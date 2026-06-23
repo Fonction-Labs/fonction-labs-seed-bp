@@ -151,17 +151,24 @@ function renderMonthlyRevenue() {
   const months = data.revenue_monthly.filter(r => r.year === 2026);
   const labels = months.map(m => new Date(m.month).toLocaleDateString('fr-FR', { month: 'short' }));
 
-  const JUNE_IDX = 5;
-  const juneRow = months[JUNE_IDX];
-  const juneActual = juneRow.actual_commercial_revenue;
+  // Derive the actuals boundary from metadata so it follows vc_case.yaml automatically
+  const actualsEnd = new Date(data.metadata.actuals_end_month || '2099-01-01');
+  const actualsEndIdx = months.findIndex(m => new Date(m.month) >= actualsEnd);
+  const splitIdx = actualsEndIdx === -1 ? months.length : actualsEndIdx;
+
+  // The split month is partially actual, rest is forecast (pro-rated from today if we're in that month)
+  const splitRow = months[splitIdx];
+  const splitActual = splitRow ? splitRow.actual_commercial_revenue : 0;
 
   const today = new Date();
-  const dayElapsed = (today.getFullYear() === 2026 && today.getMonth() === 5) ? today.getDate() : 30;
+  const splitDate = splitRow ? new Date(splitRow.month) : null;
+  const isCurrentMonth = splitDate && today.getFullYear() === splitDate.getFullYear() && today.getMonth() === splitDate.getMonth();
+  const dayElapsed = isCurrentMonth ? today.getDate() : 30;
   const dayRemaining = Math.max(0, 30 - dayElapsed);
-  const juneForecast = dayRemaining > 0 ? (juneActual / dayElapsed) * dayRemaining : 0;
+  const splitForecast = (splitRow && dayRemaining > 0) ? (splitActual / dayElapsed) * dayRemaining : 0;
 
-  const actualVals   = months.map((m, i) => i < JUNE_IDX ? m.total_revenue : i === JUNE_IDX ? juneActual : 0);
-  const forecastVals = months.map((m, i) => i < JUNE_IDX ? 0 : i === JUNE_IDX ? juneForecast : m.total_revenue);
+  const actualVals   = months.map((m, i) => i < splitIdx ? m.total_revenue : i === splitIdx ? splitActual : 0);
+  const forecastVals = months.map((m, i) => i < splitIdx ? 0 : i === splitIdx ? splitForecast : m.total_revenue);
 
   const darkColor = isDark() ? '#e4e4e7' : '#18181b';
   const grayColor = isDark() ? '#71717a' : '#a1a1aa';
@@ -318,24 +325,32 @@ function renderMix() {
     options: baseChartOpts(fmt.eur)
   });
 
-  // Annual table
+  // Annual table with YoY growth columns
+  const fmtMultiple = (a, b) => {
+    if (!a || !b || a <= 0) return '—';
+    return (b / a).toFixed(1) + '×';
+  };
   const metrics = [
-    ['Services & déploiement',    r => r.services_deployment_revenue],
-    ['Abonnement plateforme',     r => r.platform_subscription_revenue],
-    ['Total revenue',             r => r.total_revenue],
-    ['Ending ARR',                r => r.ending_arr],
-    ['Recurring revenue share',   r => fmt.pct(r.recurring_revenue_share)],
-    ['Gross margin',              r => fmt.pct(r.gross_margin)],
+    { label: 'Services & déploiement',  fn: r => r.services_deployment_revenue, bold: false },
+    { label: 'Abonnement plateforme',   fn: r => r.platform_subscription_revenue, bold: false },
+    { label: 'Total revenue',           fn: r => r.total_revenue, bold: true },
+    { label: 'Ending ARR',              fn: r => r.ending_arr, bold: false },
+    { label: 'Recurring revenue share', fn: r => fmt.pct(r.recurring_revenue_share), bold: false, isStr: true },
+    { label: 'Gross margin',            fn: r => fmt.pct(r.gross_margin), bold: false, isStr: true },
   ];
-  setHTML('annualRows', metrics.map(([label, fn]) => `
-    <tr>
-      <td class="px-4 py-3 text-zinc-700 dark:text-zinc-300">${label}</td>
-      ${rows.map(r => {
-        const v = fn(r);
-        const isStr = typeof v === 'string';
-        return `<td class="px-4 py-3 text-right font-${label === 'Total revenue' ? 'semibold' : 'normal'}">${isStr ? v : fmt.eur(v)}</td>`;
-      }).join('')}
-    </tr>`).join(''));
+  const mutedCls = 'text-zinc-400 dark:text-zinc-500';
+  setHTML('annualRows', metrics.map(({ label, fn, bold, isStr }) => {
+    const vals = rows.map(r => fn(r));
+    const cells = rows.map((r, i) => {
+      const v = vals[i];
+      const cell = `<td class="px-4 py-3 text-right font-${bold ? 'semibold' : 'normal'}">${isStr ? v : fmt.eur(v)}</td>`;
+      const yoy = (i > 0 && !isStr)
+        ? `<td class="px-4 py-3 text-right text-xs ${mutedCls}">${fmtMultiple(vals[i-1], v)}</td>`
+        : (i > 0 ? `<td class="px-4 py-3 text-right text-xs ${mutedCls}">—</td>` : '');
+      return cell + yoy;
+    }).join('');
+    return `<tr><td class="px-4 py-3 text-zinc-700 dark:text-zinc-300">${label}</td>${cells}</tr>`;
+  }).join(''));
 }
 
 // ─── Capacity & cash ─────────────────────────────────────────────────────────

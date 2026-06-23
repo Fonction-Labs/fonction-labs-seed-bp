@@ -3,6 +3,7 @@ window.DASHBOARD_DATA = {
     "title": "Fonction Labs — Seed BP Dashboard",
     "scenario": "VC Case",
     "model_version": "pipeline_v2",
+    "actuals_end_month": "2026-06-01",
     "note": "Dashboard generated from model.duckdb. Excel workbooks are outputs, not source data."
   },
   "kpis": [

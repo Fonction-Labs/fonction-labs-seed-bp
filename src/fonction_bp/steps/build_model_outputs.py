@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 import duckdb
+import yaml
 
 from fonction_bp.config import Paths
 from fonction_bp.utils import _json_default, fmt_eur, fmt_pct, save_json
@@ -30,11 +31,20 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         val = con.execute("SELECT ending_arr, enterprise_accounts_end, live_use_cases FROM revenue_monthly WHERE month = ?", [q["quarter_end_month"]]).fetchone()
         q["ending_arr"], q["enterprise_accounts_end"], q["live_use_cases"] = val
 
+    vc_yaml = paths.assumptions_dir / "vc_case.yaml"
+    actuals_end_month = None
+    if vc_yaml.exists():
+        raw = yaml.safe_load(vc_yaml.read_text())
+        val = raw.get("actuals_end_month")
+        if val:
+            actuals_end_month = str(val)
+
     dashboard = {
         "metadata": {
             "title": "Fonction Labs — Seed BP Dashboard",
             "scenario": "VC Case",
             "model_version": "pipeline_v2",
+            "actuals_end_month": actuals_end_month,
             "note": "Dashboard generated from model.duckdb. Excel workbooks are outputs, not source data.",
         },
         "kpis": kpis,

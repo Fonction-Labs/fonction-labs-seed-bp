@@ -6,6 +6,20 @@
   <title>Fonction Labs — BP Dashboard</title>
   <meta name="description" content="Vue synthétique du modèle seed Fonction Labs 2026–2028 : traction, ARR, use cases, runway.">
 
+  <script>
+    // Password gate — SHA-256 hash of F0nctionAGI!
+    const HASH = '2cefc6b58d20900f49d3c6e559a50f52bbfe9580ececb37d99219992a0c540e9';
+    async function checkAccess() {
+      if (sessionStorage.getItem('fl_auth') === HASH) return;
+      const pwd = prompt('Mot de passe requis / Password required:');
+      if (!pwd) { document.body.innerHTML = ''; return; }
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pwd));
+      const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+      if (hex !== HASH) { document.body.innerHTML = '<p style="font-family:sans-serif;padding:2rem">Accès refusé.</p>'; return; }
+      sessionStorage.setItem('fl_auth', HASH);
+    }
+    checkAccess();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' };
@@ -172,7 +186,9 @@
               <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide">Metric</th>
               <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2026E</th>
               <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2027E</th>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">×</th>
               <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2028E</th>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">×</th>
             </tr>
           </thead>
           <tbody id="annualRows" class="divide-y divide-zinc-100 dark:divide-zinc-800"></tbody>
