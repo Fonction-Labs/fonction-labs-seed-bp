@@ -1,0 +1,5 @@
+stage_or_source,count,default_probability,default_deal_value_eur,notes
+Won 2026+,17,0.90,223089,Deck and revenue actuals: 17 paying clients
+Deployments in progress,4,0.80,150000,Deck metric: 4 deployments in progress
+R2+ / Proposal,12,0.35,35000,Observed active Attio stages; replace with full CSV export for production model
+R1 active,25,0.12,5250,Current telecom motion: approx. 25 meetings per month

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+.python-version
+
+# Generated outputs — not source of truth
+data/processed/model.duckdb
+data/processed/model_outputs.json
+data/processed/validation_report.json
+downloads/
+
+# Raw sensitive data
+data/raw/qonto/
+
+# OS
+.DS_Store

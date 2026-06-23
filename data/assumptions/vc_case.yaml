@@ -1,0 +1,254 @@
+metadata:
+  model_name: Fonction Labs Seed BP
+  version: pipeline_v2
+  scenario: VC Case
+  currency: EUR
+  generated_from: raw data + assumptions
+
+model_period:
+  start_month: 2026-01-01
+  end_month: 2028-12-01
+  actuals_end_month: 2026-06-01
+
+fundraising:
+  seed_close_month: 2026-09-01
+  seed_net_proceeds: 2500000
+  starting_cash_2026_07_01: 146698.29
+
+qonto_classification:
+  include_credit_categories:
+    - "Chiffre d'affaires"
+  include_counterparty_contains:
+    - IN CURVE
+    - DECLARANET
+    - KNOWMORE
+    - YONDER
+    - AGILEBIO
+    - DOCOON
+    - ARCHIREPORT
+    - AEGIS
+    - ARTECOMM
+    - ARGOS
+  exclude_counterparty_contains:
+    - CORDIER
+    - VASSALO
+    - FOUREZ
+    - QONTO
+  exclude_reference_contains:
+    - CCA
+    - PRET
+    - PRÊT
+    - AUGMENTATION
+    - CAPITAL
+    - YOUNITED
+    - RESTITUTION
+    - REMBOURSEMENT
+
+pricing:
+  workshop_fee_per_new_enterprise_client: 10000
+  deployment_fee_per_use_case: 40000
+  deployment_duration_months: 3
+  subscription_mrr_per_live_use_case: 10000
+  fde_billable_day_rate: 1150
+  usage_success_based_revenue: 0
+
+service_continuity:
+  wassym_days_per_month: 3.3
+  wassym_revenue_day_rate: 915
+  wassym_cost_day_rate: 750
+  start_month: 2026-07-01
+  end_month: 2027-12-01
+  vc_facing_display: Included in Services & Deployment Revenue
+
+service_forecast_baseline:
+  # Custom service / deployment continuity, excluding workshops, 0→1 deployment fees and recurring platform subscription.
+  monthly_eur:
+    2026-07-01: 25000
+    2026-08-01: 25000
+    2026-09-01: 30000
+    2026-10-01: 35000
+    2026-11-01: 40000
+    2026-12-01: 50000
+    2027-01-01: 45000
+    2027-02-01: 45000
+    2027-03-01: 45000
+    2027-04-01: 45000
+    2027-05-01: 45000
+    2027-06-01: 45000
+    2027-07-01: 35000
+    2027-08-01: 35000
+    2027-09-01: 35000
+    2027-10-01: 35000
+    2027-11-01: 35000
+    2027-12-01: 35000
+    2028-01-01: 10000
+    2028-02-01: 10000
+    2028-03-01: 10000
+    2028-04-01: 10000
+    2028-05-01: 10000
+    2028-06-01: 10000
+    2028-07-01: 10000
+    2028-08-01: 10000
+    2028-09-01: 10000
+    2028-10-01: 10000
+    2028-11-01: 10000
+    2028-12-01: 10000
+
+fde_support_revenue:
+  # Optional FDE support / billable capacity, displayed within Services & Deployment Revenue.
+  monthly_eur:
+    2027-01-01: 10000
+    2027-02-01: 10000
+    2027-03-01: 10000
+    2027-04-01: 10000
+    2027-05-01: 10000
+    2027-06-01: 10000
+    2027-07-01: 10000
+    2027-08-01: 10000
+    2027-09-01: 10000
+    2027-10-01: 10000
+    2027-11-01: 10000
+    2027-12-01: 10000
+    2028-01-01: 15000
+    2028-02-01: 15000
+    2028-03-01: 15000
+    2028-04-01: 15000
+    2028-05-01: 15000
+    2028-06-01: 15000
+    2028-07-01: 15000
+    2028-08-01: 15000
+    2028-09-01: 15000
+    2028-10-01: 15000
+    2028-11-01: 15000
+    2028-12-01: 15000
+
+gross_margin:
+  services_deployment:
+    2026: 0.40
+    2027: 0.60
+    2028: 0.70
+  platform_subscription:
+    2026: 0.85
+    2027: 0.88
+    2028: 0.90
+
+fde_capacity:
+  use_cases_per_fde:
+    2026: 2
+    2027: 3
+    2028: 4
+  driver_of_improvement: Reusable playbooks, internal tooling, connectors, evaluation flows, and progressive self-serve deployment capabilities.
+
+enterprise_cohort_plan:
+  # new_enterprise_accounts are logos. initial_use_case_starts + expansion_use_case_starts drive deployment and subscription after deployment lag.
+  monthly:
+    2026-09-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2026-10-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2026-11-01: {new_enterprise_accounts: 0, initial_use_case_starts: 0, expansion_use_case_starts: 2}
+    2026-12-01: {new_enterprise_accounts: 0, initial_use_case_starts: 0, expansion_use_case_starts: 2}
+    2027-01-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2027-02-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2027-03-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2027-04-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 1}
+    2027-05-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2027-06-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 1}
+    2027-07-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 0}
+    2027-08-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 1}
+    2027-09-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2027-10-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2027-11-01: {new_enterprise_accounts: 0, initial_use_case_starts: 0, expansion_use_case_starts: 2}
+    2027-12-01: {new_enterprise_accounts: 0, initial_use_case_starts: 0, expansion_use_case_starts: 2}
+    2028-01-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-02-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-03-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-04-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-05-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-06-01: {new_enterprise_accounts: 1, initial_use_case_starts: 1, expansion_use_case_starts: 2}
+    2028-07-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 2}
+    2028-08-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 3}
+    2028-09-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 3}
+    2028-10-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 3}
+    2028-11-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 3}
+    2028-12-01: {new_enterprise_accounts: 2, initial_use_case_starts: 2, expansion_use_case_starts: 3}
+
+headcount:
+  # Monthly fully-loaded cash cost assumptions. Placeholders should be confirmed before sending final data room.
+  founder_salary_monthly_loaded_2027: 8000
+  founder_salary_monthly_loaded_2028: 10000
+  founder_count: 3
+  founder_catchup_payments:
+    2026-06-01: 110000
+    2026-12-01: 110000
+  current_roles:
+    cold_callers_count: 2
+    cold_caller_monthly_total_placeholder: 7000
+    sales_full_time_monthly_loaded_placeholder: 9000
+  hires:
+    - {role: Product Lead, function: Product & Engineering, start_month: 2026-09-01, monthly_loaded_cost: 12000}
+    - {role: FDE Senior 1, function: Forward-Deployed Engineering, start_month: 2026-09-01, monthly_loaded_cost: 11000}
+    - {role: AI / Platform Engineer, function: Product & Engineering, start_month: 2026-11-01, monthly_loaded_cost: 11000}
+    - {role: FDE Senior 2, function: Forward-Deployed Engineering, start_month: 2027-01-01, monthly_loaded_cost: 11000}
+    - {role: Enterprise Sales, function: Sales & GTM, start_month: 2027-02-01, monthly_loaded_cost: 11000}
+    - {role: Product Engineer, function: Product & Engineering, start_month: 2027-04-01, monthly_loaded_cost: 11000}
+    - {role: FDE Senior 3, function: Forward-Deployed Engineering, start_month: 2027-05-01, monthly_loaded_cost: 11000}
+    - {role: Customer Ops, function: Ops, start_month: 2027-07-01, monthly_loaded_cost: 8000}
+    - {role: FDE Senior 4, function: Forward-Deployed Engineering, start_month: 2027-09-01, monthly_loaded_cost: 11000}
+    - {role: Sales Development, function: Sales & GTM, start_month: 2027-10-01, monthly_loaded_cost: 8000}
+    - {role: Platform Engineer 2, function: Product & Engineering, start_month: 2028-01-01, monthly_loaded_cost: 12000}
+    - {role: FDE Senior 5, function: Forward-Deployed Engineering, start_month: 2028-02-01, monthly_loaded_cost: 11500}
+    - {role: Enterprise Sales 2, function: Sales & GTM, start_month: 2028-03-01, monthly_loaded_cost: 12000}
+    - {role: FDE Senior 6, function: Forward-Deployed Engineering, start_month: 2028-06-01, monthly_loaded_cost: 11500}
+    - {role: Solutions Architect, function: Forward-Deployed Engineering, start_month: 2028-09-01, monthly_loaded_cost: 12000}
+
+opex:
+  # Non-headcount operating spend, exclusive of founder catch-up and payroll.
+  monthly_base_2026_h2: 42000
+  monthly_base_2027: 65000
+  monthly_base_2028: 95000
+  enterprise_security_legal:
+    2026-09-01: 40000
+    2027-01-01: 30000
+    2027-07-01: 30000
+    2028-01-01: 40000
+  product_infra_ai_tooling:
+    2026-09-01: 15000
+    2026-10-01: 15000
+    2026-11-01: 15000
+    2026-12-01: 15000
+    2027-01-01: 25000
+    2027-02-01: 25000
+    2027-03-01: 25000
+    2027-04-01: 25000
+    2027-05-01: 25000
+    2027-06-01: 25000
+    2027-07-01: 35000
+    2027-08-01: 35000
+    2027-09-01: 35000
+    2027-10-01: 35000
+    2027-11-01: 35000
+    2027-12-01: 35000
+    2028-01-01: 55000
+    2028-02-01: 55000
+    2028-03-01: 55000
+    2028-04-01: 55000
+    2028-05-01: 55000
+    2028-06-01: 55000
+    2028-07-01: 70000
+    2028-08-01: 70000
+    2028-09-01: 70000
+    2028-10-01: 70000
+    2028-11-01: 70000
+    2028-12-01: 70000
+
+use_of_funds:
+  - {category: Product & Engineering, amount: 850000, purpose: Production-ready Agent OS, internal tooling and self-serve deployment capabilities}
+  - {category: Forward-Deployed Engineering, amount: 650000, purpose: Deployment capacity and customer implementation}
+  - {category: Sales & GTM, amount: 400000, purpose: Enterprise pipeline and founder-led sales leverage}
+  - {category: Ops / Legal / Security, amount: 250000, purpose: Enterprise readiness, security, legal and admin}
+  - {category: Buffer / runway flexibility, amount: 350000, purpose: Execution flexibility}
+
+target_checks:
+  # Used for validation tolerance, not as a source of truth for model formulas.
+  dec_2027_ending_arr: 2400000
+  dec_2028_ending_arr: 7080000
+  jan_jun_2026_commercial_revenue: 183907.5

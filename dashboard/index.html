@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fonction Labs — BP Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top">fonction</a>
+    <nav>
+      <a href="#trajectory">Trajectoire</a>
+      <a href="#traction">Traction</a>
+      <a href="#model">Modèle</a>
+      <a href="#growth">Croissance</a>
+      <a href="#runway">Runway</a>
+      <a class="nav-download" href="downloads/Fonction_Labs_BP_Seed_2026_2028_full_pipeline_v2.xlsx">Excel</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Annexe BP · VC case</p>
+        <h1>Fonction Labs — BP dashboard</h1>
+        <p class="lead">Vue synthétique du modèle seed 2026–2028 : traction commerciale, passage vers l'abonnement plateforme, expansion par use case et usage des fonds.</p>
+        <div class="meta">
+          <span class="pill">Levée modélisée : 2,5M€ net</span>
+          <span class="pill">Closing : septembre 2026</span>
+          <span class="pill">Modèle : VC case</span>
+          <span class="pill">Devise : k€ HT</span>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" href="downloads/Fonction_Labs_BP_Seed_2026_2028_full_pipeline_v2.xlsx">Télécharger le BP complet</a>
+          <a class="button secondary" href="downloads/Fonction_Labs_BP_Seed_2026_2028_simplified_pipeline_v2.xlsx">BP simplifié</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <span class="panel-label">Source du modèle</span>
+        <strong>Pipeline v2</strong>
+        <p>Dashboard, Excel complet et Excel simplifié sont générés depuis les mêmes tables DuckDB.</p>
+      </aside>
+    </section>
+
+    <section class="kpi-band" id="kpis" aria-label="KPIs"></section>
+
+    <section id="trajectory" class="section trajectory-section">
+      <div class="section-intro">
+        <span class="section-number">01</span>
+        <div>
+          <h2>Trajectoire sur trois ans</h2>
+          <p>Le modèle part d'une traction commerciale déjà existante, puis fait progressivement basculer le revenu vers des abonnements liés aux use cases live chez les grands comptes.</p>
+        </div>
+      </div>
+      <div class="trajectory-grid" id="trajectoryCards"></div>
+    </section>
+
+    <section id="traction" class="section split-section">
+      <div class="section-intro sticky-intro">
+        <span class="section-number">02</span>
+        <div>
+          <h2>Traction existante et outlook 2026</h2>
+          <p>Vue annuelle 2026 complète : les six premiers mois montrent la traction existante ; le second semestre modélise la continuité des services et les premiers revenus plateforme.</p>
+        </div>
+      </div>
+      <div class="content-card wide">
+        <div class="chart-head">
+          <div>
+            <h3>Revenu commercial mensuel — 2026</h3>
+            <p>Jan–Jun actuals / estimation, Jul–Déc forecast. Montants HT.</p>
+          </div>
+          <div class="legend compact">
+            <span><i class="dot actual"></i>Actuel / estimé</span>
+            <span><i class="dot forecast"></i>Forecast</span>
+          </div>
+        </div>
+        <div id="monthlyRevenueChart" class="chart tall"></div>
+        <div id="revenue2026Table" class="table-wrap"></div>
+      </div>
+    </section>
+
+    <section id="model" class="section">
+      <div class="section-intro">
+        <span class="section-number">03</span>
+        <div>
+          <h2>Modèle de revenu par grand compte</h2>
+          <p>Chaque nouveau grand compte démarre par un use case cadré, passe par un déploiement 0→1, puis génère un abonnement par use case live.</p>
+        </div>
+      </div>
+      <div class="phase" id="unitEconomics"></div>
+    </section>
+
+    <section id="growth" class="section split-section">
+      <div class="section-intro sticky-intro">
+        <span class="section-number">04</span>
+        <div>
+          <h2>Modèle de croissance : comptes et use cases</h2>
+          <p>L'ARR est construit par deux moteurs : nouveaux comptes enterprise et expansion du nombre de use cases live dans les comptes existants.</p>
+        </div>
+      </div>
+      <div class="grid-two">
+        <div class="content-card">
+          <div class="chart-head"><h3>Comptes enterprise et use cases live</h3></div>
+          <div id="accountsUsecasesChart" class="chart medium"></div>
+        </div>
+        <div class="content-card">
+          <h3>Jalons de fin d'année</h3>
+          <div id="milestonesTable"></div>
+          <p class="footnote">L'ending ARR est le run-rate d'abonnement annualisé en fin de période. Revenu récurrent reconnu et ending ARR sont deux métriques distinctes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section split-section">
+      <div class="section-intro sticky-intro">
+        <span class="section-number">05</span>
+        <div>
+          <h2>Mix de revenus et montée en ARR</h2>
+          <p>Les revenus services et déploiement restent actifs pendant que le revenu récurrent plateforme devient le principal moteur de croissance à mesure que les use cases déployés passent en live.</p>
+        </div>
+      </div>
+      <div class="grid-two">
+        <div class="content-card">
+          <div class="chart-head"><h3>Mix de revenus annuel</h3></div>
+          <div id="revenueMixChart" class="chart medium"></div>
+        </div>
+        <div class="content-card">
+          <div class="chart-head"><h3>ARR en fin de trimestre</h3></div>
+          <div id="arrChart" class="chart medium"></div>
+        </div>
+      </div>
+      <div class="content-card wide table-only" id="annualTable"></div>
+    </section>
+
+    <section class="section split-section" id="runway">
+      <div class="section-intro sticky-intro">
+        <span class="section-number">06</span>
+        <div>
+          <h2>Scalabilité, runway et usage des fonds</h2>
+          <p>La levée finance le produit, l'engineering, la capacité FDE et le go-to-market enterprise. La capacité par FDE augmente avec les playbooks, connecteurs, tooling interne et self-serve progressif.</p>
+        </div>
+      </div>
+      <div class="grid-two">
+        <div class="content-card">
+          <div class="chart-head"><h3>Capacité FDE vs déploiements actifs</h3></div>
+          <div id="capacityChart" class="chart medium"></div>
+        </div>
+        <div class="content-card">
+          <div class="chart-head"><h3>Cash runway</h3></div>
+          <div id="cashChart" class="chart medium"></div>
+        </div>
+      </div>
+      <div class="grid-two bottom-grid">
+        <div class="content-card" id="capacityTable"></div>
+        <div class="content-card" id="useOfFunds"></div>
+      </div>
+    </section>
+
+    <section class="download-section">
+      <div>
+        <p class="eyebrow">Téléchargements</p>
+        <h2>Modèles Excel générés depuis le même pipeline.</h2>
+        <p>Le BP complet pour une revue détaillée, le BP simplifié pour une version VC-facing allégée. Les deux sont issus des mêmes tables modèle.</p>
+      </div>
+      <div class="download-actions">
+        <a class="button primary" href="downloads/Fonction_Labs_BP_Seed_2026_2028_full_pipeline_v2.xlsx">BP complet Excel</a>
+        <a class="button secondary" href="downloads/Fonction_Labs_BP_Seed_2026_2028_simplified_pipeline_v2.xlsx">BP simplifié Excel</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/dashboard_data.js"></script>
+  <script src="assets/dashboard.js"></script>
+</body>
+</html>
