@@ -1,5 +1,7 @@
 const data = window.DASHBOARD_DATA;
 
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
 const fmt = {
   eur(v) {
     const n = Number(v || 0);
@@ -9,217 +11,470 @@ const fmt = {
   },
   count(v) { return String(Math.round(Number(v || 0))); },
   pct(v) { return Math.round(Number(v || 0) * 100) + '%'; },
-  monthLabel(iso) {
-    const d = new Date(iso);
-    return d.toLocaleDateString('en-US', { month: 'short' });
-  },
-  periodLabel(iso) {
-    const d = new Date(iso);
-    const mon = d.toLocaleDateString('en-US', { month: 'short' });
-    const yr = String(d.getFullYear()).slice(2);
-    return `${mon} '${yr}`;
-  }
 };
 
-function getKpi(name) { return data.kpis.find(k => k.metric === name); }
-function kpiValue(k) { return k.unit === 'EUR' ? fmt.eur(k.value) : fmt.count(k.value); }
-function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
-function svg(width, height, inner) { return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-hidden="true">${inner}</svg>`; }
+function el(id) { return document.getElementById(id); }
+function setHTML(id, html) { const e = el(id); if (e) e.innerHTML = html; }
+
+function isDark() { return document.documentElement.classList.contains('dark'); }
+
+const GRID_COLOR   = () => isDark() ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.06)';
+const TICK_COLOR   = () => isDark() ? '#71717a' : '#a1a1aa';
+const TOOLTIP_BG   = () => isDark() ? '#18181b' : '#fff';
+const TOOLTIP_BODY = () => isDark() ? '#d4d4d8' : '#3f3f46';
+const TOOLTIP_TTL  = () => isDark() ? '#f4f4f5' : '#18181b';
+
+const baseChartOpts = (yFmt) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  interaction: { mode: 'index', intersect: false },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: TOOLTIP_BG,
+      titleColor: TOOLTIP_TTL,
+      bodyColor: TOOLTIP_BODY,
+      borderColor: () => isDark() ? '#3f3f46' : '#e4e4e7',
+      borderWidth: 1,
+      padding: 10,
+      callbacks: { label: ctx => ` ${ctx.dataset.label}: ${yFmt(ctx.parsed.y)}` }
+    }
+  },
+  scales: {
+    x: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR, font: { size: 11 } } },
+    y: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR, font: { size: 11 }, callback: yFmt }, border: { display: false } }
+  }
+});
+
+// ─── KPIs — stat row sans chrome ─────────────────────────────────────────────
 
 function renderKpis() {
-  const items = [
-    { metric: 'Actual commercial revenue Jan-Jun 2026', sub: 'Chiffre d\'affaires commercial H1', dark: true },
-    { metric: '2026E revenue',               sub: 'Revenu annuel total 2026E' },
-    { metric: '2027E revenue',               sub: 'Services, déploiement et abonnement' },
-    { metric: 'Ending ARR Dec-2027',         sub: 'Run-rate abonnement annualisé' },
-    { metric: 'Enterprise accounts Dec-2027',sub: 'Comptes enterprise activés' },
-    { metric: 'Live use cases Dec-2027',     sub: 'Use cases en abonnement' },
-    { metric: '2028E revenue',               sub: 'Croissance par expansion compte', computed: true },
-    { metric: 'Ending ARR Dec-2028',         sub: 'Run-rate abonnement annualisé', computed: true },
+  function getKpi(name) { return data.kpis.find(k => k.metric === name); }
+  function kpiVal(k) { return k.unit === 'EUR' ? fmt.eur(k.value) : fmt.count(k.value); }
+
+  const row2028 = data.annual_summary.find(r => r.year === 2028);
+  const mil2028 = data.year_end_milestones.find(r => r.year === 2028);
+
+  // Two rows: actuals + 2026 / 2027 numbers / 2028 numbers
+  const row1 = [
+    { label: 'Revenue H1 2026*',        val: kpiVal(getKpi('Actual commercial revenue Jan-Jun 2026')), sub: 'Actuals Jan–Jun', accent: true },
+    { label: '2026E revenue',            val: kpiVal(getKpi('2026E revenue')),                         sub: 'Full-year' },
+    { label: '2027E revenue',            val: kpiVal(getKpi('2027E revenue')),                         sub: 'Services + abonnement' },
+    { label: 'ARR Dec-2027',             val: kpiVal(getKpi('Ending ARR Dec-2027')),                   sub: 'Run-rate annualisé' },
   ];
-  setHTML('kpis', items.map(item => {
-    let val;
-    if (item.computed && item.metric === '2028E revenue') {
-      const row = data.annual_summary.find(r => r.year === 2028);
-      val = row ? fmt.eur(row.total_revenue) : '—';
-    } else if (item.computed && item.metric === 'Ending ARR Dec-2028') {
-      const row = data.year_end_milestones.find(r => r.year === 2028);
-      val = row ? fmt.eur(row.ending_arr) : '—';
-    } else {
-      const k = getKpi(item.metric);
-      val = k ? kpiValue(k) : '—';
-    }
-    return `<div class="kpi-card${item.dark ? ' feature' : ''}"><p>${item.metric}</p><strong>${val}</strong><span>${item.sub}</span></div>`;
-  }).join(''));
+  const row2 = [
+    { label: 'Enterprise accounts 2027', val: kpiVal(getKpi('Enterprise accounts Dec-2027')),          sub: 'Comptes activés' },
+    { label: 'Live use cases 2027',      val: kpiVal(getKpi('Live use cases Dec-2027')),               sub: 'Use cases live' },
+    { label: '2028E revenue',            val: row2028 ? fmt.eur(row2028.total_revenue) : '—',          sub: 'Expansion comptes' },
+    { label: 'ARR Dec-2028',             val: mil2028 ? fmt.eur(mil2028.ending_arr) : '—',            sub: 'Run-rate annualisé' },
+  ];
+
+  const renderRow = (items) => `
+    <div class="grid grid-cols-2 sm:grid-cols-4 divide-x divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden mb-px">
+      ${items.map(item => `
+        <div class="px-5 py-4 ${item.accent ? 'bg-zinc-900 dark:bg-zinc-800' : 'bg-white dark:bg-zinc-950'}">
+          <div class="text-xs text-${item.accent ? 'zinc-400' : 'zinc-500'} mb-1.5 truncate">${item.label}</div>
+          <div class="text-2xl font-bold tracking-tight leading-none ${item.accent ? 'text-white' : ''}">${item.val}</div>
+          <div class="text-xs mt-2 text-${item.accent ? 'zinc-400' : 'zinc-400'}">${item.sub}</div>
+        </div>`).join('')}
+    </div>`;
+
+  setHTML('kpiGrid',
+    renderRow(row1) + renderRow(row2) +
+    `<p class="text-xs text-zinc-400 dark:text-zinc-500 mt-3 pl-1">* Chiffre d'affaires encaissé sur transactions Qonto classifiées. Facturé YTD : ~230k€.</p>`
+  );
 }
 
+// ─── Trajectory — timeline table ─────────────────────────────────────────────
+
 function renderTrajectory() {
-  setHTML('trajectoryCards', data.trajectory.map(t => `
-    <article class="trajectory-card">
-      <span class="year">${t.year}</span>
-      <h3>${t.theme}</h3>
-      <p>${t.text}</p>
-    </article>`).join(''));
+  const years = data.annual_summary;    // 2026, 2027, 2028
+  const milestones = data.year_end_milestones;
+  const themes = data.trajectory;
+
+  // Rows: theme, revenue, ARR, use cases, description
+  const get = (year) => ({
+    theme:    themes.find(t => t.year === year),
+    summary:  years.find(r => r.year === year),
+    mile:     milestones.find(r => r.year === year),
+  });
+
+  const cols = [2026, 2027, 2028].map(get);
+
+  const borderCls = 'border-t border-zinc-200 dark:border-zinc-800';
+  const labelCls  = 'text-xs font-medium text-zinc-400 dark:text-zinc-500 uppercase tracking-wide py-3 pr-4 whitespace-nowrap';
+  const cellCls   = 'py-3 px-4 text-sm';
+
+  setHTML('trajectoryTable', `
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr>
+          <th class="text-left ${labelCls} w-28"></th>
+          ${cols.map(c => `<th class="text-left px-4 py-3 border-l border-zinc-200 dark:border-zinc-800">
+            <span class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">${c.theme.year}</span>
+            <div class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mt-1">${c.theme.theme}</div>
+          </th>`).join('')}
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="${borderCls}">
+          <td class="${labelCls}">Revenue</td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800 font-semibold">${fmt.eur(c.summary.total_revenue)}</td>`).join('')}
+        </tr>
+        <tr class="${borderCls}">
+          <td class="${labelCls}">Ending ARR</td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800 font-semibold">${fmt.eur(c.mile.ending_arr)}</td>`).join('')}
+        </tr>
+        <tr class="${borderCls}">
+          <td class="${labelCls}">Live use cases</td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800">${fmt.count(c.mile.live_use_cases)}</td>`).join('')}
+        </tr>
+        <tr class="${borderCls}">
+          <td class="${labelCls}">Comptes</td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800">${fmt.count(c.mile.enterprise_accounts)}</td>`).join('')}
+        </tr>
+        <tr class="${borderCls}">
+          <td class="${labelCls}">Récurrent</td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800 text-zinc-500">${fmt.pct(c.summary.recurring_revenue_share)}</td>`).join('')}
+        </tr>
+        <tr class="${borderCls}">
+          <td class="${labelCls}"></td>
+          ${cols.map(c => `<td class="${cellCls} border-l border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 leading-relaxed">${c.theme.text}</td>`).join('')}
+        </tr>
+      </tbody>
+    </table>`);
 }
+
+// ─── Monthly revenue 2026 ────────────────────────────────────────────────────
 
 function renderMonthlyRevenue() {
   const months = data.revenue_monthly.filter(r => r.year === 2026);
-  const max = Math.max(...months.map(r => r.total_revenue));
-  const W = 760, H = 300, L = 42, R = 18, T = 20, B = 48;
-  const chartW = W - L - R, chartH = H - T - B;
-  const bw = chartW / months.length * 0.58;
-  const gap = chartW / months.length;
-  const y = v => T + chartH - (v / max) * chartH;
-  const lines = [0, .25, .5, .75, 1].map(p => `<line class="grid-line" x1="${L}" x2="${W-R}" y1="${T + chartH - p*chartH}" y2="${T + chartH - p*chartH}"/>`).join('');
-  const bars = months.map((m, i) => {
-    const x = L + i * gap + (gap - bw) / 2;
-    const yy = y(m.total_revenue);
-    const h = T + chartH - yy;
-    const actual = i < 6;
-    return `<rect x="${x}" y="${yy}" width="${bw}" height="${h}" rx="7" fill="${actual ? '#111111' : '#9a958b'}"/>
-      <text class="bar-label" x="${x + bw/2}" y="${H-22}" text-anchor="middle">${fmt.monthLabel(m.month)}</text>
-      <text class="value-label" x="${x + bw/2}" y="${Math.max(12, yy-7)}" text-anchor="middle">${fmt.eur(m.total_revenue)}</text>`;
-  }).join('');
-  setHTML('monthlyRevenueChart', svg(W, H, lines + bars));
+  const labels = months.map(m => new Date(m.month).toLocaleDateString('fr-FR', { month: 'short' }));
 
-  const janJun = months.slice(0,6).reduce((s,r)=>s+r.total_revenue,0);
-  const julDec = months.slice(6).reduce((s,r)=>s+r.total_revenue,0);
-  const total = janJun + julDec;
-  const svcH1 = months.slice(0,6).reduce((s,r)=>s+r.services_deployment_revenue,0);
-  const svcH2 = months.slice(6).reduce((s,r)=>s+r.services_deployment_revenue,0);
-  const subH1 = months.slice(0,6).reduce((s,r)=>s+r.platform_subscription_revenue,0);
-  const subH2 = months.slice(6).reduce((s,r)=>s+r.platform_subscription_revenue,0);
-  setHTML('revenue2026Table', `
-    <table class="summary-table"><thead><tr><th>Metric</th><th>Jan–Jun</th><th>Jul–Dec</th><th>2026E</th></tr></thead><tbody>
-      <tr><td>Commercial revenue</td><td>${fmt.eur(janJun)}</td><td>${fmt.eur(julDec)}</td><td>${fmt.eur(total)}</td></tr>
-      <tr><td>Services &amp; deployment revenue</td><td>${fmt.eur(svcH1)}</td><td>${fmt.eur(svcH2)}</td><td>${fmt.eur(svcH1+svcH2)}</td></tr>
-      <tr><td>Platform subscription revenue</td><td>${fmt.eur(subH1)}</td><td>${fmt.eur(subH2)}</td><td>${fmt.eur(subH1+subH2)}</td></tr>
-    </tbody></table>`);
+  const JUNE_IDX = 5;
+  const juneRow = months[JUNE_IDX];
+  const juneActual = juneRow.actual_commercial_revenue;
+
+  const today = new Date();
+  const dayElapsed = (today.getFullYear() === 2026 && today.getMonth() === 5) ? today.getDate() : 30;
+  const dayRemaining = Math.max(0, 30 - dayElapsed);
+  const juneForecast = dayRemaining > 0 ? (juneActual / dayElapsed) * dayRemaining : 0;
+
+  const actualVals   = months.map((m, i) => i < JUNE_IDX ? m.total_revenue : i === JUNE_IDX ? juneActual : 0);
+  const forecastVals = months.map((m, i) => i < JUNE_IDX ? 0 : i === JUNE_IDX ? juneForecast : m.total_revenue);
+
+  const darkColor = isDark() ? '#e4e4e7' : '#18181b';
+  const grayColor = isDark() ? '#71717a' : '#a1a1aa';
+
+  new Chart(el('monthlyRevenueChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Actuel',   data: actualVals,   backgroundColor: darkColor, borderRadius: 6 },
+        { label: 'Forecast', data: forecastVals, backgroundColor: grayColor, borderRadius: 6 },
+      ]
+    },
+    options: {
+      ...baseChartOpts(fmt.eur),
+      scales: {
+        ...baseChartOpts(fmt.eur).scales,
+        x: { ...baseChartOpts(fmt.eur).scales.x, stacked: true },
+        y: { ...baseChartOpts(fmt.eur).scales.y, stacked: true },
+      },
+      plugins: {
+        ...baseChartOpts(fmt.eur).plugins,
+        legend: { display: false },
+        tooltip: {
+          ...baseChartOpts(fmt.eur).plugins.tooltip,
+          filter: (item) => item.parsed.y > 0,
+        }
+      }
+    }
+  });
+
+  const janJun = months.slice(0, 6).reduce((s, r) => s + r.total_revenue, 0);
+  const julDec = months.slice(6).reduce((s, r) => s + r.total_revenue, 0);
+  const svcH1 = months.slice(0, 6).reduce((s, r) => s + r.services_deployment_revenue, 0);
+  const svcH2 = months.slice(6).reduce((s, r) => s + r.services_deployment_revenue, 0);
+  const subH1 = months.slice(0, 6).reduce((s, r) => s + r.platform_subscription_revenue, 0);
+  const subH2 = months.slice(6).reduce((s, r) => s + r.platform_subscription_revenue, 0);
+
+  const rows = [
+    ['Commercial revenue',          janJun,      julDec,      janJun + julDec],
+    ['Services & deployment',       svcH1,       svcH2,       svcH1 + svcH2],
+    ['Platform subscription',       subH1,       subH2,       subH1 + subH2],
+  ];
+  setHTML('revenue2026Rows', rows.map(([label, h1, h2, total]) => `
+    <tr>
+      <td class="px-4 py-3 text-zinc-700 dark:text-zinc-300">${label}</td>
+      <td class="px-4 py-3 text-right">${fmt.eur(h1)}</td>
+      <td class="px-4 py-3 text-right">${fmt.eur(h2)}</td>
+      <td class="px-4 py-3 text-right font-semibold">${fmt.eur(total)}</td>
+    </tr>`).join(''));
 }
 
-function renderUnitEconomics() {
-  setHTML('unitEconomics', data.unit_economics.map(r => `
-    <div class="phase-card">
-      <span class="phase-label">${r.phase}</span>
-      <strong>${r.assumption}</strong>
-      <span>${r.driver} · ${r.timing}</span>
+// ─── Phase cards ─────────────────────────────────────────────────────────────
+
+function renderPhaseCards() {
+  setHTML('phaseCards', data.unit_economics.map(r => `
+    <div class="stat-card">
+      <div class="text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-3">${r.phase}</div>
+      <div class="text-xl font-bold tracking-tight mb-2">${r.assumption}</div>
+      <div class="text-sm text-zinc-500 dark:text-zinc-400">${r.driver}</div>
+      <div class="text-xs text-zinc-400 mt-1">${r.timing}</div>
     </div>`).join(''));
 }
 
-function renderAccountsUseCases() {
+// ─── Accounts & use cases ────────────────────────────────────────────────────
+
+function renderGrowth() {
   const rows = data.year_end_milestones;
-  const max = Math.max(...rows.flatMap(r => [r.enterprise_accounts, r.live_use_cases]));
-  const W=620,H=270,L=40,R=20,T=20,B=42, chartW=W-L-R, chartH=H-T-B;
-  const gap = chartW / rows.length;
-  const bw = gap * .22;
-  const y = v => T + chartH - (v/max)*chartH;
-  const grid = [0,.25,.5,.75,1].map(p=>`<line class="grid-line" x1="${L}" x2="${W-R}" y1="${T+chartH-p*chartH}" y2="${T+chartH-p*chartH}"/>`).join('');
-  const bars = rows.map((r,i)=>{
-    const base = L + i*gap + gap/2;
-    const yA = y(r.enterprise_accounts), hA = T+chartH-yA;
-    const yU = y(r.live_use_cases), hU = T+chartH-yU;
-    return `<rect x="${base-bw-3}" y="${yA}" width="${bw}" height="${hA}" rx="6" fill="#111"/>
-      <rect x="${base+3}" y="${yU}" width="${bw}" height="${hU}" rx="6" fill="#2f45ff"/>
-      <text class="value-label" x="${base-bw/2-3}" y="${Math.max(12,yA-7)}" text-anchor="middle">${fmt.count(r.enterprise_accounts)}</text>
-      <text class="value-label" x="${base+bw/2+3}" y="${Math.max(12,yU-7)}" text-anchor="middle">${fmt.count(r.live_use_cases)}</text>
-      <text class="bar-label" x="${base}" y="${H-18}" text-anchor="middle">Dec ${r.year}</text>`;
-  }).join('');
-  const legend = `<text class="bar-label" x="${L}" y="${H-2}">● Enterprise accounts</text><text class="bar-label" x="${L+170}" y="${H-2}" fill="#2f45ff">● Live use cases</text>`;
-  setHTML('accountsUsecasesChart', svg(W,H,grid+bars+legend));
+  const labels = rows.map(r => `Dec ${r.year}`);
 
-  setHTML('milestonesTable', `<table class="summary-table"><thead><tr><th>Year-end</th><th>Accounts</th><th>Live use cases</th><th>Use cases / account</th><th>ARR</th></tr></thead><tbody>` +
-    rows.map(r => `<tr><td>Dec ${r.year}</td><td>${fmt.count(r.enterprise_accounts)}</td><td>${fmt.count(r.live_use_cases)}</td><td>${Number(r.use_cases_per_account || 0).toFixed(1)}x</td><td>${fmt.eur(r.ending_arr)}</td></tr>`).join('') + `</tbody></table>`);
+  new Chart(el('accountsChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Enterprise accounts', data: rows.map(r => r.enterprise_accounts), backgroundColor: isDark() ? '#e4e4e7' : '#3f3f46', borderRadius: 6 },
+        { label: 'Live use cases',      data: rows.map(r => r.live_use_cases),      backgroundColor: isDark() ? '#6366f1' : '#4f46e5', borderRadius: 6 },
+      ]
+    },
+    options: {
+      ...baseChartOpts(fmt.count),
+      plugins: {
+        ...baseChartOpts(fmt.count).plugins,
+        legend: {
+          display: true,
+          labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  setHTML('milestonesRows', rows.map(r => `
+    <tr>
+      <td class="py-3 text-zinc-700 dark:text-zinc-300">Dec ${r.year}</td>
+      <td class="py-3 text-right">${fmt.count(r.enterprise_accounts)}</td>
+      <td class="py-3 text-right">${fmt.count(r.live_use_cases)}</td>
+      <td class="py-3 text-right font-semibold">${fmt.eur(r.ending_arr)}</td>
+    </tr>`).join(''));
 }
 
-function renderRevenueMix() {
+// ─── Revenue mix & ARR ───────────────────────────────────────────────────────
+
+function renderMix() {
   const rows = data.annual_summary;
-  const W=620,H=270,L=48,R=22,T=20,B=48, chartW=W-L-R, chartH=H-T-B;
-  const max = Math.max(...rows.map(r=>r.total_revenue));
-  const gap = chartW / rows.length;
-  const bw = gap * .38;
-  const y = v => T + chartH - (v/max)*chartH;
-  const grid = [0,.25,.5,.75,1].map(p=>`<line class="grid-line" x1="${L}" x2="${W-R}" y1="${T+chartH-p*chartH}" y2="${T+chartH-p*chartH}"/>`).join('');
-  const bars = rows.map((r,i)=>{
-    const x = L + i*gap + (gap-bw)/2;
-    const hSvc = (r.services_deployment_revenue/max)*chartH;
-    const hSub = (r.platform_subscription_revenue/max)*chartH;
-    const ySub = T + chartH - hSub;
-    const ySvc = ySub - hSvc;
-    return `<rect x="${x}" y="${ySvc}" width="${bw}" height="${hSvc}" rx="8" fill="#d0ccff"/>
-      <rect x="${x}" y="${ySub}" width="${bw}" height="${hSub}" rx="8" fill="#2f45ff"/>
-      <text class="value-label" x="${x+bw/2}" y="${Math.max(12,ySvc-8)}" text-anchor="middle">${fmt.eur(r.total_revenue)}</text>
-      <text class="bar-label" x="${x+bw/2}" y="${H-20}" text-anchor="middle">${r.year}E</text>`;
-  }).join('');
-  const legend = `<text class="bar-label" x="${L}" y="${H-2}" fill="#7772d9">● Services &amp; deployment</text><text class="bar-label" x="${L+205}" y="${H-2}" fill="#2f45ff">● Platform subscription</text>`;
-  setHTML('revenueMixChart', svg(W,H,grid+bars+legend));
+  const labels = rows.map(r => `${r.year}E`);
 
-  setHTML('annualTable', `<table class="summary-table"><thead><tr><th>Metric</th><th>2026E</th><th>2027E</th><th>2028E</th></tr></thead><tbody>
-    <tr><td>Services &amp; deployment revenue</td>${rows.map(r=>`<td>${fmt.eur(r.services_deployment_revenue)}</td>`).join('')}</tr>
-    <tr><td>Platform subscription revenue</td>${rows.map(r=>`<td>${fmt.eur(r.platform_subscription_revenue)}</td>`).join('')}</tr>
-    <tr><td>Total revenue</td>${rows.map(r=>`<td>${fmt.eur(r.total_revenue)}</td>`).join('')}</tr>
-    <tr><td>Ending ARR</td>${rows.map(r=>`<td>${fmt.eur(r.ending_arr)}</td>`).join('')}</tr>
-    <tr><td>Recurring revenue share</td>${rows.map(r=>`<td>${fmt.pct(r.recurring_revenue_share)}</td>`).join('')}</tr>
-    <tr><td>Gross margin</td>${rows.map(r=>`<td>${fmt.pct(r.gross_margin)}</td>`).join('')}</tr>
-  </tbody></table>`);
+  new Chart(el('revenueMixChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Services & déploiement',  data: rows.map(r => r.services_deployment_revenue),  backgroundColor: isDark() ? '#a1a1aa' : '#d4d4d8', borderRadius: 4 },
+        { label: 'Abonnement plateforme',   data: rows.map(r => r.platform_subscription_revenue), backgroundColor: isDark() ? '#6366f1' : '#4f46e5', borderRadius: 4 },
+      ]
+    },
+    options: {
+      ...baseChartOpts(fmt.eur),
+      scales: {
+        ...baseChartOpts(fmt.eur).scales,
+        x: { ...baseChartOpts(fmt.eur).scales.x, stacked: true },
+        y: { ...baseChartOpts(fmt.eur).scales.y, stacked: true },
+      },
+      plugins: {
+        ...baseChartOpts(fmt.eur).plugins,
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ARR line chart — fixed points from revenue_monthly to avoid quarter bug
+  const ARR_MONTHS  = ['2026-12-01','2027-06-01','2027-12-01','2028-06-01','2028-12-01'];
+  const ARR_LABELS  = ["Dec '26", "Jun '27", "Dec '27", "Jun '28", "Dec '28"];
+  const arrRows = ARR_MONTHS.map(m => data.revenue_monthly.find(r => r.month === m)).filter(Boolean);
+
+  new Chart(el('arrChart'), {
+    type: 'line',
+    data: {
+      labels: ARR_LABELS,
+      datasets: [{
+        label: 'Ending ARR',
+        data: arrRows.map(r => r.ending_arr),
+        borderColor: isDark() ? '#818cf8' : '#4f46e5',
+        backgroundColor: isDark() ? 'rgba(129,140,248,.12)' : 'rgba(79,70,229,.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: isDark() ? '#818cf8' : '#4f46e5',
+        pointRadius: 5,
+        tension: 0.35,
+        fill: true,
+      }]
+    },
+    options: baseChartOpts(fmt.eur)
+  });
+
+  // Annual table
+  const metrics = [
+    ['Services & déploiement',    r => r.services_deployment_revenue],
+    ['Abonnement plateforme',     r => r.platform_subscription_revenue],
+    ['Total revenue',             r => r.total_revenue],
+    ['Ending ARR',                r => r.ending_arr],
+    ['Recurring revenue share',   r => fmt.pct(r.recurring_revenue_share)],
+    ['Gross margin',              r => fmt.pct(r.gross_margin)],
+  ];
+  setHTML('annualRows', metrics.map(([label, fn]) => `
+    <tr>
+      <td class="px-4 py-3 text-zinc-700 dark:text-zinc-300">${label}</td>
+      ${rows.map(r => {
+        const v = fn(r);
+        const isStr = typeof v === 'string';
+        return `<td class="px-4 py-3 text-right font-${label === 'Total revenue' ? 'semibold' : 'normal'}">${isStr ? v : fmt.eur(v)}</td>`;
+      }).join('')}
+    </tr>`).join(''));
 }
 
-function renderArr() {
-  // Use monthly data directly to avoid the quarter labelling bug (Q5 = Dec alone)
-  const ARR_POINTS = ['2026-12-01','2027-06-01','2027-12-01','2028-06-01','2028-12-01'];
-  const LABELS     = ["Dec '26", "Jun '27", "Dec '27", "Jun '28", "Dec '28"];
-  const rows = ARR_POINTS.map(m => data.revenue_monthly.find(r => r.month === m)).filter(Boolean);
-  const W=620,H=270,L=48,R=20,T=20,B=46, chartW=W-L-R, chartH=H-T-B;
-  const max = Math.max(...rows.map(r=>r.ending_arr));
-  const x = i => L + i*(chartW/(rows.length-1));
-  const y = v => T + chartH - (v/max)*chartH;
-  const grid = [0,.25,.5,.75,1].map(p=>`<line class="grid-line" x1="${L}" x2="${W-R}" y1="${T+chartH-p*chartH}" y2="${T+chartH-p*chartH}"/>`).join('');
-  const points = rows.map((r,i)=>`${x(i)},${y(r.ending_arr)}`).join(' ');
-  const labels = rows.map((r,i)=>`<circle cx="${x(i)}" cy="${y(r.ending_arr)}" r="5" fill="#2f45ff"/><text class="bar-label" x="${x(i)}" y="${H-20}" text-anchor="middle">${LABELS[i]}</text><text class="value-label" x="${x(i)}" y="${Math.max(12,y(r.ending_arr)-10)}" text-anchor="middle">${fmt.eur(r.ending_arr)}</text>`).join('');
-  setHTML('arrChart', svg(W,H,grid+`<polyline points="${points}" fill="none" stroke="#2f45ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`+labels));
+// ─── Capacity & cash ─────────────────────────────────────────────────────────
+
+function renderRunway() {
+  const caps = data.delivery_capacity.filter(r =>
+    r.month.endsWith('-12-01') || ['2026-09-01','2027-06-01','2028-06-01'].includes(r.month));
+  const capLabels = caps.map(r => {
+    const d = new Date(r.month);
+    return `${d.toLocaleDateString('en-US', { month: 'short' })} '${String(d.getFullYear()).slice(2)}`;
+  });
+
+  new Chart(el('capacityChart'), {
+    type: 'line',
+    data: {
+      labels: capLabels,
+      datasets: [
+        {
+          label: 'FDE capacity',
+          data: caps.map(r => r.fde_capacity_active_use_cases),
+          borderColor: isDark() ? '#818cf8' : '#4f46e5',
+          backgroundColor: 'transparent',
+          borderWidth: 2.5,
+          pointRadius: 4,
+          tension: 0.3,
+        },
+        {
+          label: 'Active deployments',
+          data: caps.map(r => r.active_deployments),
+          borderColor: isDark() ? '#e4e4e7' : '#3f3f46',
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          pointRadius: 4,
+          borderDash: [4, 3],
+          tension: 0.3,
+        }
+      ]
+    },
+    options: {
+      ...baseChartOpts(fmt.count),
+      plugins: {
+        ...baseChartOpts(fmt.count).plugins,
+        legend: {
+          display: true, position: 'bottom',
+          labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  const cash = data.cash_monthly.filter(r =>
+    r.month.endsWith('-12-01') || ['2026-09-01','2027-06-01','2028-06-01'].includes(r.month));
+  const cashLabels = cash.map(r => {
+    const d = new Date(r.month);
+    return `${d.toLocaleDateString('en-US', { month: 'short' })} '${String(d.getFullYear()).slice(2)}`;
+  });
+
+  new Chart(el('cashChart'), {
+    type: 'line',
+    data: {
+      labels: cashLabels,
+      datasets: [{
+        label: 'Ending cash',
+        data: cash.map(r => r.ending_cash),
+        borderColor: isDark() ? '#e4e4e7' : '#3f3f46',
+        backgroundColor: isDark() ? 'rgba(228,228,231,.08)' : 'rgba(63,63,70,.06)',
+        borderWidth: 2.5,
+        pointBackgroundColor: isDark() ? '#e4e4e7' : '#3f3f46',
+        pointRadius: 5,
+        tension: 0.35,
+        fill: true,
+      }]
+    },
+    options: baseChartOpts(fmt.eur)
+  });
+
+  // FDE table
+  const capByYear = [2026, 2027, 2028].map(y =>
+    data.delivery_capacity.find(r => r.year === y && r.month.endsWith('-12-01')) ||
+    data.delivery_capacity.find(r => r.year === y));
+  const drivers = { 2026: 'Hands-on deployments', 2027: 'Playbooks & tooling', 2028: 'Self-serve progressif' };
+  setHTML('capacityRows', capByYear.map(r => `
+    <tr>
+      <td class="py-3 text-zinc-700 dark:text-zinc-300">${r.year}</td>
+      <td class="py-3 text-right">${Number(r.use_cases_per_fde).toFixed(0)} use cases</td>
+      <td class="py-3 text-right text-zinc-500">${drivers[r.year]}</td>
+    </tr>`).join(''));
+
+  // Seed allocation
+  setHTML('fundsGrid', data.use_of_funds.map(f => `
+    <div>
+      <div class="flex justify-between text-sm mb-1.5">
+        <span class="font-medium">${f.category}</span>
+        <span class="text-zinc-500">${fmt.eur(f.amount)} · ${fmt.pct(f.share)}</span>
+      </div>
+      <div class="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+        <div class="h-full rounded-full bg-zinc-800 dark:bg-zinc-300" style="width:${Math.max(4, f.share * 100)}%"></div>
+      </div>
+      <div class="text-xs text-zinc-400 mt-1">${f.purpose}</div>
+    </div>`).join(''));
 }
 
-function renderCapacityAndCash() {
-  const caps = data.delivery_capacity.filter(r => r.month.endsWith('-12-01') || ['2026-09-01','2027-06-01','2028-06-01'].includes(r.month));
-  const W=620,H=270,L=48,R=20,T=20,B=46, chartW=W-L-R, chartH=H-T-B;
-  const max = Math.max(...caps.flatMap(r=>[r.fde_capacity_active_use_cases, r.active_deployments]));
-  const x = i => L + i*(chartW/(caps.length-1));
-  const y = v => T + chartH - (v/max)*chartH;
-  const grid = [0,.25,.5,.75,1].map(p=>`<line class="grid-line" x1="${L}" x2="${W-R}" y1="${T+chartH-p*chartH}" y2="${T+chartH-p*chartH}"/>`).join('');
-  const capLine = caps.map((r,i)=>`${x(i)},${y(r.fde_capacity_active_use_cases)}`).join(' ');
-  const depLine = caps.map((r,i)=>`${x(i)},${y(r.active_deployments)}`).join(' ');
-  const labels = caps.map((r,i)=>{ const d=new Date(r.month); const label=`${d.toLocaleDateString('en-US',{month:'short'})} '${String(d.getFullYear()).slice(2)}`; return `<text class="bar-label" x="${x(i)}" y="${H-20}" text-anchor="middle">${label}</text>`}).join('');
-  setHTML('capacityChart', svg(W,H,grid+`<polyline points="${capLine}" fill="none" stroke="#2f45ff" stroke-width="4" stroke-linecap="round"/><polyline points="${depLine}" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>`+caps.map((r,i)=>`<circle cx="${x(i)}" cy="${y(r.fde_capacity_active_use_cases)}" r="4" fill="#2f45ff"/><circle cx="${x(i)}" cy="${y(r.active_deployments)}" r="4" fill="#111"/>`).join('')+labels+`<text class="bar-label" x="${L}" y="${H-2}">● Active deployments</text><text class="bar-label" x="${L+160}" y="${H-2}" fill="#2f45ff">● FDE capacity</text>`));
+// ─── TOC active state ────────────────────────────────────────────────────────
 
-  const capacityByYear = [2026,2027,2028].map(year => data.delivery_capacity.find(r => r.year === year && r.month.endsWith('-12-01')) || data.delivery_capacity.find(r => r.year === year));
-  setHTML('capacityTable', `<h3>FDE leverage assumptions</h3><table class="summary-table"><thead><tr><th>Year</th><th>Capacity / FDE</th><th>Driver of improvement</th></tr></thead><tbody>` +
-    capacityByYear.map(r => `<tr><td>${r.year}</td><td>${Number(r.use_cases_per_fde).toFixed(0)} active use cases</td><td>${r.year===2026?'Hands-on deployments':r.year===2027?'Reusable playbooks and internal tooling':'Progressive self-serve deployment capabilities'}</td></tr>`).join('') + `</tbody></table>`);
+function initToc() {
+  const links = document.querySelectorAll('.toc a');
+  const ids   = [...links].map(a => a.getAttribute('href').slice(1));
+  const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
 
-  const cash = data.cash_monthly.filter(r => r.month.endsWith('-12-01') || ['2026-09-01','2027-06-01','2028-06-01'].includes(r.month));
-  const maxCash = Math.max(...cash.map(r=>r.ending_cash));
-  const minCash = Math.min(0, ...cash.map(r=>r.ending_cash));
-  const range = maxCash - minCash || 1;
-  const yc = v => T + chartH - ((v-minCash)/range)*chartH;
-  const xc = i => L + i*(chartW/(cash.length-1));
-  const cashPoints = cash.map((r,i)=>`${xc(i)},${yc(r.ending_cash)}`).join(' ');
-  const cashLabels = cash.map((r,i)=>{ const d=new Date(r.month); const label=`${d.toLocaleDateString('en-US',{month:'short'})} '${String(d.getFullYear()).slice(2)}`; return `<circle cx="${xc(i)}" cy="${yc(r.ending_cash)}" r="5" fill="#111"/><text class="bar-label" x="${xc(i)}" y="${H-20}" text-anchor="middle">${label}</text><text class="value-label" x="${xc(i)}" y="${Math.max(12,yc(r.ending_cash)-9)}" text-anchor="middle">${fmt.eur(r.ending_cash)}</text>`}).join('');
-  setHTML('cashChart', svg(W,H,grid+`<polyline points="${cashPoints}" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`+cashLabels));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.toc a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => obs.observe(s));
 }
 
-function renderFunds() {
-  setHTML('useOfFunds', `<h3>Seed allocation</h3><div class="fund-list">` + data.use_of_funds.map(f => `
-    <div class="fund-item">
-      <div class="fund-top"><span>${f.category}</span><span>${fmt.eur(f.amount)}</span></div>
-      <div class="fund-purpose">${f.purpose} · ${fmt.pct(f.share)}</div>
-      <div class="fund-bar"><div style="width:${Math.max(4, f.share*100)}%"></div></div>
-    </div>`).join('') + `</div>`);
-}
+// ─── Dark mode toggle ────────────────────────────────────────────────────────
+
+el('theme-toggle').addEventListener('click', () => {
+  const isDk = document.documentElement.classList.toggle('dark');
+  localStorage.theme = isDk ? 'dark' : 'light';
+  // Charts don't auto-recolor — simplest UX is to reload
+  location.reload();
+});
+
+// ─── Init ────────────────────────────────────────────────────────────────────
 
 renderKpis();
 renderTrajectory();
 renderMonthlyRevenue();
-renderUnitEconomics();
-renderAccountsUseCases();
-renderRevenueMix();
-renderArr();
-renderCapacityAndCash();
-renderFunds();
+
+renderPhaseCards();
+renderGrowth();
+renderMix();
+renderRunway();
+initToc();
