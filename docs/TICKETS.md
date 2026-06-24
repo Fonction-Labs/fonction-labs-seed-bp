@@ -48,21 +48,19 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T1.3 — Creer la vue decomposee "ARR total" vs "ARR plateforme"
 
+**Statut** : DONE (methodologie) — chiffres precis a remplir apres T2.1/T2.2/T2.3
 **Priorite** : Haute
 **Owner** : Matthieu
-**Dependances** : T2.3 (grille de pricing finalisee)
+**Dependances** : T2.1, T2.2, T2.3 pour les chiffres exacts
+**Doc de reference** : [T1.3_arr-decomposition_conclusions.md](./T1.3_arr-decomposition_conclusions.md)
 
-**Description** :
-Ajouter dans le modele financier une decomposition explicite entre ARR total (incluant le service recurrent) et ARR plateforme (uniquement logiciel).
-
-**Livrable** :
-- Nouvelle ligne dans le modele : ARR plateforme = abonnements logiciel uniquement (hors jours FDE, hors ateliers, hors amelioration continue people-based)
-- ARR total = ARR plateforme + revenu recurrent service (FDE places, contrats d'amelioration continue)
-- Montrer la trajectoire : part plateforme qui augmente progressivement (petit % en 2026, dominant en 2028)
-- Chiffre de reference actuel : ~120k ARR annualise fin 2026 (abonnement seul)
-
-**Pourquoi** :
-Un VC veut savoir si on vend des hommes ou du logiciel. La reponse honnete : aujourd'hui surtout des hommes, demain surtout du logiciel. La transparence est un choix strategique assume.
+**Conclusions principales** :
+- La decomposition ARR plateforme vs ARR service n'est pertinente que pour 2026-2027 (modele de transition)
+- En 2028 (modele cible), le FDE est un cout de delivery interne — plus de ligne "service" dans le revenu
+- 3 buckets en transition : one-shot (atelier + deploy, non recurrent), ARR service (amelioration continue ~50k/an/use case), ARR plateforme (per-agent)
+- Ordres de grandeur 2027 : ~1.15M ARR plateforme + ~1.2M ARR service = ~2.35M total (a affiner avec T2)
+- ARR fin 2026 recalcule a ~48k (pas 120k — l'ancien pricing 10k/mois est abandonne)
+- One-shot toujours traite comme revenue non recurrent, jamais annualise (Option A actee)
 
 ---
 
