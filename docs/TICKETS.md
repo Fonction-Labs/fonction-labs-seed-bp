@@ -28,32 +28,21 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T1.2 — Documenter "modele intermediaire" vs "modele cible"
 
+**Statut** : DONE
 **Priorite** : Haute
 **Owner** : Matthieu
 **Dependances** : Aucune
+**Doc de reference** : [T1.2_modeles-intermediaire-vs-cible_conclusions.md](./T1.2_modeles-intermediaire-vs-cible_conclusions.md)
 
-**Description** :
-Creer un document de reference clair qui definit les deux modeles economiques et les conditions de bascule.
-
-**Livrable** :
-Un document avec :
-
-**Modele intermediaire (maintenant → mi-2027)** :
-- Service + petit fee plateforme
-- Composantes : atelier (20k) + deploiement (40k/use case) + amelioration continue (~50k/an moyenne) + abonnement plateforme (15-20k/an/use case en entree)
-- Strategie : offre tres abordable et limitee → montee en gamme par packages (silver/gold/enterprise jusqu'a 200-300k/an)
-- Le deploy est un humain (FDE), pas masque dans un fee plateforme
-
-**Modele cible (post-SecNumCloud)** :
-- Usage-based : facturation au token avec marge ~30%
-- On gere les modeles IA pour le client (SaaS complet)
-- Le client ne touche pas a l'infra IA
-- Prerequis : SecNumCloud atteint OU partenariat OVH operationnel
-
-**Conditions de bascule** :
-- Jalon technique SecNumCloud (ou partenariat OVH)
-- Nombre suffisant de clients lockes (lock-in ecosystemique)
-- Timeline estimee : 2-3 ans
+**Conclusions principales** :
+- Modele intermediaire = 2 lignes (abonnement per-agent + service FDE en forfait mensuel)
+- Tiers : Starter (1.5-2k/agent/mois) / Growth (2.5-3k/agent/mois) / Enterprise (forfait negocie, deploiement personnalise)
+- Modele cible = credits (standard, marge ~30%) + success fee par case "done" (option premium)
+- FDE dans le modele cible = cout de delivery integre au package enterprise (pas un produit vendu)
+- ETI self-service = amelioration continue via SDK client (roadmap M5)
+- Bascule progressive : ETI Q3 2027 (RGPD suffit) → GC Q4 2027 (ISO 27001) → TGC 2028+ (SecNumCloud/OVH)
+- Transition client = grandfathering + migration incitee au renouvellement
+- SLA = custom par client pour l'instant
 
 ---
 
