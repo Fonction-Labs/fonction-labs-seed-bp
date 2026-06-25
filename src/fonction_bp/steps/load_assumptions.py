@@ -32,6 +32,10 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     pricing_rows = [{"key": k, "value": float(v)} for k, v in pricing.items() if isinstance(v, (int, float))]
     create_table_from_dicts(con, "pricing", pricing_rows, [("key", "VARCHAR"), ("value", "DOUBLE")])
 
+    # Pricing by segment.
+    seg_pricing_rows = [{"segment": seg, "avg_mrr_per_uc": float(val)} for seg, val in pricing["avg_mrr_per_uc"].items()]
+    create_table_from_dicts(con, "segment_pricing", seg_pricing_rows, [("segment", "VARCHAR"), ("avg_mrr_per_uc", "DOUBLE")])
+
     baseline_rows = _monthly_dict_to_rows(assumptions["service_forecast_baseline"]["monthly_eur"], "custom_service_baseline")
     create_table_from_dicts(con, "service_baseline_raw", baseline_rows, [("month", "DATE"), ("custom_service_baseline", "DOUBLE")])
     con.execute("CREATE TABLE service_baseline AS SELECT month, custom_service_baseline FROM service_baseline_raw")
@@ -40,34 +44,47 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     create_table_from_dicts(con, "fde_support_revenue_raw", fde_support_rows, [("month", "DATE"), ("fde_support_revenue", "DOUBLE")])
     con.execute("CREATE TABLE fde_support_revenue AS SELECT month, fde_support_revenue FROM fde_support_revenue_raw")
 
-    # Enterprise cohort plan.
+    # Enterprise cohort plan — now with segment.
     cohort_rows = []
     for month, values in assumptions["enterprise_cohort_plan"]["monthly"].items():
         cohort_rows.append({
             "month": str(month),
+            "segment": values.get("segment", "ETI"),
             "new_enterprise_accounts": int(values.get("new_enterprise_accounts", 0) or 0),
             "initial_use_case_starts": int(values.get("initial_use_case_starts", 0) or 0),
             "expansion_use_case_starts": int(values.get("expansion_use_case_starts", 0) or 0),
         })
-    create_table_from_dicts(con, "cohort_plan_raw", cohort_rows, [("month", "DATE"), ("new_enterprise_accounts", "INTEGER"), ("initial_use_case_starts", "INTEGER"), ("expansion_use_case_starts", "INTEGER")])
+    create_table_from_dicts(con, "cohort_plan_raw", cohort_rows, [("month", "DATE"), ("segment", "VARCHAR"), ("new_enterprise_accounts", "INTEGER"), ("initial_use_case_starts", "INTEGER"), ("expansion_use_case_starts", "INTEGER")])
     con.execute("""
         CREATE TABLE cohort_plan AS
-        SELECT month, new_enterprise_accounts, initial_use_case_starts, expansion_use_case_starts,
+        SELECT month, segment, new_enterprise_accounts, initial_use_case_starts, expansion_use_case_starts,
                initial_use_case_starts + expansion_use_case_starts AS use_case_starts
         FROM cohort_plan_raw
     """)
 
-    # FDE capacity by year.
+    # FDE capacity by year (legacy, kept for backward compat).
     cap_rows = []
     for year, cap in assumptions["fde_capacity"]["use_cases_per_fde"].items():
         cap_rows.append({"year": int(year), "use_cases_per_fde": float(cap)})
     create_table_from_dicts(con, "fde_capacity_assumptions", cap_rows, [("year", "INTEGER"), ("use_cases_per_fde", "DOUBLE")])
 
-    # Gross margin by year.
-    gm_rows = []
-    for stream, mapping in assumptions["gross_margin"].items():
-        for year, margin in mapping.items():
-            gm_rows.append({"stream": stream, "year": int(year), "gross_margin": float(margin)})
+    # FDE formula params.
+    fde_f = assumptions["fde_formula"]
+    fde_formula_rows = [
+        {"param": "fde_per_uc_deploying", "value": float(fde_f["fde_per_uc_deploying"])},
+        {"param": "fde_per_uc_in_run", "value": float(fde_f["fde_per_uc_in_run"])},
+    ]
+    create_table_from_dicts(con, "fde_formula_params", fde_formula_rows, [("param", "VARCHAR"), ("value", "DOUBLE")])
+
+    # Gross margin — no longer used for COGS (bottom-up now), but keep empty for compat.
+    gm_rows = [
+        {"stream": "services_deployment", "year": 2026, "gross_margin": 0.40},
+        {"stream": "services_deployment", "year": 2027, "gross_margin": 0.60},
+        {"stream": "services_deployment", "year": 2028, "gross_margin": 0.70},
+        {"stream": "platform_subscription", "year": 2026, "gross_margin": 0.85},
+        {"stream": "platform_subscription", "year": 2027, "gross_margin": 0.88},
+        {"stream": "platform_subscription", "year": 2028, "gross_margin": 0.90},
+    ]
     create_table_from_dicts(con, "gross_margin_assumptions", gm_rows, [("stream", "VARCHAR"), ("year", "INTEGER"), ("gross_margin", "DOUBLE")])
 
     # Use of funds.
