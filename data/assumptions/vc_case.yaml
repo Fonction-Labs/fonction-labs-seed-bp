@@ -78,7 +78,9 @@ freelance_missions:
 service_forecast_baseline:
   # Custom service / deployment continuity, excluding workshops, 0→1 deployment fees and recurring platform subscription.
   # Represents ongoing service work with existing clients (excl. Wassym which is separate).
+  # Note: current month entry needed for the "mixed bar" split (actual invoiced + forecast residual).
   monthly_eur:
+    2026-06-01: 20000
     2026-07-01: 20000
     2026-08-01: 20000
     2026-09-01: 20000
