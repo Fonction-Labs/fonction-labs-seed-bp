@@ -69,6 +69,47 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         ORDER BY 1
     """)
 
+    # Invoiced revenue from Qonto invoices CSV (source of truth for actuals).
+    invoices_dir = paths.root / "data" / "raw" / "invoices"
+    invoice_files = list(invoices_dir.glob("*.csv")) if invoices_dir.exists() else []
+    if invoice_files:
+        import csv as csv_mod
+        inv_rows = []
+        for inv_file in invoice_files:
+            with open(inv_file, "r", encoding="utf-8") as f:
+                reader = csv_mod.DictReader(f, delimiter=";")
+                for row in reader:
+                    issue_date = row.get("Issue Date", "")
+                    subtotal_raw = row.get("Subtotal", "0")
+                    subtotal = float(subtotal_raw.replace(",", ".")) if subtotal_raw else 0.0
+                    if issue_date and subtotal > 0:
+                        inv_rows.append({
+                            "invoice_number": row.get("Number", ""),
+                            "issue_date": issue_date,
+                            "month": issue_date[:8] + "01",
+                            "status": row.get("Status", ""),
+                            "client_name": row.get("Client Name", ""),
+                            "subtotal_ht": subtotal,
+                        })
+        if inv_rows:
+            create_table_from_dicts(con, "raw_invoices", inv_rows)
+            con.execute("""
+                CREATE TABLE invoiced_revenue_monthly AS
+                SELECT
+                    CAST(month AS DATE) AS month,
+                    SUM(subtotal_ht) AS invoiced_revenue,
+                    SUM(CASE WHEN status = 'paid' THEN subtotal_ht ELSE 0 END) AS collected_revenue,
+                    SUM(CASE WHEN status != 'paid' THEN subtotal_ht ELSE 0 END) AS outstanding_revenue,
+                    COUNT(*) AS invoice_count
+                FROM raw_invoices
+                GROUP BY 1
+                ORDER BY 1
+            """)
+        else:
+            con.execute("CREATE TABLE invoiced_revenue_monthly (month DATE, invoiced_revenue DOUBLE, collected_revenue DOUBLE, outstanding_revenue DOUBLE, invoice_count INTEGER)")
+    else:
+        con.execute("CREATE TABLE invoiced_revenue_monthly (month DATE, invoiced_revenue DOUBLE, collected_revenue DOUBLE, outstanding_revenue DOUBLE, invoice_count INTEGER)")
+
     attio_path = paths.raw_attio_dir / "attio_funnel_extract.csv"
     attio_rows = csv_rows(attio_path)
     create_table_from_dicts(con, "raw_attio_funnel", attio_rows)
