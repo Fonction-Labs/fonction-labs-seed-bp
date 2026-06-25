@@ -179,46 +179,34 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T4.1 — Definir la trajectoire SecNumCloud
 
+**Statut** : DONE (validé)
 **Priorite** : Moyenne
-**Owner** : Matthieu / a definir
+**Owner** : Matthieu
 **Dependances** : Aucune
+**Doc de reference** : [T4_strategie-enterprise_conclusions.md](./T4_strategie-enterprise_conclusions.md)
 
-**Description** :
-Cartographier le chemin vers SecNumCloud : contraintes, timeline, couts, jalons.
-
-**Questions a resoudre** :
-- Quelles sont les exigences exactes pour la qualification SecNumCloud ?
-- Quel est le delai realiste (estimation actuelle : 2-3 ans) ?
-- Quels couts (audit, mise en conformite, infra) ?
-- Est-ce qu'on le fait seul ou via un partenaire (cf T4.2) ?
-- Quel jalon precis mettre dans le BP pour la bascule vers usage-based ?
-
-**Contexte** :
-- Les grandes entreprises sont "paranos de la securite"
-- SecNumCloud est le prerequis pour facturer les tokens en direct (usage-based)
-- Sans ca, impossible de "refacturer le modele" aux clients enterprise
-- C'est le verrou principal vers le modele cible
+**Conclusions principales** :
+- Approche retenue : hébergement sur OVH S3NS (JV OVH × Thales, qualifiée SecNumCloud) — pas certification produit propre
+- Certification produit propre abandonnée (100-300k+, 2-3 ans — hors scope BP)
+- AWS non qualifié SecNumCloud → disqualifié pour les TGC français
+- Jalon BP : Q1 2027 partenariat OVH formalisé → infrastructure qualifiée disponible → déblocage TGC
 
 ---
 
 ### T4.2 — Explorer le partenariat OVH
 
+**Statut** : DONE (validé)
 **Priorite** : Moyenne
-**Owner** : Matthieu / a definir
+**Owner** : Matthieu
 **Dependances** : T4.1
+**Doc de reference** : [T4_strategie-enterprise_conclusions.md](./T4_strategie-enterprise_conclusions.md)
 
-**Description** :
-Evaluer la faisabilite d'un partenariat OVH comme chemin accelere vers le modele cible.
-
-**Hypothese** :
-Jean identifie OVH comme "le chemin le plus facile" vers un deploiement compatible exigences enterprise (SecNumCloud / souverainete).
-
-**Questions a resoudre** :
-- OVH propose-t-il deja une offre SecNumCloud compatible avec nos besoins ?
-- Quel type de partenariat (technique, commercial, les deux) ?
-- Quels delais vs le faire en solo ?
-- Quels couts / contraintes ?
-- Y a-t-il des contacts existants a activer ?
+**Conclusions principales** :
+- Contact OVH existant (bien placé) — à activer juil-sept 2026 sur dimensions technique + commercial
+- Priorité : hébergement qualifié OVH S3NS d'abord, partenariat commercial ensuite
+- AWS/Azure : options valides pour ETI et GC (ISO 27001 suffit)
+- Coût OVH S3NS (~20-30% premium vs AWS standard) inclus dans budget infra cloud T3.4
+- Prospection TGC à démarrer Q1 2027 (cycle 6-18 mois → closes H1 2028)
 
 ---
 
