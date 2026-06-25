@@ -68,107 +68,53 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T2.1 — Construire les 3 typologies clients
 
+**Statut** : DONE (validé)
 **Priorite** : Haute
 **Owner** : Matthieu
 **Dependances** : Aucune
+**Doc de reference** : [T2_synthese-complete_conclusions.md](./T2_synthese-complete_conclusions.md)
 
-**Description** :
-Definir 3 profils d'entreprises cibles avec des hypotheses chiffrees pour chacun.
-
-**Livrable** :
-Un tableau par segment :
-
-| Critere | ETI (~100M CA) | Grand compte (~1Md CA) | Tres grand compte (~40-50Md CA) |
-|---------|----------------|------------------------|---------------------------------|
-| Nombre de use cases potentiels | ? | ? | ? |
-| Rythme d'ajout use cases/an | ? | ? | ? |
-| Ticket moyen deploiement | ? | ? | ? |
-| Ticket moyen recurrent/an | ? | ? | ? |
-| Cycle de vente estime | ? | ? | ? |
-| Contraintes securite | ? | ? | ? |
-| Nombre de clients vises 2027 | ? | ? | ? |
-
-**Hypotheses structurantes a respecter** :
-- Max 3 tres grands comptes en 2027 (realiste)
-- L'essentiel du volume vient des ETI et grands comptes
-- Bouygues (57Md CA) = reference pour le segment tres grand compte
-- 12 entreprises total en 2027, 30 en 2028
-
-**Offres a profiler par segment** :
-- Quels packages pour chaque taille ?
-- Quel prix d'entree vs prix cible a terme ?
+**Conclusions principales** :
+- ETI : 1-2 UC annee 1, rythme +1/an, cycle 2-4 mois, interlocuteur DG/Head of Data, tier Starter
+- GC : 2-3 UC annee 1, rythme +2/an, cycle 4-8 mois, interlocuteur DSI+metier, tier Growth
+- TGC : 3 UC annee 1, rythme +3-4/an, cycle 6-18 mois, interlocuteur DSI+RSSI, tier Enterprise
+- Clients : 1 fin 2026 / 12 fin 2027 / 30 fin 2028
 
 ---
 
 ### T2.2 — Chiffrer 3-4 use cases types
 
+**Statut** : DONE (validé)
 **Priorite** : Haute
 **Owner** : Matthieu
-**Dependances** : Aucune (peut etre fait en parallele de T2.1)
+**Dependances** : Aucune
+**Doc de reference** : [T2_synthese-complete_conclusions.md](./T2_synthese-complete_conclusions.md)
 
-**Description** :
-Prendre 3-4 cas d'usage representatifs et estimer pour chacun les couts, volumetries et revenus.
-
-**Use cases retenus** :
-1. **Facturation** — controle, rapprochement, detection d'anomalies
-2. **Service client** — triage, resolution automatisee, escalade
-3. **Saisie/execution dans un outil** — automatisation de workflows metier
-4. **[A definir]** — identifier un 4e use case classique (suggestions : conformite/audit, RH/onboarding, procurement)
-
-**Pour chaque use case, estimer** :
-
-| Dimension | A chiffrer |
-|-----------|-----------|
-| Volumetrie tokens (input/output par resolution) | ex : combien de tokens pour traiter une facture ? |
-| Volume mensuel typique par segment client | ex : 1000 factures/mois pour une ETI, 50 000 pour un grand compte |
-| Effort d'implementation (jours FDE) | ex : 20 jours, 40 jours, 60 jours |
-| Effort amelioration continue (jours FDE/an) | ex : 5 jours/an (quasi-automatise) vs 60 jours/an (complexe) |
-| Cout tokens mensuel pour nous | en EUR |
-| Cout FDE imputable | en EUR (base 1 150 EUR/jour) |
-| Prix de vente (transition) | deploiement + recurrent |
-| Prix de vente (modele cible, usage-based) | marge token + fee plateforme |
-| Marge par use case | brute et nette |
-
-**Observation terrain a integrer** :
-- Bouygues Telecom Wholesale : 2 agents facturation, dont 1 tres simple. Volumetrie relativement tranquille.
-- Possibilite de generer du revenu recurrent vite via petits abonnements (10-15k/use case/an) meme en transition.
+**Conclusions principales** :
+- 4 use cases : Facturation, Service client, Saisie/execution, Analyse/reporting
+- Value-based pricing : prix = cout humain / 2 (ROI x2 client minimum)
+- Prix moyens : ETI 2k/UC/mois, GC 5.25k, TGC 16.25k
+- Cout tokens negligeable (marge brute >94%) — vrai cout = FDE amorti (~45k/an/UC)
+- Modele final = abonnement leger + credits prepay (1 credit = X tokens)
 
 ---
 
-### T2.3 — Recaler la grille de pricing de transition et projeter le CA 2026-2028
+### T2.3 — Recaler la grille de pricing et projeter le CA 2026-2028
 
+**Statut** : DONE (validé)
 **Priorite** : Haute
 **Owner** : Matthieu
 **Dependances** : T2.1, T2.2
+**Doc de reference** : [T2_synthese-complete_conclusions.md](./T2_synthese-complete_conclusions.md)
 
-**Description** :
-A partir des typologies clients et des use cases chiffres, construire la grille de pricing definitive pour la phase de transition et en deduire un CA credible annee par annee.
-
-**Grille de base discutee** :
-
-| Poste | Montant | Frequence |
-|-------|---------|-----------|
-| Atelier decouverte | 20 000 EUR | One-shot par engagement |
-| Deploiement | 40 000 EUR | One-shot par use case |
-| Amelioration continue | ~50 000 EUR/an (moyenne) | Recurrent, grande variabilite |
-| Abonnement plateforme (entree) | 15-20k EUR/an/use case | Recurrent |
-| Abonnement plateforme (enterprise) | 200-300k EUR/an | Recurrent, quand 4-5+ use cases |
-
-**Logique de montee en valeur a modeliser** :
-1. Client entre a 40k/an pour 2 agents (phase test, facile a acheter)
-2. Constate la valeur en 3-6 mois
-3. Demande plus d'agents / features
-4. On propose package superieur (silver → gold → enterprise)
-5. Cible : 200-300k/an par client au bout de 12-18 mois
-
-**Projection CA a produire** :
-- CA 2026 : distinguer signe vs facture (le facture est plus bas que le signe)
-- CA 2027 : ventile par segment + par poste (one-shot vs recurrent)
-- CA 2028 : inclure la bascule progressive vers usage-based
-
-**Point d'attention** :
-- Le pricing de transition en petits abonnements par use case (10-15k) peut generer du CA rapide si on multiplie les micro-deployments (type Bouygues Wholesale)
-- Ne pas projeter au-dela de 2028
+**Conclusions principales** :
+- CA 2026 total : ~374k (264k service pur actuals/forecast Qonto + 110k plateforme)
+- CA 2027 : ~2.5M (1.22M one-shot + 0.4M ARR plateforme + 0.84M ARR service)
+- CA 2028 : ~7.1M (2.56M one-shot + 4.1M ARR plateforme)
+- ARR fin 2027 : ~2.25M / fin 2028 : ~4.55M
+- Coherent avec Jean (ecart max -11% sur 2027, +1% sur 2028)
+- Point ouvert : ratio credit/token et prix abonnement leger a fixer
+- "600k signe 2026" ≠ CA facture — distinction importante pour le BP
 
 ---
 
