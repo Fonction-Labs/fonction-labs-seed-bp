@@ -24,9 +24,9 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     con = duckdb.connect(str(paths.duckdb_path))
     checks: list[dict] = []
 
-    # Check 1: Qonto actuals match known total.
-    actual_sum = con.execute("SELECT SUM(commercial_revenue_actual) FROM actual_revenue_monthly").fetchone()[0]
-    _assert_close("Jan-Jun 2026 actual commercial revenue", actual_sum, float(assumptions["target_checks"]["jan_jun_2026_commercial_revenue"]), 1.0, checks)
+    # Check 1: Invoiced revenue matches known total.
+    invoiced_sum = con.execute("SELECT SUM(invoiced_revenue) FROM invoiced_revenue_monthly WHERE month BETWEEN DATE '2026-01-01' AND DATE '2026-06-01'").fetchone()[0]
+    _assert_close("Jan-Jun 2026 invoiced revenue", invoiced_sum, float(assumptions["target_checks"]["jan_jun_2026_invoiced_revenue"]), 1.0, checks)
 
     # Check 2: Annual revenue equals monthly sum (internal consistency).
     bad_annual = con.execute("""
@@ -38,10 +38,10 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     if bad_annual:
         raise AssertionError("Annual revenue check failed")
 
-    # Check 3: COGS = FDE + tokens + infra + wassym (formula check).
+    # Check 3: COGS = FDE + freelance + tokens + infra + wassym (formula check).
     bad_cogs = con.execute("""
         SELECT COUNT(*) FROM cogs_monthly
-        WHERE ABS(total_cogs - (fde_cost + token_cost + infra_cloud_cost + service_continuity_cogs)) > 0.01
+        WHERE ABS(total_cogs - (fde_cost + freelance_cost + token_cost + infra_cloud_cost + service_continuity_cogs)) > 0.01
     """).fetchone()[0]
     checks.append({"check": "COGS formula internal consistency", "actual": bad_cogs, "expected": 0, "status": "PASS" if bad_cogs == 0 else "FAIL"})
     if bad_cogs:
@@ -59,7 +59,9 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
 
     # Check 6: Dashboard data alignment.
     data = json.loads(paths.model_outputs_json.read_text(encoding="utf-8"))
-    dash_arr = next(k["value"] for k in data["kpis"] if k["metric"] == "Ending ARR Dec-2027")
+    dash_arr = next((k["value"] for k in data["kpis"] if k["metric"] == "Ending ARR Dec-2027"), None)
+    if dash_arr is None:
+        dash_arr = 0
     dec_2027_arr = con.execute("SELECT ending_arr FROM revenue_monthly WHERE month = DATE '2027-12-01'").fetchone()[0]
     _assert_close("Dashboard Dec-2027 ARR alignment", dash_arr, dec_2027_arr, 0.01, checks)
 

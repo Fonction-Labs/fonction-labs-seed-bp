@@ -48,6 +48,9 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     # Headcount summary for team growth viz.
     headcount_monthly = _rows(con, "SELECT month, year, total_headcount_equivalent, total_payroll_cost FROM headcount_monthly ORDER BY month")
 
+    # Invoiced revenue breakdown for traction display.
+    invoiced_monthly = _rows(con, "SELECT * FROM invoiced_revenue_monthly ORDER BY month")
+
     vc_yaml = paths.assumptions_dir / "vc_case.yaml"
     raw = {}
     actuals_end_month = None
@@ -71,6 +74,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         "kpis": kpis,
         "annual_summary": annual,
         "revenue_monthly": revenue_monthly,
+        "invoiced_monthly": invoiced_monthly,
         "quarters": q_rows,
         "year_end_milestones": milestones,
         "delivery_capacity": capacity,

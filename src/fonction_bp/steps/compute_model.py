@@ -110,20 +110,24 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     """)
 
     # Revenue monthly — combines all streams.
+    # Actuals source: invoiced revenue (facturé), not collected (encaissé).
     con.execute(f"""
         CREATE OR REPLACE TABLE revenue_monthly AS
         SELECT
             m.month,
             m.year,
-            COALESCE(ar.commercial_revenue_actual, 0) AS actual_commercial_revenue,
+            COALESCE(inv.invoiced_revenue, 0) AS invoiced_revenue_actual,
+            COALESCE(ar.commercial_revenue_actual, 0) AS collected_revenue_actual,
             COALESCE(sb.custom_service_baseline, 0) AS custom_service_baseline,
             COALESCE(fsr.fde_support_revenue, 0) AS fde_support_revenue,
             COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} AS workshop_revenue,
             COALESCE(dr.deployment_revenue, 0) AS deployment_revenue,
             COALESCE(sc.service_continuity_revenue, 0) AS service_continuity_revenue,
             CASE
-              WHEN m.month <= DATE '{assumptions['model_period']['actuals_end_month']}'
-                THEN COALESCE(ar.commercial_revenue_actual, 0)
+              WHEN m.month < DATE '{assumptions['model_period']['actuals_end_month']}'
+                THEN COALESCE(inv.invoiced_revenue, 0)
+              WHEN m.month = DATE '{assumptions['model_period']['actuals_end_month']}'
+                THEN COALESCE(inv.invoiced_revenue, 0)
               ELSE COALESCE(sb.custom_service_baseline, 0) + COALESCE(fsr.fde_support_revenue, 0) +
                    COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
                    COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0)
@@ -135,6 +139,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             COALESCE(ec.enterprise_accounts_end, 0) AS enterprise_accounts_end,
             COALESCE(ec.use_case_starts, 0) AS use_case_starts
         FROM months m
+        LEFT JOIN invoiced_revenue_monthly inv USING(month)
         LEFT JOIN actual_revenue_monthly ar USING(month)
         LEFT JOIN service_baseline sb USING(month)
         LEFT JOIN fde_support_revenue fsr USING(month)
@@ -186,6 +191,37 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         })
     create_table_from_dicts(con, "hires", hire_rows, [("role", "VARCHAR"), ("function", "VARCHAR"), ("start_month", "DATE"), ("monthly_loaded_cost", "DOUBLE")])
 
+    # Freelance missions — COGS ponctuels de sous-traitance delivery.
+    freelance_missions = assumptions.get("freelance_missions", {}).get("missions", [])
+    fl_rows = []
+    for mission in freelance_missions:
+        total_cost = float(mission["tjm"]) * int(mission["days"])
+        start = str(mission["start_month"])
+        end = str(mission["end_month"])
+        fl_rows.append({
+            "name": mission["name"],
+            "client": mission["client"],
+            "start_month": start,
+            "end_month": end,
+            "total_cost": total_cost,
+        })
+    if fl_rows:
+        create_table_from_dicts(con, "freelance_missions", fl_rows, [("name", "VARCHAR"), ("client", "VARCHAR"), ("start_month", "DATE"), ("end_month", "DATE"), ("total_cost", "DOUBLE")])
+        con.execute("""
+            CREATE OR REPLACE TABLE freelance_cogs_monthly AS
+            SELECT
+                m.month,
+                COALESCE(SUM(
+                    fm.total_cost / (DATEDIFF('month', fm.start_month, fm.end_month) + 1)
+                ), 0) AS freelance_cost
+            FROM months m
+            LEFT JOIN freelance_missions fm
+              ON m.month >= fm.start_month AND m.month <= fm.end_month
+            GROUP BY 1
+        """)
+    else:
+        con.execute("CREATE TABLE freelance_cogs_monthly AS SELECT month, 0.0 AS freelance_cost FROM months")
+
     # COGS bottom-up.
     # FDE cost = actual hire cost of Forward-Deployed Engineering staff (not formula × flat rate).
     # This avoids double-counting with payroll — FDE hires are EXCLUDED from payroll below.
@@ -208,6 +244,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             m.month,
             m.year,
             COALESCE(fac.fde_cost, 0) AS fde_cost,
+            COALESCE(fl.freelance_cost, 0) AS freelance_cost,
             COALESCE(luc.live_use_cases, 0) * {avg_token_cost} AS token_cost,
             CASE
               WHEN m.month BETWEEN DATE '2026-07-01' AND DATE '2026-12-01' THEN {float(infra_cloud['2026_h2'])}
@@ -220,13 +257,14 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             COALESCE(sc.service_continuity_cogs, 0) AS service_continuity_cogs
         FROM months m
         LEFT JOIN fde_actual_cost fac USING(month)
+        LEFT JOIN freelance_cogs_monthly fl USING(month)
         LEFT JOIN live_use_cases luc USING(month)
         LEFT JOIN service_continuity sc USING(month)
     """)
     con.execute("""
         CREATE OR REPLACE TABLE cogs_monthly AS
         SELECT *,
-            fde_cost + token_cost + infra_cloud_cost + service_continuity_cogs AS total_cogs
+            fde_cost + freelance_cost + token_cost + infra_cloud_cost + service_continuity_cogs AS total_cogs
         FROM cogs_monthly
     """)
 
@@ -399,11 +437,11 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     """)
 
     # Dashboard KPIs.
-    jan_jun_actual = con.execute("SELECT SUM(commercial_revenue_actual) FROM actual_revenue_monthly").fetchone()[0] or 0
+    jan_jun_invoiced = con.execute("SELECT SUM(invoiced_revenue) FROM invoiced_revenue_monthly WHERE month BETWEEN DATE '2026-01-01' AND DATE '2026-06-01'").fetchone()[0] or 0
     dec_2027 = con.execute("SELECT ending_arr, enterprise_accounts_end, live_use_cases FROM annual_summary WHERE year = 2027").fetchone()
     runway_cash_2027 = con.execute("SELECT ending_cash FROM cash_monthly WHERE month = DATE '2027-12-01'").fetchone()[0]
     kpis = [
-        {"metric": "Actual commercial revenue Jan-Jun 2026", "value": jan_jun_actual, "unit": "EUR"},
+        {"metric": "Invoiced revenue H1 2026", "value": jan_jun_invoiced, "unit": "EUR"},
         {"metric": "2026E revenue", "value": con.execute("SELECT total_revenue FROM annual_summary WHERE year=2026").fetchone()[0], "unit": "EUR"},
         {"metric": "2027E revenue", "value": con.execute("SELECT total_revenue FROM annual_summary WHERE year=2027").fetchone()[0], "unit": "EUR"},
         {"metric": "2028E revenue", "value": con.execute("SELECT total_revenue FROM annual_summary WHERE year=2028").fetchone()[0], "unit": "EUR"},
