@@ -65,6 +65,16 @@ service_continuity:
   end_month: 2027-07-01
   vc_facing_display: Included in Services & Deployment Revenue
 
+freelance_missions:
+  # Coûts COGS ponctuels de sous-traitance delivery client (missions passées + en cours).
+  # Source : staffing plan + factures fournisseurs.
+  missions:
+    - {name: Christophe, client: Yonder, tjm: 650, days: 25, start_month: 2026-03-01, end_month: 2026-04-01}
+    - {name: Oscar, client: Docoon, tjm: 700, days: 20, start_month: 2026-04-01, end_month: 2026-05-01}
+    - {name: Oscar, client: Soaman, tjm: 700, days: 5, start_month: 2026-05-01, end_month: 2026-05-01}
+    - {name: Pierre, client: Bouygues, tjm: 950, days: 15, start_month: 2026-05-01, end_month: 2026-06-01}
+    - {name: Pierre, client: Bouygues, tjm: 950, days: 20, start_month: 2026-06-01, end_month: 2026-07-01}
+
 service_forecast_baseline:
   # Custom service / deployment continuity, excluding workshops, 0→1 deployment fees and recurring platform subscription.
   # Represents ongoing service work with existing clients (excl. Wassym which is separate).
@@ -254,4 +264,5 @@ use_of_funds:
 
 target_checks:
   # Validation checks: internal consistency only — no external targets hardcoded.
-  jan_jun_2026_commercial_revenue: 183907.5
+  jan_jun_2026_invoiced_revenue: 334982.20
+  jan_jun_2026_collected_revenue: 183907.5
