@@ -159,16 +159,18 @@ function renderRevenue() {
       </tbody>
     </table>`);
 
-  // Monthly revenue chart (all 36 months)
+  // Monthly revenue chart (all 36 months) — 3 datasets: actual | forecast residual | platform
   const months = data.revenue_monthly;
-  const actEnd = new Date(data.metadata.actuals_end_month || '2026-06-01');
   const labels = months.map(m => {
     const d = new Date(m.month);
     return d.getMonth() === 0 ? d.getFullYear().toString() : d.toLocaleDateString('fr-FR', { month: 'short' });
   });
 
-  const actualVals   = months.map(m => new Date(m.month) <= actEnd ? m.total_revenue : 0);
-  const forecastVals = months.map(m => new Date(m.month) > actEnd ? m.total_revenue : 0);
+  // actual_services_revenue, forecast_services_revenue, platform_subscription_revenue
+  // Current month has both actual (filled) and forecast residual (lighter) stacked
+  const actualVals    = months.map(m => m.actual_services_revenue   || 0);
+  const forecastVals  = months.map(m => m.forecast_services_revenue || 0);
+  const platformVals  = months.map(m => m.platform_subscription_revenue || 0);
 
   new Chart(el('revenueChart'), {
     type: 'bar',
@@ -177,6 +179,7 @@ function renderRevenue() {
       datasets: [
         { label: 'Actuals (facturé)', data: actualVals,   backgroundColor: DARK_BAR(), borderRadius: 3 },
         { label: 'Forecast',          data: forecastVals, backgroundColor: GRAY_BAR(), borderRadius: 3 },
+        { label: 'Plateforme',        data: platformVals, backgroundColor: INDIGO(),   borderRadius: 3 },
       ]
     },
     options: {
@@ -188,6 +191,7 @@ function renderRevenue() {
       },
       plugins: {
         ...baseChartOpts(fmt.eur).plugins,
+        legend: { display: true, position: 'bottom', labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, font: { size: 11 } } },
         tooltip: { ...baseChartOpts(fmt.eur).plugins.tooltip, filter: (item) => item.parsed.y > 0 }
       }
     }
