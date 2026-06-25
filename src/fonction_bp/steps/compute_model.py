@@ -1,4 +1,6 @@
 from __future__ import annotations
+import calendar
+import datetime as dt
 import duckdb
 
 from fonction_bp.config import Paths
@@ -111,6 +113,16 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
 
     # Revenue monthly — combines all streams.
     # Actuals source: invoiced revenue (facturé), not collected (encaissé).
+    # For the current month: split into actual portion (invoiced so far) + forecast residual.
+    today = dt.date.today()
+    current_month_start = today.replace(day=1)
+    days_in_month = calendar.monthrange(today.year, today.month)[1]
+    # fraction of month elapsed up to today (day 25 of 30 = 0.833)
+    fraction_elapsed = today.day / days_in_month
+    fraction_remaining = 1.0 - fraction_elapsed
+    current_month_iso = current_month_start.isoformat()
+    actuals_end = str(assumptions['model_period']['actuals_end_month'])
+
     con.execute(f"""
         CREATE OR REPLACE TABLE revenue_monthly AS
         SELECT
@@ -123,15 +135,25 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} AS workshop_revenue,
             COALESCE(dr.deployment_revenue, 0) AS deployment_revenue,
             COALESCE(sc.service_continuity_revenue, 0) AS service_continuity_revenue,
+            -- actual_services: invoiced for past/current months; 0 for future
             CASE
-              WHEN m.month < DATE '{assumptions['model_period']['actuals_end_month']}'
-                THEN COALESCE(inv.invoiced_revenue, 0)
-              WHEN m.month = DATE '{assumptions['model_period']['actuals_end_month']}'
-                THEN COALESCE(inv.invoiced_revenue, 0)
+              WHEN m.month <= DATE '{current_month_iso}' THEN COALESCE(inv.invoiced_revenue, 0)
+              ELSE 0
+            END AS actual_services_revenue,
+            -- forecast_services: 0 for past months; residual fraction for current; full for future
+            -- For current month: forecast_baseline * fraction_remaining (what's still to invoice)
+            CASE
+              WHEN m.month < DATE '{current_month_iso}' THEN 0
+              WHEN m.month = DATE '{current_month_iso}'
+                THEN GREATEST(0,
+                       (COALESCE(sb.custom_service_baseline, 0) + COALESCE(fsr.fde_support_revenue, 0) +
+                        COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
+                        COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0))
+                       * {fraction_remaining})
               ELSE COALESCE(sb.custom_service_baseline, 0) + COALESCE(fsr.fde_support_revenue, 0) +
                    COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
                    COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0)
-            END AS services_deployment_revenue,
+            END AS forecast_services_revenue,
             COALESCE(pr.platform_subscription_revenue, 0) AS platform_subscription_revenue,
             0.0 AS usage_success_revenue,
             COALESCE(pr.ending_arr, 0) AS ending_arr,
@@ -154,7 +176,8 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     con.execute("""
         CREATE OR REPLACE TABLE revenue_monthly AS
         SELECT *,
-            services_deployment_revenue + platform_subscription_revenue + usage_success_revenue AS total_revenue
+            actual_services_revenue + forecast_services_revenue AS services_deployment_revenue,
+            actual_services_revenue + forecast_services_revenue + platform_subscription_revenue + usage_success_revenue AS total_revenue
         FROM revenue_monthly
     """)
 
