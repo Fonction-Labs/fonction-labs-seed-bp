@@ -53,8 +53,8 @@ pricing:
   usage_success_based_revenue: 0
 
 service_continuity:
-  wassym_days_per_month: 3.3
-  wassym_revenue_day_rate: 915
+  wassym_days_per_month: 20
+  wassym_revenue_day_rate: 950
   wassym_cost_day_rate: 750
   start_month: 2026-07-01
   end_month: 2027-12-01
