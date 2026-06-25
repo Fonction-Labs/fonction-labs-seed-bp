@@ -8,13 +8,13 @@ window.DASHBOARD_DATA = {
   },
   "kpis": [
     {
-      "metric": "Actual commercial revenue Jan-Jun 2026",
-      "value": 183907.5,
+      "metric": "Invoiced revenue H1 2026",
+      "value": 334982.2,
       "unit": "EUR"
     },
     {
       "metric": "2026E revenue",
-      "value": 548407.5,
+      "value": 699482.2,
       "unit": "EUR"
     },
     {
@@ -49,7 +49,7 @@ window.DASHBOARD_DATA = {
     },
     {
       "metric": "Ending cash Dec-2027",
-      "value": 1952831.623333333,
+      "value": 1943331.623333333,
       "unit": "EUR"
     },
     {
@@ -61,17 +61,17 @@ window.DASHBOARD_DATA = {
   "annual_summary": [
     {
       "year": 2026,
-      "services_deployment_revenue": 537907.5,
+      "services_deployment_revenue": 688982.2,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
-      "total_revenue": 548407.5,
-      "total_cogs": 176400.0,
-      "gross_profit": 372007.50000000006,
-      "gross_margin": 0.6783413793575034,
+      "total_revenue": 699482.2,
+      "total_cogs": 243400.0,
+      "gross_profit": 456082.20000000007,
+      "gross_margin": 0.6520283146590437,
       "ending_arr": 126000.0,
       "enterprise_accounts_end": 1,
       "live_use_cases": 2,
-      "recurring_revenue_share": 0.01914634646681528
+      "recurring_revenue_share": 0.015011103928019898
     },
     {
       "year": 2027,
@@ -106,115 +106,122 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-01-01",
       "year": 2026,
-      "actual_commercial_revenue": 19215.0,
+      "invoiced_revenue_actual": 9600.0,
+      "collected_revenue_actual": 19215.0,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 19215.0,
+      "services_deployment_revenue": 9600.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 19215.0
+      "total_revenue": 9600.0
     },
     {
       "month": "2026-02-01",
       "year": 2026,
-      "actual_commercial_revenue": 22230.0,
+      "invoiced_revenue_actual": 17430.0,
+      "collected_revenue_actual": 22230.0,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 22230.0,
+      "services_deployment_revenue": 17430.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 22230.0
+      "total_revenue": 17430.0
     },
     {
       "month": "2026-03-01",
       "year": 2026,
-      "actual_commercial_revenue": 23100.0,
+      "invoiced_revenue_actual": 42760.0,
+      "collected_revenue_actual": 23100.0,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 23100.0,
+      "services_deployment_revenue": 42760.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 23100.0
+      "total_revenue": 42760.0
     },
     {
       "month": "2026-04-01",
       "year": 2026,
-      "actual_commercial_revenue": 32655.0,
+      "invoiced_revenue_actual": 44655.0,
+      "collected_revenue_actual": 32655.0,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 32655.0,
+      "services_deployment_revenue": 44655.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 32655.0
+      "total_revenue": 44655.0
     },
     {
       "month": "2026-05-01",
       "year": 2026,
-      "actual_commercial_revenue": 44280.0,
+      "invoiced_revenue_actual": 128197.5,
+      "collected_revenue_actual": 44280.0,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 44280.0,
+      "services_deployment_revenue": 128197.5,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 44280.0
+      "total_revenue": 128197.5
     },
     {
       "month": "2026-06-01",
       "year": 2026,
-      "actual_commercial_revenue": 42427.5,
+      "invoiced_revenue_actual": 92339.7,
+      "collected_revenue_actual": 42427.5,
       "custom_service_baseline": 0.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
-      "services_deployment_revenue": 42427.5,
+      "services_deployment_revenue": 92339.7,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "total_revenue": 42427.5
+      "total_revenue": 92339.7
     },
     {
       "month": "2026-07-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 20000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
@@ -232,7 +239,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-08-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 20000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
@@ -250,7 +258,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-09-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 20000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 20000.0,
@@ -268,7 +277,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-10-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 25000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
@@ -286,7 +296,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-11-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 25000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
@@ -304,7 +315,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-12-01",
       "year": 2026,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 30000.0,
       "fde_support_revenue": 0.0,
       "workshop_revenue": 0.0,
@@ -322,7 +334,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-01-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -340,7 +353,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-02-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -358,7 +372,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-03-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 0.0,
@@ -376,7 +391,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-04-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -394,7 +410,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-05-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -412,7 +429,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-06-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 45000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -430,7 +448,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-07-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -448,7 +467,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-08-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -466,7 +486,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-09-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -484,7 +505,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-10-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -502,7 +524,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-11-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 20000.0,
@@ -520,7 +543,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2027-12-01",
       "year": 2027,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 35000.0,
       "fde_support_revenue": 10000.0,
       "workshop_revenue": 0.0,
@@ -538,7 +562,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-01-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -556,7 +581,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-02-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -574,7 +600,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-03-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -592,7 +619,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-04-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -610,7 +638,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-05-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -628,7 +657,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-06-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -646,7 +676,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-07-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -664,7 +695,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-08-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -682,7 +714,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-09-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -700,7 +733,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-10-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -718,7 +752,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-11-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 20000.0,
@@ -736,7 +771,8 @@ window.DASHBOARD_DATA = {
     {
       "month": "2028-12-01",
       "year": 2028,
-      "actual_commercial_revenue": 0.0,
+      "invoiced_revenue_actual": 0.0,
+      "collected_revenue_actual": 0.0,
       "custom_service_baseline": 10000.0,
       "fde_support_revenue": 15000.0,
       "workshop_revenue": 40000.0,
@@ -752,13 +788,57 @@ window.DASHBOARD_DATA = {
       "total_revenue": 733166.6666666666
     }
   ],
+  "invoiced_monthly": [
+    {
+      "month": "2026-01-01",
+      "invoiced_revenue": 9600.0,
+      "collected_revenue": 9600.0,
+      "outstanding_revenue": 0.0,
+      "invoice_count": 2
+    },
+    {
+      "month": "2026-02-01",
+      "invoiced_revenue": 17430.0,
+      "collected_revenue": 17430.0,
+      "outstanding_revenue": 0.0,
+      "invoice_count": 2
+    },
+    {
+      "month": "2026-03-01",
+      "invoiced_revenue": 42760.0,
+      "collected_revenue": 40840.0,
+      "outstanding_revenue": 1920.0,
+      "invoice_count": 5
+    },
+    {
+      "month": "2026-04-01",
+      "invoiced_revenue": 44655.0,
+      "collected_revenue": 44655.0,
+      "outstanding_revenue": 0.0,
+      "invoice_count": 7
+    },
+    {
+      "month": "2026-05-01",
+      "invoiced_revenue": 128197.5,
+      "collected_revenue": 82807.5,
+      "outstanding_revenue": 45390.0,
+      "invoice_count": 9
+    },
+    {
+      "month": "2026-06-01",
+      "invoiced_revenue": 92339.7,
+      "collected_revenue": 9854.0,
+      "outstanding_revenue": 82485.7,
+      "invoice_count": 8
+    }
+  ],
   "quarters": [
     {
       "year": 2026,
       "quarter": 1,
       "period": "Q1 26",
-      "total_revenue": 41445.0,
-      "services_deployment_revenue": 41445.0,
+      "total_revenue": 27030.0,
+      "services_deployment_revenue": 27030.0,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-02-01",
       "ending_arr": 0.0,
@@ -769,8 +849,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 2,
       "period": "Q2 26",
-      "total_revenue": 100035.0,
-      "services_deployment_revenue": 100035.0,
+      "total_revenue": 215612.5,
+      "services_deployment_revenue": 215612.5,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-05-01",
       "ending_arr": 0.0,
@@ -781,8 +861,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 3,
       "period": "Q3 26",
-      "total_revenue": 120427.5,
-      "services_deployment_revenue": 120427.5,
+      "total_revenue": 170339.7,
+      "services_deployment_revenue": 170339.7,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-08-01",
       "ending_arr": 0.0,
@@ -1288,12 +1368,12 @@ window.DASHBOARD_DATA = {
       "month": "2026-07-01",
       "year": 2026,
       "total_revenue": 39000.0,
-      "total_cogs": 22000.0,
+      "total_cogs": 31500.0,
       "total_payroll_cost": 16000.0,
       "total_opex": 44000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -43000.0,
-      "ending_cash": 103698.29000000001
+      "operating_cashflow": -52500.0,
+      "ending_cash": 94198.29000000001
     },
     {
       "month": "2026-08-01",
@@ -1304,7 +1384,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 44000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -43000.0,
-      "ending_cash": 60698.29000000001
+      "ending_cash": 51198.29000000001
     },
     {
       "month": "2026-09-01",
@@ -1315,7 +1395,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 86000.0,
       "seed_proceeds": 2500000.0,
       "operating_cashflow": -61333.33333333333,
-      "ending_cash": 2499364.9566666665
+      "ending_cash": 2489864.9566666665
     },
     {
       "month": "2026-10-01",
@@ -1326,7 +1406,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 46000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -36333.33333333333,
-      "ending_cash": 2463031.623333333
+      "ending_cash": 2453531.623333333
     },
     {
       "month": "2026-11-01",
@@ -1337,7 +1417,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 47000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -48333.33333333333,
-      "ending_cash": 2414698.2899999996
+      "ending_cash": 2405198.2899999996
     },
     {
       "month": "2026-12-01",
@@ -1348,7 +1428,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 47000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -179900.0,
-      "ending_cash": 2234798.2899999996
+      "ending_cash": 2225298.2899999996
     },
     {
       "month": "2027-01-01",
@@ -1359,7 +1439,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 107300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -106533.33333333331,
-      "ending_cash": 2128264.956666666
+      "ending_cash": 2118764.956666666
     },
     {
       "month": "2027-02-01",
@@ -1370,7 +1450,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 77300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -60866.66666666666,
-      "ending_cash": 2067398.2899999996
+      "ending_cash": 2057898.2899999996
     },
     {
       "month": "2027-03-01",
@@ -1381,7 +1461,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 77300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -54200.0,
-      "ending_cash": 2013198.2899999996
+      "ending_cash": 2003698.2899999996
     },
     {
       "month": "2027-04-01",
@@ -1392,7 +1472,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 78300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -29266.666666666657,
-      "ending_cash": 1983931.6233333328
+      "ending_cash": 1974431.6233333328
     },
     {
       "month": "2027-05-01",
@@ -1403,7 +1483,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 79300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -37666.66666666666,
-      "ending_cash": 1946264.956666666
+      "ending_cash": 1936764.956666666
     },
     {
       "month": "2027-06-01",
@@ -1414,7 +1494,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 79300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -14233.333333333314,
-      "ending_cash": 1932031.6233333328
+      "ending_cash": 1922531.6233333328
     },
     {
       "month": "2027-07-01",
@@ -1425,7 +1505,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 109300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -61833.333333333314,
-      "ending_cash": 1870198.2899999996
+      "ending_cash": 1860698.2899999996
     },
     {
       "month": "2027-08-01",
@@ -1436,7 +1516,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 79300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -18900.0,
-      "ending_cash": 1851298.2899999996
+      "ending_cash": 1841798.2899999996
     },
     {
       "month": "2027-09-01",
@@ -1447,7 +1527,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 80300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -2416.666666666657,
-      "ending_cash": 1848881.6233333328
+      "ending_cash": 1839381.6233333328
     },
     {
       "month": "2027-10-01",
@@ -1458,7 +1538,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 80300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 16316.666666666686,
-      "ending_cash": 1865198.2899999996
+      "ending_cash": 1855698.2899999996
     },
     {
       "month": "2027-11-01",
@@ -1469,7 +1549,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 80300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 35050.0,
-      "ending_cash": 1900248.2899999996
+      "ending_cash": 1890748.2899999996
     },
     {
       "month": "2027-12-01",
@@ -1480,7 +1560,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 80300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 52583.33333333337,
-      "ending_cash": 1952831.623333333
+      "ending_cash": 1943331.623333333
     },
     {
       "month": "2028-01-01",
@@ -1491,7 +1571,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 156500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -29416.666666666628,
-      "ending_cash": 1923414.9566666665
+      "ending_cash": 1913914.9566666665
     },
     {
       "month": "2028-02-01",
@@ -1502,7 +1582,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 117500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 5283.333333333372,
-      "ending_cash": 1928698.29
+      "ending_cash": 1919198.29
     },
     {
       "month": "2028-03-01",
@@ -1513,7 +1593,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 117500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 63383.33333333337,
-      "ending_cash": 1992081.6233333335
+      "ending_cash": 1982581.6233333335
     },
     {
       "month": "2028-04-01",
@@ -1524,7 +1604,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 117500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 97250.0,
-      "ending_cash": 2089331.6233333335
+      "ending_cash": 2079831.6233333335
     },
     {
       "month": "2028-05-01",
@@ -1535,7 +1615,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 117500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 110783.33333333337,
-      "ending_cash": 2200114.956666667
+      "ending_cash": 2190614.956666667
     },
     {
       "month": "2028-06-01",
@@ -1546,7 +1626,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 118500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 140616.6666666667,
-      "ending_cash": 2340731.6233333335
+      "ending_cash": 2331231.6233333335
     },
     {
       "month": "2028-07-01",
@@ -1557,7 +1637,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 118500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 131416.6666666667,
-      "ending_cash": 2472148.29
+      "ending_cash": 2462648.29
     },
     {
       "month": "2028-08-01",
@@ -1568,7 +1648,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 118500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 190000.0,
-      "ending_cash": 2662148.29
+      "ending_cash": 2652648.29
     },
     {
       "month": "2028-09-01",
@@ -1579,7 +1659,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 119500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 167800.0,
-      "ending_cash": 2829948.29
+      "ending_cash": 2820448.29
     },
     {
       "month": "2028-10-01",
@@ -1590,7 +1670,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 119500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 297433.33333333326,
-      "ending_cash": 3127381.623333333
+      "ending_cash": 3117881.623333333
     },
     {
       "month": "2028-11-01",
@@ -1601,7 +1681,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 119500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 288233.33333333326,
-      "ending_cash": 3415614.956666666
+      "ending_cash": 3406114.956666666
     },
     {
       "month": "2028-12-01",
@@ -1612,7 +1692,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 119500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 351866.6666666666,
-      "ending_cash": 3767481.6233333326
+      "ending_cash": 3757981.6233333326
     }
   ],
   "cogs_monthly": [
@@ -1620,6 +1700,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-01-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
@@ -1629,6 +1710,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-02-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
@@ -1638,51 +1720,57 @@ window.DASHBOARD_DATA = {
       "month": "2026-03-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 8125.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
-      "total_cogs": 0.0
+      "total_cogs": 8125.0
     },
     {
       "month": "2026-04-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 15125.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
-      "total_cogs": 0.0
+      "total_cogs": 15125.0
     },
     {
       "month": "2026-05-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 17625.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
-      "total_cogs": 0.0
+      "total_cogs": 17625.0
     },
     {
       "month": "2026-06-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 16625.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 0.0,
       "service_continuity_cogs": 0.0,
-      "total_cogs": 0.0
+      "total_cogs": 16625.0
     },
     {
       "month": "2026-07-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 9500.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
-      "total_cogs": 22000.0
+      "total_cogs": 31500.0
     },
     {
       "month": "2026-08-01",
       "year": 2026,
       "fde_cost": 0.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
@@ -1692,6 +1780,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-09-01",
       "year": 2026,
       "fde_cost": 11000.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
@@ -1701,6 +1790,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-10-01",
       "year": 2026,
       "fde_cost": 11000.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
@@ -1710,6 +1800,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-11-01",
       "year": 2026,
       "fde_cost": 11000.0,
+      "freelance_cost": 0.0,
       "token_cost": 0.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
@@ -1719,6 +1810,7 @@ window.DASHBOARD_DATA = {
       "month": "2026-12-01",
       "year": 2026,
       "fde_cost": 11000.0,
+      "freelance_cost": 0.0,
       "token_cost": 400.0,
       "infra_cloud_cost": 7000.0,
       "service_continuity_cogs": 15000.0,
@@ -1728,6 +1820,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-01-01",
       "year": 2027,
       "fde_cost": 22000.0,
+      "freelance_cost": 0.0,
       "token_cost": 400.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1737,6 +1830,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-02-01",
       "year": 2027,
       "fde_cost": 22000.0,
+      "freelance_cost": 0.0,
       "token_cost": 400.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1746,6 +1840,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-03-01",
       "year": 2027,
       "fde_cost": 22000.0,
+      "freelance_cost": 0.0,
       "token_cost": 400.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1755,6 +1850,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-04-01",
       "year": 2027,
       "fde_cost": 22000.0,
+      "freelance_cost": 0.0,
       "token_cost": 800.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1764,6 +1860,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-05-01",
       "year": 2027,
       "fde_cost": 33000.0,
+      "freelance_cost": 0.0,
       "token_cost": 1200.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1773,6 +1870,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-06-01",
       "year": 2027,
       "fde_cost": 33000.0,
+      "freelance_cost": 0.0,
       "token_cost": 1600.0,
       "infra_cloud_cost": 12000.0,
       "service_continuity_cogs": 15000.0,
@@ -1782,6 +1880,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-07-01",
       "year": 2027,
       "fde_cost": 33000.0,
+      "freelance_cost": 0.0,
       "token_cost": 2200.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 15000.0,
@@ -1791,6 +1890,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-08-01",
       "year": 2027,
       "fde_cost": 33000.0,
+      "freelance_cost": 0.0,
       "token_cost": 2600.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 0.0,
@@ -1800,6 +1900,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-09-01",
       "year": 2027,
       "fde_cost": 44000.0,
+      "freelance_cost": 0.0,
       "token_cost": 3200.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 0.0,
@@ -1809,6 +1910,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-10-01",
       "year": 2027,
       "fde_cost": 44000.0,
+      "freelance_cost": 0.0,
       "token_cost": 3800.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 0.0,
@@ -1818,6 +1920,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-11-01",
       "year": 2027,
       "fde_cost": 44000.0,
+      "freelance_cost": 0.0,
       "token_cost": 4400.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 0.0,
@@ -1827,6 +1930,7 @@ window.DASHBOARD_DATA = {
       "month": "2027-12-01",
       "year": 2027,
       "fde_cost": 44000.0,
+      "freelance_cost": 0.0,
       "token_cost": 5200.0,
       "infra_cloud_cost": 17000.0,
       "service_continuity_cogs": 0.0,
@@ -1836,6 +1940,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-01-01",
       "year": 2028,
       "fde_cost": 44000.0,
+      "freelance_cost": 0.0,
       "token_cost": 6000.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1845,6 +1950,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-02-01",
       "year": 2028,
       "fde_cost": 55500.0,
+      "freelance_cost": 0.0,
       "token_cost": 6800.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1854,6 +1960,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-03-01",
       "year": 2028,
       "fde_cost": 55500.0,
+      "freelance_cost": 0.0,
       "token_cost": 7200.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1863,6 +1970,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-04-01",
       "year": 2028,
       "fde_cost": 55500.0,
+      "freelance_cost": 0.0,
       "token_cost": 8000.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1872,6 +1980,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-05-01",
       "year": 2028,
       "fde_cost": 55500.0,
+      "freelance_cost": 0.0,
       "token_cost": 8800.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1881,6 +1990,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-06-01",
       "year": 2028,
       "fde_cost": 67000.0,
+      "freelance_cost": 0.0,
       "token_cost": 9800.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1890,6 +2000,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-07-01",
       "year": 2028,
       "fde_cost": 67000.0,
+      "freelance_cost": 0.0,
       "token_cost": 11000.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1899,6 +2010,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-08-01",
       "year": 2028,
       "fde_cost": 67000.0,
+      "freelance_cost": 0.0,
       "token_cost": 12000.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1908,6 +2020,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-09-01",
       "year": 2028,
       "fde_cost": 79000.0,
+      "freelance_cost": 0.0,
       "token_cost": 13200.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1917,6 +2030,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-10-01",
       "year": 2028,
       "fde_cost": 79000.0,
+      "freelance_cost": 0.0,
       "token_cost": 14400.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1926,6 +2040,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-11-01",
       "year": 2028,
       "fde_cost": 79000.0,
+      "freelance_cost": 0.0,
       "token_cost": 15600.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1935,6 +2050,7 @@ window.DASHBOARD_DATA = {
       "month": "2028-12-01",
       "year": 2028,
       "fde_cost": 79000.0,
+      "freelance_cost": 0.0,
       "token_cost": 16800.0,
       "infra_cloud_cost": 25000.0,
       "service_continuity_cogs": 0.0,
@@ -1945,58 +2061,58 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-01-01",
       "year": 2026,
-      "total_revenue": 19215.0,
+      "total_revenue": 9600.0,
       "total_cogs": 0.0,
-      "gross_profit": 19215.0,
+      "gross_profit": 9600.0,
       "gross_margin": 1.0
     },
     {
       "month": "2026-02-01",
       "year": 2026,
-      "total_revenue": 22230.0,
+      "total_revenue": 17430.0,
       "total_cogs": 0.0,
-      "gross_profit": 22230.0,
+      "gross_profit": 17430.0,
       "gross_margin": 1.0
     },
     {
       "month": "2026-03-01",
       "year": 2026,
-      "total_revenue": 23100.0,
-      "total_cogs": 0.0,
-      "gross_profit": 23100.0,
-      "gross_margin": 1.0
+      "total_revenue": 42760.0,
+      "total_cogs": 8125.0,
+      "gross_profit": 34635.0,
+      "gross_margin": 0.8099859681945744
     },
     {
       "month": "2026-04-01",
       "year": 2026,
-      "total_revenue": 32655.0,
-      "total_cogs": 0.0,
-      "gross_profit": 32655.0,
-      "gross_margin": 1.0
+      "total_revenue": 44655.0,
+      "total_cogs": 15125.0,
+      "gross_profit": 29530.0,
+      "gross_margin": 0.6612921285410368
     },
     {
       "month": "2026-05-01",
       "year": 2026,
-      "total_revenue": 44280.0,
-      "total_cogs": 0.0,
-      "gross_profit": 44280.0,
-      "gross_margin": 1.0
+      "total_revenue": 128197.5,
+      "total_cogs": 17625.0,
+      "gross_profit": 110572.5,
+      "gross_margin": 0.8625168197507752
     },
     {
       "month": "2026-06-01",
       "year": 2026,
-      "total_revenue": 42427.5,
-      "total_cogs": 0.0,
-      "gross_profit": 42427.5,
-      "gross_margin": 1.0
+      "total_revenue": 92339.7,
+      "total_cogs": 16625.0,
+      "gross_profit": 75714.7,
+      "gross_margin": 0.8199582628057055
     },
     {
       "month": "2026-07-01",
       "year": 2026,
       "total_revenue": 39000.0,
-      "total_cogs": 22000.0,
-      "gross_profit": 17000.0,
-      "gross_margin": 0.4358974358974359
+      "total_cogs": 31500.0,
+      "gross_profit": 7500.0,
+      "gross_margin": 0.19230769230769232
     },
     {
       "month": "2026-08-01",
