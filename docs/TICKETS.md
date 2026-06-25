@@ -122,72 +122,56 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T3.1 — Modeliser le headcount FDE
 
+**Statut** : DONE (validé)
 **Priorite** : Haute
 **Owner** : Matthieu
-**Dependances** : T2.1 (nombre de use cases par annee)
+**Dependances** : T2.1
+**Doc de reference** : [T3_depenses-headcount_conclusions.md](./T3_depenses-headcount_conclusions.md)
 
-**Description** :
-Construire le modele de staffing FDE base sur le nombre de use cases (pas le CA).
-
-**Parametres** :
-- Taux journalier de vente : 1 150 EUR/jour
-- Base annuelle : 210 jours
-- CA max par FDE : ~241 500 EUR/an (1 150 x 210)
-- Capacite moyenne : ~4 use cases/an par FDE (variabilite forte)
-- Les FDEs font aussi les ateliers (pas que le deploy/maintenance)
-
-**Trajectoire a modeliser** :
-- Fin 2026 : 3-4 FDEs (Jean insiste pour ne pas commencer a 2)
-- 2027 : adapter au nombre de use cases cibles (24 use cases / ~4 par FDE = 6 FDEs theoriques, mais certains use cases sont quasi-automatises)
-- 2028 : 4-6 FDEs minimum + prise en compte de l'automatisation progressive
-
-**Facteurs a integrer** :
-- Tous les use cases ne demandent pas un FDE a temps plein (certains resolus en 3 mois, d'autres demandent 3 ans)
-- Probabilite d'automatisation croissante au fil des annees (reduit le besoin de FDE par use case)
-- Un PM peut gerer 4 clients simultanement
-- Variabilite : some use cases = 3 mois, others = amelioration continue permanente
+**Conclusions principales** :
+- Formule FDE : #FDE = (UC_deploy × 1.0) + (UC_AC × 0.25) — remplace toute cible arbitraire
+- Contrainte deploy : 1 FDE focalisé sur 1 UC actif en déploiement
+- AC : 1 FDE gère 4 UC simultanément (0.25 FDE/UC)
+- Coût FDE interne : 11k/mois fully loaded (maintien YAML — cohérent CDI senior Paris)
+- YAML sous-estime significativement : ~4 FDE fin 2027 vs ~9 formule → recalibration en T5.1
+- Calibration mois par mois : à faire en T5.1 depuis enterprise_cohort_plan
 
 ---
 
-### T3.2 — Budget marketing + bureaux
+### T3.2 — Budget marketing + bureaux + headcount non-FDE
 
+**Statut** : DONE (validé)
 **Priorite** : Moyenne
 **Owner** : Matthieu
 **Dependances** : Aucune
+**Doc de reference** : [T3_depenses-headcount_conclusions.md](./T3_depenses-headcount_conclusions.md)
 
-**Description** :
-Integrer les couts marketing et bureaux dans le modele de depenses.
-
-**Marketing** :
-- Actuel : ~3 000 EUR/mois = 36k/an
-- Cible 2027 : tripler = ~100 000 EUR/an
-- Objectif : doubler la pipeline de sales
-- Profil de depenses : croissance progressive (pas un step function)
-
-**Bureaux** :
-- A chiffrer selon les besoins (2026 : taille actuelle, 2027-2028 : croissance equipe)
+**Conclusions principales** :
+- Nomenclature simplifiée : Lead AI Engineer / AI Engineer / Sales Engineer / Sales / Customer Ops
+- Sales Engineer ajouté déc 2026 (10k/mois) — quasi recruté, absent du YAML
+- Sales Dev avancé à jan 2027 (vs oct 2027 YAML) — pour nourrir le pipeline 2028
+- Marketing : ligne séparée opex_base (+64k/an en 2027, +114k/an en 2028)
+- Bureaux : dans opex_base YAML, pas de changement
+- AI dev tooling : ligne absente du YAML — ~3k/mois 2026, ~8k/mois 2027, ~12k/mois 2028 (~1k/personne technique)
 
 ---
 
-### T3.3 — Couts RH/back-office et certification
+### T3.3 — RH/back-office, certification, Wassym, marge brute
 
+**Statut** : DONE (validé)
 **Priorite** : Moyenne
 **Owner** : Matthieu
 **Dependances** : T4.1 (trajectoire SecNumCloud)
+**Doc de reference** : [T3_depenses-headcount_conclusions.md](./T3_depenses-headcount_conclusions.md)
 
-**Description** :
-Anticiper les couts indirects lies a la croissance et a la strategie enterprise.
-
-**RH / Back-office** :
-- Anticiper un recrutement admin/facturation d'ici 2028
-- Besoin : gestion de la facturation, back-office client, support admin
-- Timing : probablement mi-2027 ou debut 2028 selon la croissance
-
-**Certification** :
-- Couts lies a la trajectoire SecNumCloud
-- Timeline : plutot 2028
-- Nature : audit, conformite, eventuellement consultants externes
-- A chiffrer une fois la trajectoire T4.1 definie
+**Conclusions principales** :
+- Customer Ops : maintenir YAML (juillet 2027, 8k/mois fully loaded)
+- ISO 27001 : maintenir jalons YAML (30-40k par jalon) — lancer maintenant si pas commencé (12-18 mois)
+- SecNumCloud : TBD post-T4.1/T4.2 — non chiffré dans le BP actuel
+- Wassym BPCE : corrigé dans YAML (20j/mois, 950 EUR/j) — sous-estimation de +16k/mois revenu corrigée
+- Wassym non affiché comme ligne séparée dans les outputs agrégés
+- Gross margin = formule dérivée (COGS = FDE + tokens + infra client-facing) — ~57% estimé 2027
+- Règle pipeline : tout output = hypothèse nommée ou formule — zéro hardcode (documenté dans AGENT.md)
 
 ---
 
