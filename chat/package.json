@@ -1,0 +1,14 @@
+{
+  "name": "bp-chat",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "concurrently --names backend,frontend --prefix-colors blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && uv run uvicorn app.main:app --reload --port 8002",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all": "cd frontend && npm install && cd ../backend && uv sync"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
