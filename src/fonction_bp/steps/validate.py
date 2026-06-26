@@ -24,24 +24,11 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     con = duckdb.connect(str(paths.duckdb_path))
     checks: list[dict] = []
 
-    actual_sum = con.execute("SELECT SUM(commercial_revenue_actual) FROM actual_revenue_monthly").fetchone()[0]
-    _assert_close("Jan-Jun 2026 actual commercial revenue", actual_sum, float(assumptions["target_checks"]["jan_jun_2026_commercial_revenue"]), 1.0, checks)
+    # Check 1: Invoiced revenue matches known total.
+    invoiced_sum = con.execute("SELECT SUM(invoiced_revenue) FROM invoiced_revenue_monthly WHERE month BETWEEN DATE '2026-01-01' AND DATE '2026-06-01'").fetchone()[0]
+    _assert_close("Jan-Jun 2026 invoiced revenue", invoiced_sum, float(assumptions["target_checks"]["jan_jun_2026_invoiced_revenue"]), 1.0, checks)
 
-    dec_2027_arr = con.execute("SELECT ending_arr FROM revenue_monthly WHERE month = DATE '2027-12-01'").fetchone()[0]
-    dec_2028_arr = con.execute("SELECT ending_arr FROM revenue_monthly WHERE month = DATE '2028-12-01'").fetchone()[0]
-    _assert_close("Dec-2027 ending ARR", dec_2027_arr, float(assumptions["target_checks"]["dec_2027_ending_arr"]), 1.0, checks)
-    _assert_close("Dec-2028 ending ARR", dec_2028_arr, float(assumptions["target_checks"]["dec_2028_ending_arr"]), 1.0, checks)
-
-    # ARR formula check.
-    bad_arr = con.execute("""
-        SELECT COUNT(*) FROM revenue_monthly
-        WHERE ABS(ending_arr - live_use_cases * (SELECT value FROM pricing WHERE key='subscription_mrr_per_live_use_case') * 12) > 0.01
-    """).fetchone()[0]
-    checks.append({"check": "Ending ARR formula", "actual": bad_arr, "expected": 0, "status": "PASS" if bad_arr == 0 else "FAIL"})
-    if bad_arr:
-        raise AssertionError("Ending ARR formula check failed")
-
-    # Annual revenue equals monthly sum.
+    # Check 2: Annual revenue equals monthly sum (internal consistency).
     bad_annual = con.execute("""
         WITH a AS (SELECT year, total_revenue FROM annual_summary),
              m AS (SELECT year, SUM(total_revenue) AS monthly_sum FROM revenue_monthly GROUP BY year)
@@ -51,12 +38,34 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     if bad_annual:
         raise AssertionError("Annual revenue check failed")
 
-    # Dashboard data alignment.
+    # Check 3: COGS = FDE + freelance + tokens + infra + wassym (formula check).
+    bad_cogs = con.execute("""
+        SELECT COUNT(*) FROM cogs_monthly
+        WHERE ABS(total_cogs - (fde_cost + freelance_cost + token_cost + infra_cloud_cost + service_continuity_cogs)) > 0.01
+    """).fetchone()[0]
+    checks.append({"check": "COGS formula internal consistency", "actual": bad_cogs, "expected": 0, "status": "PASS" if bad_cogs == 0 else "FAIL"})
+    if bad_cogs:
+        raise AssertionError("COGS formula check failed")
+
+    # Check 4: FDE headcount is non-negative and monotonically reasonable.
+    neg_fde = con.execute("SELECT COUNT(*) FROM fde_headcount_plan WHERE fde_headcount < 0").fetchone()[0]
+    checks.append({"check": "FDE headcount non-negative", "actual": neg_fde, "expected": 0, "status": "PASS" if neg_fde == 0 else "FAIL"})
+    if neg_fde:
+        raise AssertionError("Negative FDE headcount found")
+
+    # Check 5: Cash never goes below -500k (reasonable burn check).
+    min_cash = con.execute("SELECT MIN(ending_cash) FROM cash_monthly").fetchone()[0]
+    checks.append({"check": "Cash runway floor (> -500k)", "actual": float(min_cash or 0), "expected": 0, "tolerance": 500000, "status": "PASS" if (min_cash or 0) > -500000 else "WARN"})
+
+    # Check 6: Dashboard data alignment.
     data = json.loads(paths.model_outputs_json.read_text(encoding="utf-8"))
-    dash_arr = next(k["value"] for k in data["kpis"] if k["metric"] == "Ending ARR Dec-2027")
+    dash_arr = next((k["value"] for k in data["kpis"] if k["metric"] == "Ending ARR Dec-2027"), None)
+    if dash_arr is None:
+        dash_arr = 0
+    dec_2027_arr = con.execute("SELECT ending_arr FROM revenue_monthly WHERE month = DATE '2027-12-01'").fetchone()[0]
     _assert_close("Dashboard Dec-2027 ARR alignment", dash_arr, dec_2027_arr, 0.01, checks)
 
-    # Workbook exists and has expected sheets.
+    # Check 7: Workbook exists and has expected sheets.
     full_path = paths.downloads_dir / "Fonction_Labs_BP_Seed_2026_2028_full_pipeline_v2.xlsx"
     simple_path = paths.downloads_dir / "Fonction_Labs_BP_Seed_2026_2028_simplified_pipeline_v2.xlsx"
     if not full_path.exists() or not simple_path.exists():

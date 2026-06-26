@@ -4,10 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fonction Labs — BP Dashboard</title>
-  <meta name="description" content="Vue synthétique du modèle seed Fonction Labs 2026–2028 : traction, ARR, use cases, runway.">
+  <meta name="description" content="Modèle financier seed Fonction Labs 2026–2028 : traction, ARR, unit economics, runway.">
 
   <script>
-    // Password gate — SHA-256 hash of F0nctionAGI!
     const HASH = '2cefc6b58d20900f49d3c6e559a50f52bbfe9580ececb37d99219992a0c540e9';
     async function checkAccess() {
       if (sessionStorage.getItem('fl_auth') === HASH) return;
@@ -27,22 +26,24 @@
       document.documentElement.classList.add('dark');
     }
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
     @media print { .no-print { display: none !important; } body { color: #000; background: #fff; } }
-
     .stat-card { padding: 1.5rem; border-radius: .75rem; border: 1px solid rgb(228 228 231); }
     .dark .stat-card { border-color: rgb(39 39 42); }
-
     .toc a { display: block; padding: .25rem 0; opacity: .55; transition: opacity .15s; font-size: .8125rem; }
     .toc a:hover, .toc a.active { opacity: 1; }
     .toc a.active { font-weight: 500; }
-
-    /* Prevent chart canvas overflow */
     .chart-wrap { position: relative; }
+    .phase-badge { display: inline-block; padding: .125rem .5rem; border-radius: 9999px; font-size: .6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+    .phase-active { background: #dcfce7; color: #166534; }
+    .dark .phase-active { background: #14532d; color: #86efac; }
+    .phase-next { background: #dbeafe; color: #1e40af; }
+    .dark .phase-next { background: #1e3a5f; color: #93c5fd; }
+    .phase-planned { background: #f3f4f6; color: #4b5563; }
+    .dark .phase-planned { background: #374151; color: #9ca3af; }
   </style>
 </head>
 
@@ -64,12 +65,11 @@
     <div class="font-semibold mb-3 text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-xs">Sections</div>
     <a href="#hero">Vue d'ensemble</a>
     <a href="#kpis">KPIs clés</a>
-    <a href="#trajectory">Trajectoire</a>
-    <a href="#traction">Traction 2026</a>
-    <a href="#model">Modèle de revenu</a>
-    <a href="#growth">Croissance</a>
-    <a href="#mix">Mix & ARR</a>
-    <a href="#runway">Runway & fonds</a>
+    <a href="#model-phases">Modèle économique</a>
+    <a href="#revenue">Revenue</a>
+    <a href="#assumptions">Hypothèses</a>
+    <a href="#margins">Marges & COGS</a>
+    <a href="#runway">Runway & équipe</a>
     <a href="#downloads">Téléchargements</a>
   </nav>
 
@@ -81,7 +81,8 @@
       <p class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Annexe BP · VC Case · 2026–2028</p>
       <h1 class="text-4xl font-bold tracking-tight mb-5">Fonction Labs BP Dashboard</h1>
       <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed">
-        Fonction Labs développe l'Agent OS pour les opérations enterprise — la couche qui permet aux grands comptes de déployer, superviser et scaler des agents IA sur leurs workflows métier. Ce dashboard présente le modèle financier seed 2026–2028 : traction commerciale déjà générée, passage progressif vers un revenu récurrent par use case live, et trajectoire vers 7M€ d'ARR fin 2028. Les chiffres sont calculés depuis une source unique (DuckDB) et exportés vers Excel et ce dashboard sans saisie manuelle.
+        Fonction Labs développe l'Agent OS pour les opérations enterprise — la couche qui permet aux grands comptes de déployer, superviser et scaler des agents IA sur leurs workflows métier.
+        Ce dashboard présente le modèle financier seed 2026–2028 : du service pur vers un modèle SaaS récurrent, avec une transition explicite par étape.
       </p>
     </header>
 
@@ -91,94 +92,48 @@
       <div id="kpiGrid"></div>
     </section>
 
-    <!-- Trajectory -->
-    <section id="trajectory">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-6">Trajectoire sur trois ans</h2>
-      <div id="trajectoryTable" class="overflow-x-auto"></div>
+    <!-- Business Model Phases -->
+    <section id="model-phases">
+      <h2 class="text-2xl font-semibold tracking-tight mb-2">Évolution du modèle économique</h2>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Trois étapes de maturité — du service pur à la plateforme usage-based. Chaque phase s'additionne à la précédente.</p>
+      <div id="modelPhases" class="space-y-4"></div>
     </section>
 
-    <!-- Traction 2026 -->
-    <section id="traction">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Traction existante et outlook 2026</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Vue annuelle 2026 complète : les six premiers mois montrent la traction existante ; le second semestre modélise la continuité des services et les premiers revenus plateforme.</p>
+    <!-- Revenue — unified section -->
+    <section id="revenue">
+      <h2 class="text-2xl font-semibold tracking-tight mb-2">Revenue et trajectoire</h2>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Revenue facturé H1 2026 (actuals) + forecast H2 2026 → 2028. L'ARR est construit par nouveaux comptes enterprise et expansion des use cases live.</p>
+
+      <!-- Trajectory table -->
+      <div id="trajectoryTable" class="overflow-x-auto mb-6"></div>
+
+      <!-- Revenue monthly chart -->
       <div class="stat-card mb-4">
         <div class="flex items-start justify-between gap-4 mb-4">
           <div>
-            <h3 class="font-semibold text-base">Revenu commercial mensuel — 2026</h3>
-            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">Jan–Jun actuals / estimation, Jul–Déc forecast. Montants HT.</p>
+            <h3 class="font-semibold text-base">Revenu mensuel 2026–2028</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">Facturé H1 2026, forecast ensuite. Montants HT.</p>
           </div>
           <div class="flex gap-4 text-xs text-zinc-500 whitespace-nowrap pt-0.5">
-            <span class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-zinc-800 dark:bg-zinc-200"></span>Actuel</span>
+            <span class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-zinc-800 dark:bg-zinc-200"></span>Actuals</span>
             <span class="flex items-center gap-1.5"><span class="inline-block w-2.5 h-2.5 rounded-full bg-zinc-400"></span>Forecast</span>
           </div>
         </div>
-        <div class="chart-wrap h-64"><canvas id="monthlyRevenueChart"></canvas></div>
+        <div class="chart-wrap h-72"><canvas id="revenueChart"></canvas></div>
       </div>
-      <div class="overflow-x-auto stat-card !p-0">
-        <table class="w-full text-sm" id="revenue2026Table">
-          <thead class="bg-zinc-50 dark:bg-zinc-900 text-left">
-            <tr>
-              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide">Metric</th>
-              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">Jan–Jun</th>
-              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">Jul–Déc</th>
-              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2026E</th>
-            </tr>
-          </thead>
-          <tbody id="revenue2026Rows" class="divide-y divide-zinc-100 dark:divide-zinc-800"></tbody>
-        </table>
-      </div>
-    </section>
 
-    <!-- Revenue model -->
-    <section id="model">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Modèle de revenu par grand compte</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Chaque nouveau grand compte démarre par un use case cadré, passe par un déploiement 0→1, puis génère un abonnement par use case live.</p>
-      <div id="phaseCards" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
-    </section>
-
-    <!-- Growth -->
-    <section id="growth">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Modèle de croissance : comptes et use cases</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">L'ARR est construit par deux moteurs : nouveaux comptes enterprise et expansion du nombre de use cases live dans les comptes existants.</p>
+      <!-- Revenue annual table + ARR + mix -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Comptes enterprise vs use cases live</h3>
-          <div class="chart-wrap h-56"><canvas id="accountsChart"></canvas></div>
+          <h3 class="font-semibold text-base mb-4">ARR et comptes</h3>
+          <div class="chart-wrap h-56"><canvas id="arrChart"></canvas></div>
         </div>
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Jalons de fin d'année</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm" id="milestonesTable">
-              <thead>
-                <tr class="border-b border-zinc-100 dark:border-zinc-800">
-                  <th class="py-2 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">Year-end</th>
-                  <th class="py-2 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">Comptes</th>
-                  <th class="py-2 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">Use cases</th>
-                  <th class="py-2 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">ARR</th>
-                </tr>
-              </thead>
-              <tbody id="milestonesRows" class="divide-y divide-zinc-100 dark:divide-zinc-800"></tbody>
-            </table>
-          </div>
-          <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-4">L'ending ARR est le run-rate d'abonnement annualisé en fin de période. Revenu récurrent reconnu et ending ARR sont deux métriques distinctes.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Revenue mix & ARR -->
-    <section id="mix">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Mix de revenus et montée en ARR</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Les revenus services et déploiement restent actifs pendant que le revenu récurrent plateforme devient le principal moteur de croissance à mesure que les use cases déployés passent en live.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
           <h3 class="font-semibold text-base mb-4">Mix de revenus annuel</h3>
           <div class="chart-wrap h-56"><canvas id="revenueMixChart"></canvas></div>
         </div>
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">ARR en fin de trimestre</h3>
-          <div class="chart-wrap h-56"><canvas id="arrChart"></canvas></div>
-        </div>
       </div>
+
       <div class="overflow-x-auto stat-card !p-0">
         <table class="w-full text-sm" id="annualTable">
           <thead class="bg-zinc-50 dark:bg-zinc-900 text-left">
@@ -196,47 +151,66 @@
       </div>
     </section>
 
-    <!-- Runway & funds -->
-    <section id="runway">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Scalabilité, runway et usage des fonds</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">La levée finance le produit, l'engineering, la capacité FDE et le go-to-market enterprise. La capacité par FDE augmente avec les playbooks, connecteurs, tooling interne et self-serve progressif.</p>
+    <!-- Key assumptions -->
+    <section id="assumptions">
+      <h2 class="text-2xl font-semibold tracking-tight mb-2">Hypothèses structurantes</h2>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Toute valeur du modèle provient d'une hypothèse nommée (YAML) ou d'une formule dérivée.</p>
+      <div id="assumptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+    </section>
+
+    <!-- Margins & COGS -->
+    <section id="margins">
+      <h2 class="text-2xl font-semibold tracking-tight mb-2">Marges et structure de coûts</h2>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">COGS bottom-up : FDE salaires + freelances delivery + tokens clients + infra cloud + Wassym. Gross margin progresse avec le mix plateforme.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Capacité FDE vs déploiements actifs</h3>
-          <div class="chart-wrap h-56"><canvas id="capacityChart"></canvas></div>
+          <h3 class="font-semibold text-base mb-4">Gross margin trimestrielle</h3>
+          <div class="chart-wrap h-56"><canvas id="grossMarginChart"></canvas></div>
         </div>
+        <div class="stat-card">
+          <h3 class="font-semibold text-base mb-4">Décomposition COGS annuelle</h3>
+          <div class="chart-wrap h-56"><canvas id="cogsChart"></canvas></div>
+        </div>
+      </div>
+      <div class="overflow-x-auto stat-card !p-0">
+        <table class="w-full text-sm">
+          <thead class="bg-zinc-50 dark:bg-zinc-900 text-left">
+            <tr>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide">Métrique</th>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2026E</th>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2027E</th>
+              <th class="px-4 py-3 font-medium text-zinc-500 dark:text-zinc-400 text-xs uppercase tracking-wide text-right">2028E</th>
+            </tr>
+          </thead>
+          <tbody id="marginsRows" class="divide-y divide-zinc-100 dark:divide-zinc-800"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Runway & team -->
+    <section id="runway">
+      <h2 class="text-2xl font-semibold tracking-tight mb-2">Runway, équipe et usage des fonds</h2>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Seed de 2.5M€ finance 30+ mois de runway. Cash toujours positif sur l'horizon du plan.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
           <h3 class="font-semibold text-base mb-4">Cash runway</h3>
           <div class="chart-wrap h-56"><canvas id="cashChart"></canvas></div>
         </div>
+        <div class="stat-card">
+          <h3 class="font-semibold text-base mb-4">Croissance équipe</h3>
+          <div class="chart-wrap h-56"><canvas id="headcountChart"></canvas></div>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Hypothèses de levier FDE</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm">
-              <thead>
-                <tr class="border-b border-zinc-100 dark:border-zinc-800">
-                  <th class="py-2 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">Année</th>
-                  <th class="py-2 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">Capacité / FDE</th>
-                  <th class="py-2 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">Driver</th>
-                </tr>
-              </thead>
-              <tbody id="capacityRows" class="divide-y divide-zinc-100 dark:divide-zinc-800"></tbody>
-            </table>
-          </div>
-        </div>
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Allocation seed — 2,5M€</h3>
-          <div id="fundsGrid" class="space-y-4"></div>
-        </div>
+      <div class="stat-card">
+        <h3 class="font-semibold text-base mb-4">Allocation seed — 2,5M€</h3>
+        <div id="fundsGrid" class="space-y-4"></div>
       </div>
     </section>
 
     <!-- Downloads -->
     <section id="downloads" class="border-t border-zinc-200 dark:border-zinc-800 pt-12">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Téléchargements</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">BP complet pour une revue détaillée, BP simplifié pour une version VC-facing allégée. Les deux sont générés depuis les mêmes tables modèle.</p>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">BP complet pour une revue détaillée, BP simplifié pour une version VC-facing allégée.</p>
       <div class="flex flex-wrap gap-3">
         <a href="downloads/Fonction_Labs_BP_Seed_2026_2028_full_pipeline_v2.xlsx"
            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-semibold hover:bg-zinc-700 dark:hover:bg-zinc-200 transition">
