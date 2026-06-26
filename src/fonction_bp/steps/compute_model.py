@@ -100,8 +100,8 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     """)
 
     # Wassym service continuity.
-    wassym_monthly_revenue = float(s["wassym_days_per_month"]) * float(s["wassym_revenue_day_rate"])
-    wassym_monthly_cost = float(s["wassym_days_per_month"]) * float(s["wassym_cost_day_rate"])
+    wassym_monthly_revenue = float(s["freelance_bpce_days_per_month"]) * float(s["freelance_bpce_revenue_day_rate"])
+    wassym_monthly_cost = float(s["freelance_bpce_days_per_month"]) * float(s["freelance_bpce_cost_day_rate"])
     con.execute(f"""
         CREATE OR REPLACE TABLE service_continuity AS
         SELECT
