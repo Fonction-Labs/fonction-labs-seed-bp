@@ -16,6 +16,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     h = assumptions["headcount"]
     o = assumptions["opex"]
     fde_f = assumptions["fde_formula"]
+    fde_b = assumptions["fde_billable"]
 
     deploy_lag = int(p["deployment_duration_months"])
 
@@ -111,13 +112,35 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         FROM months
     """)
 
+    # FDE billable service revenue — formula-driven, replaces hardcoded service_forecast_baseline.
+    # Revenue = uc_in_run × fde_per_uc_in_run × day_rate × days_per_month × utilization_rate
+    # UC in deployment already generates deployment_revenue (40k/UC over 3 months) — not here.
+    fde_day_rate = float(p['fde_billable_day_rate'])
+    fde_days_per_month = float(fde_b['days_billable_per_month'])
+    util_rates = {str(k): v for k, v in fde_b['utilization_rate'].items()}
+    con.execute(f"""
+        CREATE OR REPLACE TABLE fde_service_revenue AS
+        SELECT
+            m.month,
+            COALESCE(luc.live_use_cases, 0) AS uc_in_run,
+            COALESCE(luc.live_use_cases, 0) * {float(fde_f['fde_per_uc_in_run'])}
+                * {fde_day_rate} * {fde_days_per_month}
+                * CASE
+                    WHEN m.month BETWEEN DATE '2026-07-01' AND DATE '2026-12-01' THEN {float(util_rates['2026_h2'])}
+                    WHEN m.month BETWEEN DATE '2027-01-01' AND DATE '2027-06-01' THEN {float(util_rates['2027_h1'])}
+                    WHEN m.month BETWEEN DATE '2027-07-01' AND DATE '2027-12-01' THEN {float(util_rates['2027_h2'])}
+                    ELSE {float(util_rates['2028'])}
+                  END AS fde_service_revenue
+        FROM months m
+        LEFT JOIN live_use_cases luc USING(month)
+    """)
+
     # Revenue monthly — combines all streams.
     # Actuals source: invoiced revenue (facturé), not collected (encaissé).
     # For the current month: split into actual portion (invoiced so far) + forecast residual.
     today = dt.date.today()
     current_month_start = today.replace(day=1)
     days_in_month = calendar.monthrange(today.year, today.month)[1]
-    # fraction of month elapsed up to today (day 25 of 30 = 0.833)
     fraction_elapsed = today.day / days_in_month
     fraction_remaining = 1.0 - fraction_elapsed
     current_month_iso = current_month_start.isoformat()
@@ -130,8 +153,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             m.year,
             COALESCE(inv.invoiced_revenue, 0) AS invoiced_revenue_actual,
             COALESCE(ar.commercial_revenue_actual, 0) AS collected_revenue_actual,
-            COALESCE(sb.custom_service_baseline, 0) AS custom_service_baseline,
-            COALESCE(fsr.fde_support_revenue, 0) AS fde_support_revenue,
+            COALESCE(fsr.fde_service_revenue, 0) AS fde_service_revenue,
             COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} AS workshop_revenue,
             COALESCE(dr.deployment_revenue, 0) AS deployment_revenue,
             COALESCE(sc.service_continuity_revenue, 0) AS service_continuity_revenue,
@@ -140,17 +162,16 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
               WHEN m.month <= DATE '{current_month_iso}' THEN COALESCE(inv.invoiced_revenue, 0)
               ELSE 0
             END AS actual_services_revenue,
-            -- forecast_services: 0 for past months; residual fraction for current; full for future
-            -- For current month: forecast_baseline * fraction_remaining (what's still to invoice)
+            -- forecast_services: 0 for past; residual fraction for current; full for future
             CASE
               WHEN m.month < DATE '{current_month_iso}' THEN 0
               WHEN m.month = DATE '{current_month_iso}'
                 THEN GREATEST(0,
-                       (COALESCE(sb.custom_service_baseline, 0) + COALESCE(fsr.fde_support_revenue, 0) +
+                       (COALESCE(fsr.fde_service_revenue, 0) +
                         COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
                         COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0))
                        * {fraction_remaining})
-              ELSE COALESCE(sb.custom_service_baseline, 0) + COALESCE(fsr.fde_support_revenue, 0) +
+              ELSE COALESCE(fsr.fde_service_revenue, 0) +
                    COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
                    COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0)
             END AS forecast_services_revenue,
@@ -163,8 +184,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         FROM months m
         LEFT JOIN invoiced_revenue_monthly inv USING(month)
         LEFT JOIN actual_revenue_monthly ar USING(month)
-        LEFT JOIN service_baseline sb USING(month)
-        LEFT JOIN fde_support_revenue fsr USING(month)
+        LEFT JOIN fde_service_revenue fsr USING(month)
         LEFT JOIN enterprise_cohorts ec USING(month)
         LEFT JOIN deployment_revenue dr USING(month)
         LEFT JOIN service_continuity sc USING(month)
@@ -323,8 +343,10 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
                  WHEN m.year >= 2028 THEN {float(h['founder_salary_monthly_loaded_2028'])}
                  ELSE 0 END * {int(h['founder_count'])} AS founder_salary_cost,
             COALESCE(fc.amount, 0) AS founder_catchup_cost,
-            CASE WHEN m.month >= DATE '2026-07-01' THEN {float(h['current_roles']['cold_caller_monthly_total_placeholder'])} ELSE 0 END AS cold_callers_cost,
-            CASE WHEN m.month >= DATE '2026-07-01' THEN {float(h['current_roles']['sales_full_time_monthly_loaded_placeholder'])} ELSE 0 END AS existing_sales_cost,
+            CASE WHEN m.month BETWEEN DATE '{h['current_roles']['cold_callers']['start_month']}' AND DATE '{h['current_roles']['cold_callers']['end_month']}'
+                 THEN {float(h['current_roles']['cold_callers']['monthly_total_cost'])} ELSE 0 END AS cold_callers_cost,
+            CASE WHEN m.month BETWEEN DATE '{h['current_roles']['sales_freelance']['start_month']}' AND DATE '{h['current_roles']['sales_freelance']['end_month']}'
+                 THEN {float(h['current_roles']['sales_freelance']['monthly_loaded_cost'])} ELSE 0 END AS existing_sales_cost,
             COALESCE(SUM(CASE WHEN CAST(hi.start_month AS DATE) <= m.month
                               AND hi.function != 'Forward-Deployed Engineering'
                          THEN hi.monthly_loaded_cost ELSE 0 END), 0) AS new_hires_cost,

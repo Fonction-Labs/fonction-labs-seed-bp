@@ -36,13 +36,14 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
     seg_pricing_rows = [{"segment": seg, "avg_mrr_per_uc": float(val)} for seg, val in pricing["avg_mrr_per_uc"].items()]
     create_table_from_dicts(con, "segment_pricing", seg_pricing_rows, [("segment", "VARCHAR"), ("avg_mrr_per_uc", "DOUBLE")])
 
-    baseline_rows = _monthly_dict_to_rows(assumptions["service_forecast_baseline"]["monthly_eur"], "custom_service_baseline")
-    create_table_from_dicts(con, "service_baseline_raw", baseline_rows, [("month", "DATE"), ("custom_service_baseline", "DOUBLE")])
-    con.execute("CREATE TABLE service_baseline AS SELECT month, custom_service_baseline FROM service_baseline_raw")
-
-    fde_support_rows = _monthly_dict_to_rows(assumptions["fde_support_revenue"]["monthly_eur"], "fde_support_revenue")
-    create_table_from_dicts(con, "fde_support_revenue_raw", fde_support_rows, [("month", "DATE"), ("fde_support_revenue", "DOUBLE")])
-    con.execute("CREATE TABLE fde_support_revenue AS SELECT month, fde_support_revenue FROM fde_support_revenue_raw")
+    # FDE billable utilization rates by period.
+    fde_billable = assumptions["fde_billable"]
+    util = fde_billable["utilization_rate"]
+    fde_billable_rows = [
+        {"period": k, "utilization_rate": float(v)}
+        for k, v in util.items()
+    ]
+    create_table_from_dicts(con, "fde_billable_utilization", fde_billable_rows, [("period", "VARCHAR"), ("utilization_rate", "DOUBLE")])
 
     # Enterprise cohort plan — now with segment.
     cohort_rows = []

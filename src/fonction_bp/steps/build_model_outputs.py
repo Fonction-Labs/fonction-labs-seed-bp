@@ -62,6 +62,8 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
 
     pricing = raw.get("pricing", {})
     seg_pricing = pricing.get("avg_mrr_per_uc", {})
+    f_raise = raw.get("fundraising", {}).get("seed_net_proceeds", 2500000)
+    jan_jun_invoiced = con.execute("SELECT COALESCE(SUM(invoiced_revenue), 0) FROM invoiced_revenue_monthly WHERE month BETWEEN DATE '2026-01-01' AND DATE '2026-06-01'").fetchone()[0]
 
     dashboard = {
         "metadata": {
@@ -100,8 +102,8 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
                 "period": "H1 2026",
                 "status": "active",
                 "revenue_model": "Service pur — workshops, déploiement custom, FDE facturé",
-                "pricing": "Workshop 20k€ + deploy 40k€/UC + FDE 1 150€/j",
-                "margin_profile": "~40% (service-heavy)",
+                "pricing": f"Workshop {pricing.get('workshop_fee_per_new_enterprise_client', 20000)//1000}k€ + deploy {pricing.get('deployment_fee_per_use_case', 40000)//1000}k€/UC + FDE {pricing.get('fde_billable_day_rate', 1150)}€/j",
+                "margin_profile": f"~{int(annual[0].get('gross_margin', 0.5) * 100)}% (service-heavy)" if annual else "~50%",
                 "key_metric": "Revenue de service générée",
             },
             {
@@ -111,30 +113,30 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
                 "status": "next",
                 "revenue_model": "Abonnement per-UC + service FDE séparé",
                 "pricing": f"ETI {seg_pricing.get('ETI', 2000)}€ / GC {seg_pricing.get('GC', 5250)}€ / TGC {seg_pricing.get('TGC', 16250)}€ par UC/mois",
-                "margin_profile": "60-75% (mix platform + service)",
+                "margin_profile": f"~{int(annual[1].get('gross_margin', 0.55) * 100)}% (mix platform + service)" if len(annual) > 1 else "55-65%",
                 "key_metric": "ARR plateforme + accounts actifs",
             },
             {
                 "id": "target",
                 "name": "Modèle cible",
-                "period": "Q3 2027+",
+                "period": "2028+",
                 "status": "planned",
-                "revenue_model": "Abonnement léger + crédits prépayés (usage-based)",
-                "pricing": "1 crédit = X tokens, marge ~80%+ sur la couche plateforme",
-                "margin_profile": "80%+ (SaaS pure)",
+                "revenue_model": "Plateforme dominante + service FDE allégé (utilization réduite)",
+                "pricing": f"Plateforme {seg_pricing.get('ETI', 2000)}–{seg_pricing.get('TGC', 16250)}€/UC/mois + FDE on-demand",
+                "margin_profile": f"~{int(annual[2].get('gross_margin', 0.75) * 100)}% (SaaS-grade)" if len(annual) > 2 else "75%+",
                 "key_metric": "Net Revenue Retention > 130%",
             },
         ],
         "unit_economics": [
-            {"phase": "Discover", "timing": "3 semaines", "driver": "Workshop cadrage", "assumption": "20k€ / nouveau client"},
-            {"phase": "Deploy", "timing": "3 mois", "driver": "Déploiement 0→1", "assumption": "40k€ / use case"},
+            {"phase": "Discover", "timing": "3 semaines", "driver": "Workshop cadrage", "assumption": f"{pricing.get('workshop_fee_per_new_enterprise_client', 20000)//1000}k€ / nouveau client"},
+            {"phase": "Deploy", "timing": f"{pricing.get('deployment_duration_months', 3)} mois", "driver": "Déploiement 0→1", "assumption": f"{pricing.get('deployment_fee_per_use_case', 40000)//1000}k€ / use case"},
             {"phase": "Run", "timing": "Post go-live", "driver": "Abonnement plateforme", "assumption": f"ETI {seg_pricing.get('ETI', 2000)}€ – TGC {seg_pricing.get('TGC', 16250)}€ /UC/mois"},
             {"phase": "Expand", "timing": "En continu", "driver": "Expansion UC + upsell segment", "assumption": "Net expansion ~130% NRR cible"},
         ],
         "trajectory": [
-            {"year": 2026, "theme": "Deployment proof", "text": "Traction existante 184k€ H1, premier client GC signé, 2 UC en déploiement, levée seed 2.5M€."},
-            {"year": 2027, "theme": "Platform transition", "text": "12 comptes activés, 26 UC live, bascule vers l'abonnement récurrent. ARR 1.6M€."},
-            {"year": 2028, "theme": "Use case expansion", "text": "30 comptes, 84 UC live, ARR 4.8M€. Levier FDE + self-serve progressif."},
+            {"year": 2026, "theme": "Deployment proof", "text": f"Traction {int(jan_jun_invoiced/1000)}k€ facturés H1, premier client GC signé, {milestones[0]['live_use_cases']} UC en déploiement, levée seed {f_raise/1e6:.1f}M€."},
+            {"year": 2027, "theme": "Platform transition", "text": f"{milestones[1]['enterprise_accounts']} comptes activés, {milestones[1]['live_use_cases']} UC live, bascule vers l'abonnement récurrent. ARR {milestones[1]['ending_arr']/1e6:.1f}M€."},
+            {"year": 2028, "theme": "Use case expansion", "text": f"{milestones[2]['enterprise_accounts']} comptes, {milestones[2]['live_use_cases']} UC live, ARR {milestones[2]['ending_arr']/1e6:.1f}M€. Levier FDE + self-serve progressif."},
         ],
     }
     save_json(paths.model_outputs_json, dashboard)

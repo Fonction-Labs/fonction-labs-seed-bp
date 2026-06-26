@@ -214,22 +214,58 @@ Ref : [Synthese reunion](./2026-06-24_reunion-jean-bp-synthese.md)
 
 ### T5.1 — Mettre a jour le modele financier complet
 
-**Priorite** : Haute (mais derniere dans l'ordre d'execution)
+**Statut** : DONE
+**Priorite** : Haute
 **Owner** : Matthieu
 **Dependances** : T1.3, T2.3, T3.1, T3.2, T3.3
 
 **Description** :
 Integrer tous les inputs des tickets precedents dans le modele financier du BP.
 
-**Contenu** :
-- Revenus : ventiles par poste (atelier, deploy, amelioration continue, abonnement) x par segment client x par annee
-- ARR total vs ARR plateforme (trajectoire)
-- Depenses : FDEs, marketing, bureaux, RH, certification
-- Headcount : trajectoire par role
-- Marges : par use case type, par segment, globale
-- KPIs : #entreprises, #use cases, CA/client moyen, ratio service/plateforme
+**Contenu livré** :
+- Revenue 100% formula-driven : workshop (cohort) + deploy 40k/UC (cohort) + FDE billable (formule live UC × utilization) + plateforme (segment pricing × live UC)
+- Actuals H1 2026 = facturé Qonto (335k€)
+- COGS bottom-up : FDE hires réels + freelances + tokens + infra cloud + Freelance BPCE
+- Opex décomposé : bureaux/admin/marketing/misc (sous-lignes nommées) + security/legal + AI tooling (formule) + SaaS
+- Cold callers (Mooniz) + Sales freelance avec dates de fin
+- Headcount accéléré (15 fin 2027) pour justifier le seed de 2.5M€
+- Cohort plan réaliste (cycle vente 3-6 mois, gaps trimestriels)
+
+**Targets révisées (vs T2.3 initiaux)** :
+- Clients fin 2027 : 8 (vs 12 initial — cycle rallongé pour réalisme)
+- UC live fin 2027 : 18 (vs 25 — conséquence directe)
+- Clients fin 2028 : 20 (vs 30 — idem)
+- UC live fin 2028 : 59 (vs 70 — idem)
+- Justification : cycle enterprise 3-6 mois (vs 1-2 mois implicite avant), pas de signature chaque mois
+
+**KPIs finaux** :
+- Revenue 2026: 567k€ | 2027: 1.65M€ | 2028: 5.37M€
+- ARR fin 2027: 1.35M€ | fin 2028: 3.9M€
+- Gross margin: 51% → 53% → 75%
+- Cash fin 2027: 1.39M€ (burn 1.13M€ en 15 mois post-seed)
 
 **Horizon** : 2026-2028 uniquement (pas au-dela)
+
+---
+
+### T5.3 — Simulation Monte Carlo du pipeline commercial
+
+**Statut** : TODO
+**Priorite** : Basse (post-pitch, amélioration future)
+**Owner** : Matthieu
+**Dependances** : T5.1
+
+**Description** :
+Ajouter une couche probabiliste au cohort plan. Aujourd'hui chaque client signe à date fixe (déterministe). En réalité, le pipeline a un taux de conversion et un délai variable.
+
+**Contenu** :
+- Distribution sur les dates de signature (± 1-2 mois)
+- Taux de conversion pipeline → signé (ex: 30-40% pour ETI, 20-25% pour GC/TGC)
+- Simulation N tirages → distribution de l'ARR fin 2027 (P10 / P50 / P90)
+- Représentation bayésienne dans le dashboard (fan chart ou confidence intervals)
+- Permet de répondre à "quel est le worst case réaliste ?" en pitch
+
+**Note** : le modèle déterministe actuel est suffisant pour le pitch seed. Le Monte Carlo serait un bonus pour la data room ou un suivi post-levée.
 
 ---
 

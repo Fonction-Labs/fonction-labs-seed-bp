@@ -14,17 +14,17 @@ window.DASHBOARD_DATA = {
     },
     {
       "metric": "2026E revenue",
-      "value": 682148.8666666667,
+      "value": 566727.2000000001,
       "unit": "EUR"
     },
     {
       "metric": "2027E revenue",
-      "value": 1766500.0,
+      "value": 1645310.8333333335,
       "unit": "EUR"
     },
     {
       "metric": "2028E revenue",
-      "value": 4281250.0,
+      "value": 5365169.999999999,
       "unit": "EUR"
     },
     {
@@ -44,12 +44,12 @@ window.DASHBOARD_DATA = {
     },
     {
       "metric": "Gross margin 2027",
-      "value": 0.5672233229549958,
+      "value": 0.535346157995475,
       "unit": "pct"
     },
     {
       "metric": "Ending cash Dec-2027",
-      "value": 1407698.29,
+      "value": 1390554.1233333333,
       "unit": "EUR"
     },
     {
@@ -61,45 +61,45 @@ window.DASHBOARD_DATA = {
   "annual_summary": [
     {
       "year": 2026,
-      "services_deployment_revenue": 671648.8666666667,
+      "services_deployment_revenue": 556227.2000000001,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
-      "total_revenue": 682148.8666666667,
+      "total_revenue": 566727.2000000001,
       "total_cogs": 276400.0,
-      "gross_profit": 405748.8666666667,
-      "gross_margin": 0.5948098523557859,
+      "gross_profit": 290327.20000000007,
+      "gross_margin": 0.5122873932996335,
       "ending_arr": 126000.0,
       "enterprise_accounts_end": 1,
       "live_use_cases": 2,
-      "recurring_revenue_share": 0.015392534552330854
+      "recurring_revenue_share": 0.01852743259896472
     },
     {
       "year": 2027,
-      "services_deployment_revenue": 1380000.0,
+      "services_deployment_revenue": 1258810.8333333335,
       "platform_subscription_revenue": 386500.0,
       "usage_success_revenue": 0.0,
-      "total_revenue": 1766500.0,
+      "total_revenue": 1645310.8333333335,
       "total_cogs": 764500.0,
-      "gross_profit": 1002000.0,
-      "gross_margin": 0.5672233229549958,
+      "gross_profit": 880810.8333333335,
+      "gross_margin": 0.535346157995475,
       "ending_arr": 1350000.0,
       "enterprise_accounts_end": 8,
       "live_use_cases": 18,
-      "recurring_revenue_share": 0.21879422587036512
+      "recurring_revenue_share": 0.23491001953531573
     },
     {
       "year": 2028,
-      "services_deployment_revenue": 1860000.0,
+      "services_deployment_revenue": 2943920.0000000005,
       "platform_subscription_revenue": 2421250.0,
       "usage_success_revenue": 0.0,
-      "total_revenue": 4281250.0,
+      "total_revenue": 5365169.999999999,
       "total_cogs": 1340700.0,
-      "gross_profit": 2940550.0,
-      "gross_margin": 0.686843795620438,
+      "gross_profit": 4024470.0,
+      "gross_margin": 0.750110434524908,
       "ending_arr": 3906000.0,
       "enterprise_accounts_end": 20,
       "live_use_cases": 59,
-      "recurring_revenue_share": 0.5655474452554744
+      "recurring_revenue_share": 0.4512904530518139
     }
   ],
   "revenue_monthly": [
@@ -108,8 +108,7 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 9600.0,
       "collected_revenue_actual": 19215.0,
-      "custom_service_baseline": 0.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
@@ -129,8 +128,7 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 17430.0,
       "collected_revenue_actual": 22230.0,
-      "custom_service_baseline": 0.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
@@ -150,8 +148,7 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 42760.0,
       "collected_revenue_actual": 23100.0,
-      "custom_service_baseline": 0.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
@@ -171,8 +168,7 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 44655.0,
       "collected_revenue_actual": 32655.0,
-      "custom_service_baseline": 0.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
@@ -192,8 +188,7 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 128197.5,
       "collected_revenue_actual": 44280.0,
-      "custom_service_baseline": 0.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
@@ -213,651 +208,620 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "invoiced_revenue_actual": 92339.7,
       "collected_revenue_actual": 42427.5,
-      "custom_service_baseline": 20000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 92339.7,
-      "forecast_services_revenue": 2666.666666666666,
+      "forecast_services_revenue": 0.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "services_deployment_revenue": 95006.36666666667,
-      "total_revenue": 95006.36666666667
+      "services_deployment_revenue": 92339.7,
+      "total_revenue": 92339.7
     },
     {
       "month": "2026-07-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 20000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 39000.0,
+      "forecast_services_revenue": 19000.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "services_deployment_revenue": 39000.0,
-      "total_revenue": 39000.0
+      "services_deployment_revenue": 19000.0,
+      "total_revenue": 19000.0
     },
     {
       "month": "2026-08-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 20000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 39000.0,
+      "forecast_services_revenue": 19000.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "services_deployment_revenue": 39000.0,
-      "total_revenue": 39000.0
+      "services_deployment_revenue": 19000.0,
+      "total_revenue": 19000.0
     },
     {
       "month": "2026-09-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 20000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 20000.0,
+      "deployment_revenue": 26666.666666666668,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 79000.0,
+      "forecast_services_revenue": 65666.66666666667,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 1,
       "use_case_starts": 2,
-      "services_deployment_revenue": 79000.0,
-      "total_revenue": 79000.0
+      "services_deployment_revenue": 65666.66666666667,
+      "total_revenue": 65666.66666666667
     },
     {
       "month": "2026-10-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 25000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 20000.0,
+      "deployment_revenue": 26666.666666666668,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 64000.0,
+      "forecast_services_revenue": 45666.66666666667,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 1,
       "use_case_starts": 0,
-      "services_deployment_revenue": 64000.0,
-      "total_revenue": 64000.0
+      "services_deployment_revenue": 45666.66666666667,
+      "total_revenue": 45666.66666666667
     },
     {
       "month": "2026-11-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 25000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 0.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 20000.0,
+      "deployment_revenue": 26666.666666666668,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 64000.0,
+      "forecast_services_revenue": 45666.66666666667,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 1,
       "use_case_starts": 0,
-      "services_deployment_revenue": 64000.0,
-      "total_revenue": 64000.0
+      "services_deployment_revenue": 45666.66666666667,
+      "total_revenue": 45666.66666666667
     },
     {
       "month": "2026-12-01",
       "year": 2026,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 30000.0,
-      "fde_support_revenue": 0.0,
+      "fde_service_revenue": 7245.0,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 49000.0,
+      "forecast_services_revenue": 26245.0,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 126000.0,
       "live_use_cases": 2,
       "enterprise_accounts_end": 1,
       "use_case_starts": 0,
-      "services_deployment_revenue": 49000.0,
-      "total_revenue": 59500.0
+      "services_deployment_revenue": 26245.0,
+      "total_revenue": 36745.0
     },
     {
       "month": "2027-01-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 6727.5,
       "workshop_revenue": 0.0,
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 55000.0,
+      "forecast_services_revenue": 6727.5,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 126000.0,
       "live_use_cases": 2,
       "enterprise_accounts_end": 1,
       "use_case_starts": 0,
-      "services_deployment_revenue": 55000.0,
-      "total_revenue": 65500.0
+      "services_deployment_revenue": 6727.5,
+      "total_revenue": 17227.5
     },
     {
       "month": "2027-02-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 6727.5,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 20000.0,
+      "deployment_revenue": 26666.666666666668,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 95000.0,
+      "forecast_services_revenue": 53394.16666666667,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 126000.0,
       "live_use_cases": 2,
       "enterprise_accounts_end": 2,
       "use_case_starts": 2,
-      "services_deployment_revenue": 95000.0,
-      "total_revenue": 105500.0
+      "services_deployment_revenue": 53394.16666666667,
+      "total_revenue": 63894.16666666667
     },
     {
       "month": "2027-03-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 6727.5,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 40000.0,
+      "deployment_revenue": 53333.333333333336,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 95000.0,
+      "forecast_services_revenue": 60060.833333333336,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 126000.0,
       "live_use_cases": 2,
       "enterprise_accounts_end": 2,
       "use_case_starts": 2,
-      "services_deployment_revenue": 95000.0,
-      "total_revenue": 105500.0
+      "services_deployment_revenue": 60060.833333333336,
+      "total_revenue": 70560.83333333334
     },
     {
       "month": "2027-04-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 6727.5,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 40000.0,
+      "deployment_revenue": 53333.333333333336,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 95000.0,
+      "forecast_services_revenue": 60060.833333333336,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 126000.0,
       "live_use_cases": 2,
       "enterprise_accounts_end": 2,
       "use_case_starts": 0,
-      "services_deployment_revenue": 95000.0,
-      "total_revenue": 105500.0
+      "services_deployment_revenue": 60060.833333333336,
+      "total_revenue": 70560.83333333334
     },
     {
       "month": "2027-05-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 13455.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 50000.0,
+      "deployment_revenue": 66666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 125000.0,
+      "forecast_services_revenue": 100121.66666666667,
       "platform_subscription_revenue": 14500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 174000.0,
       "live_use_cases": 4,
       "enterprise_accounts_end": 3,
       "use_case_starts": 3,
-      "services_deployment_revenue": 125000.0,
-      "total_revenue": 139500.0
+      "services_deployment_revenue": 100121.66666666667,
+      "total_revenue": 114621.66666666667
     },
     {
       "month": "2027-06-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 45000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 20182.5,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 50000.0,
+      "deployment_revenue": 66666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 125000.0,
+      "forecast_services_revenue": 106849.16666666667,
       "platform_subscription_revenue": 25000.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 300000.0,
       "live_use_cases": 6,
       "enterprise_accounts_end": 4,
       "use_case_starts": 2,
-      "services_deployment_revenue": 125000.0,
-      "total_revenue": 150000.0
+      "services_deployment_revenue": 106849.16666666667,
+      "total_revenue": 131849.1666666667
     },
     {
       "month": "2027-07-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 17077.5,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 145000.0,
+      "forecast_services_revenue": 143744.1666666667,
       "platform_subscription_revenue": 25000.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 300000.0,
       "live_use_cases": 6,
       "enterprise_accounts_end": 5,
       "use_case_starts": 3,
-      "services_deployment_revenue": 145000.0,
-      "total_revenue": 170000.0
+      "services_deployment_revenue": 143744.1666666667,
+      "total_revenue": 168744.1666666667
     },
     {
       "month": "2027-08-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 25616.25,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 50000.0,
+      "deployment_revenue": 66666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 95000.0,
+      "forecast_services_revenue": 92282.91666666667,
       "platform_subscription_revenue": 31000.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 372000.0,
       "live_use_cases": 9,
       "enterprise_accounts_end": 5,
       "use_case_starts": 0,
-      "services_deployment_revenue": 95000.0,
-      "total_revenue": 126000.0
+      "services_deployment_revenue": 92282.91666666667,
+      "total_revenue": 123282.91666666667
     },
     {
       "month": "2027-09-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 31308.75,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 70000.0,
+      "deployment_revenue": 93333.33333333334,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 135000.0,
+      "forecast_services_revenue": 144642.08333333334,
       "platform_subscription_revenue": 41500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 498000.0,
       "live_use_cases": 11,
       "enterprise_accounts_end": 6,
       "use_case_starts": 4,
-      "services_deployment_revenue": 135000.0,
-      "total_revenue": 176500.0
+      "services_deployment_revenue": 144642.08333333334,
+      "total_revenue": 186142.08333333334
     },
     {
       "month": "2027-10-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 39847.5,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 145000.0,
+      "forecast_services_revenue": 166514.1666666667,
       "platform_subscription_revenue": 47500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 570000.0,
       "live_use_cases": 14,
       "enterprise_accounts_end": 7,
       "use_case_starts": 4,
-      "services_deployment_revenue": 145000.0,
-      "total_revenue": 192500.0
+      "services_deployment_revenue": 166514.1666666667,
+      "total_revenue": 214014.1666666667
     },
     {
       "month": "2027-11-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 39847.5,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 125000.0,
+      "forecast_services_revenue": 146514.1666666667,
       "platform_subscription_revenue": 47500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 570000.0,
       "live_use_cases": 14,
       "enterprise_accounts_end": 7,
       "use_case_starts": 0,
-      "services_deployment_revenue": 125000.0,
-      "total_revenue": 172500.0
+      "services_deployment_revenue": 146514.1666666667,
+      "total_revenue": 194014.1666666667
     },
     {
       "month": "2027-12-01",
       "year": 2027,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 35000.0,
-      "fde_support_revenue": 10000.0,
+      "fde_service_revenue": 51232.5,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 145000.0,
+      "forecast_services_revenue": 177899.1666666667,
       "platform_subscription_revenue": 112500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1350000.0,
       "live_use_cases": 18,
       "enterprise_accounts_end": 8,
       "use_case_starts": 4,
-      "services_deployment_revenue": 145000.0,
-      "total_revenue": 257500.0
+      "services_deployment_revenue": 177899.1666666667,
+      "total_revenue": 290399.1666666667
     },
     {
       "month": "2028-01-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 45540.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 125000.0,
+      "forecast_services_revenue": 172206.6666666667,
       "platform_subscription_revenue": 133500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1602000.0,
       "live_use_cases": 22,
       "enterprise_accounts_end": 9,
       "use_case_starts": 4,
-      "services_deployment_revenue": 125000.0,
-      "total_revenue": 258500.0
+      "services_deployment_revenue": 172206.6666666667,
+      "total_revenue": 305706.6666666667
     },
     {
       "month": "2028-02-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 45540.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 80000.0,
+      "deployment_revenue": 106666.66666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 105000.0,
+      "forecast_services_revenue": 152206.6666666667,
       "platform_subscription_revenue": 133500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1602000.0,
       "live_use_cases": 22,
       "enterprise_accounts_end": 9,
       "use_case_starts": 0,
-      "services_deployment_revenue": 105000.0,
-      "total_revenue": 238500.0
+      "services_deployment_revenue": 152206.6666666667,
+      "total_revenue": 285706.6666666667
     },
     {
       "month": "2028-03-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 53820.0,
       "workshop_revenue": 40000.0,
-      "deployment_revenue": 90000.0,
+      "deployment_revenue": 120000.0,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 155000.0,
+      "forecast_services_revenue": 213820.0,
       "platform_subscription_revenue": 141500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1698000.0,
       "live_use_cases": 26,
       "enterprise_accounts_end": 11,
       "use_case_starts": 5,
-      "services_deployment_revenue": 155000.0,
-      "total_revenue": 296500.0
+      "services_deployment_revenue": 213820.0,
+      "total_revenue": 355320.0
     },
     {
       "month": "2028-04-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 62100.0,
       "workshop_revenue": 40000.0,
-      "deployment_revenue": 110000.0,
+      "deployment_revenue": 146666.6666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 175000.0,
+      "forecast_services_revenue": 248766.6666666667,
       "platform_subscription_revenue": 149500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1794000.0,
       "live_use_cases": 30,
       "enterprise_accounts_end": 13,
       "use_case_starts": 6,
-      "services_deployment_revenue": 175000.0,
-      "total_revenue": 324500.0
+      "services_deployment_revenue": 248766.6666666667,
+      "total_revenue": 398266.6666666667
     },
     {
       "month": "2028-05-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 62100.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 110000.0,
+      "deployment_revenue": 146666.6666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 135000.0,
+      "forecast_services_revenue": 208766.6666666667,
       "platform_subscription_revenue": 149500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 1794000.0,
       "live_use_cases": 30,
       "enterprise_accounts_end": 13,
       "use_case_starts": 0,
-      "services_deployment_revenue": 135000.0,
-      "total_revenue": 284500.0
+      "services_deployment_revenue": 208766.6666666667,
+      "total_revenue": 358266.6666666667
     },
     {
       "month": "2028-06-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 72450.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 110000.0,
+      "deployment_revenue": 146666.6666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 155000.0,
+      "forecast_services_revenue": 239116.6666666667,
       "platform_subscription_revenue": 175750.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 2109000.0,
       "live_use_cases": 35,
       "enterprise_accounts_end": 14,
       "use_case_starts": 5,
-      "services_deployment_revenue": 155000.0,
-      "total_revenue": 330750.0
+      "services_deployment_revenue": 239116.6666666667,
+      "total_revenue": 414866.6666666667
     },
     {
       "month": "2028-07-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 84870.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 110000.0,
+      "deployment_revenue": 146666.6666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 155000.0,
+      "forecast_services_revenue": 251536.6666666667,
       "platform_subscription_revenue": 187750.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 2253000.0,
       "live_use_cases": 41,
       "enterprise_accounts_end": 15,
       "use_case_starts": 6,
-      "services_deployment_revenue": 155000.0,
-      "total_revenue": 342750.0
+      "services_deployment_revenue": 251536.6666666667,
+      "total_revenue": 439286.6666666667
     },
     {
       "month": "2028-08-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 84870.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 110000.0,
+      "deployment_revenue": 146666.6666666667,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 135000.0,
+      "forecast_services_revenue": 231536.6666666667,
       "platform_subscription_revenue": 187750.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 2253000.0,
       "live_use_cases": 41,
       "enterprise_accounts_end": 15,
       "use_case_starts": 0,
-      "services_deployment_revenue": 135000.0,
-      "total_revenue": 322750.0
+      "services_deployment_revenue": 231536.6666666667,
+      "total_revenue": 419286.6666666667
     },
     {
       "month": "2028-09-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 95220.0,
       "workshop_revenue": 40000.0,
-      "deployment_revenue": 130000.0,
+      "deployment_revenue": 173333.3333333333,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 195000.0,
+      "forecast_services_revenue": 308553.3333333333,
       "platform_subscription_revenue": 214000.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 2568000.0,
       "live_use_cases": 46,
       "enterprise_accounts_end": 17,
       "use_case_starts": 7,
-      "services_deployment_revenue": 195000.0,
-      "total_revenue": 409000.0
+      "services_deployment_revenue": 308553.3333333333,
+      "total_revenue": 522553.3333333333
     },
     {
       "month": "2028-10-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 107640.0,
       "workshop_revenue": 20000.0,
-      "deployment_revenue": 130000.0,
+      "deployment_revenue": 173333.3333333333,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 175000.0,
+      "forecast_services_revenue": 300973.3333333333,
       "platform_subscription_revenue": 311500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 3738000.0,
       "live_use_cases": 52,
       "enterprise_accounts_end": 18,
       "use_case_starts": 6,
-      "services_deployment_revenue": 175000.0,
-      "total_revenue": 486500.0
+      "services_deployment_revenue": 300973.3333333333,
+      "total_revenue": 612473.3333333333
     },
     {
       "month": "2028-11-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 107640.0,
       "workshop_revenue": 0.0,
-      "deployment_revenue": 130000.0,
+      "deployment_revenue": 173333.3333333333,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 155000.0,
+      "forecast_services_revenue": 280973.3333333333,
       "platform_subscription_revenue": 311500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 3738000.0,
       "live_use_cases": 52,
       "enterprise_accounts_end": 18,
       "use_case_starts": 0,
-      "services_deployment_revenue": 155000.0,
-      "total_revenue": 466500.0
+      "services_deployment_revenue": 280973.3333333333,
+      "total_revenue": 592473.3333333333
     },
     {
       "month": "2028-12-01",
       "year": 2028,
       "invoiced_revenue_actual": 0.0,
       "collected_revenue_actual": 0.0,
-      "custom_service_baseline": 10000.0,
-      "fde_support_revenue": 15000.0,
+      "fde_service_revenue": 122130.0,
       "workshop_revenue": 40000.0,
-      "deployment_revenue": 130000.0,
+      "deployment_revenue": 173333.3333333333,
       "service_continuity_revenue": 0.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 195000.0,
+      "forecast_services_revenue": 335463.3333333333,
       "platform_subscription_revenue": 325500.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 3906000.0,
       "live_use_cases": 59,
       "enterprise_accounts_end": 20,
       "use_case_starts": 7,
-      "services_deployment_revenue": 195000.0,
-      "total_revenue": 520500.0
+      "services_deployment_revenue": 335463.3333333333,
+      "total_revenue": 660963.3333333333
     }
   ],
   "invoiced_monthly": [
@@ -933,8 +897,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 3,
       "period": "Q3 26",
-      "total_revenue": 173006.36666666667,
-      "services_deployment_revenue": 173006.36666666667,
+      "total_revenue": 130339.7,
+      "services_deployment_revenue": 130339.7,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-08-01",
       "ending_arr": 0.0,
@@ -945,8 +909,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 4,
       "period": "Q4 26",
-      "total_revenue": 207000.0,
-      "services_deployment_revenue": 207000.0,
+      "total_revenue": 157000.0,
+      "services_deployment_revenue": 157000.0,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-11-01",
       "ending_arr": 0.0,
@@ -957,8 +921,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 5,
       "period": "Q5 26",
-      "total_revenue": 59500.0,
-      "services_deployment_revenue": 49000.0,
+      "total_revenue": 36745.0,
+      "services_deployment_revenue": 26245.0,
       "platform_subscription_revenue": 10500.0,
       "quarter_end_month": "2026-12-01",
       "ending_arr": 126000.0,
@@ -969,8 +933,8 @@ window.DASHBOARD_DATA = {
       "year": 2027,
       "quarter": 1,
       "period": "Q1 27",
-      "total_revenue": 171000.0,
-      "services_deployment_revenue": 150000.0,
+      "total_revenue": 81121.66666666667,
+      "services_deployment_revenue": 60121.66666666667,
       "platform_subscription_revenue": 21000.0,
       "quarter_end_month": "2027-02-01",
       "ending_arr": 126000.0,
@@ -981,8 +945,8 @@ window.DASHBOARD_DATA = {
       "year": 2027,
       "quarter": 2,
       "period": "Q2 27",
-      "total_revenue": 350500.0,
-      "services_deployment_revenue": 315000.0,
+      "total_revenue": 255743.33333333337,
+      "services_deployment_revenue": 220243.33333333334,
       "platform_subscription_revenue": 35500.0,
       "quarter_end_month": "2027-05-01",
       "ending_arr": 174000.0,
@@ -993,8 +957,8 @@ window.DASHBOARD_DATA = {
       "year": 2027,
       "quarter": 3,
       "period": "Q3 27",
-      "total_revenue": 446000.0,
-      "services_deployment_revenue": 365000.0,
+      "total_revenue": 423876.25000000006,
+      "services_deployment_revenue": 342876.25000000006,
       "platform_subscription_revenue": 81000.0,
       "quarter_end_month": "2027-08-01",
       "ending_arr": 372000.0,
@@ -1005,8 +969,8 @@ window.DASHBOARD_DATA = {
       "year": 2027,
       "quarter": 4,
       "period": "Q4 27",
-      "total_revenue": 541500.0,
-      "services_deployment_revenue": 405000.0,
+      "total_revenue": 594170.4166666667,
+      "services_deployment_revenue": 457670.4166666667,
       "platform_subscription_revenue": 136500.0,
       "quarter_end_month": "2027-11-01",
       "ending_arr": 570000.0,
@@ -1017,8 +981,8 @@ window.DASHBOARD_DATA = {
       "year": 2027,
       "quarter": 5,
       "period": "Q5 27",
-      "total_revenue": 257500.0,
-      "services_deployment_revenue": 145000.0,
+      "total_revenue": 290399.1666666667,
+      "services_deployment_revenue": 177899.1666666667,
       "platform_subscription_revenue": 112500.0,
       "quarter_end_month": "2027-12-01",
       "ending_arr": 1350000.0,
@@ -1029,8 +993,8 @@ window.DASHBOARD_DATA = {
       "year": 2028,
       "quarter": 1,
       "period": "Q1 28",
-      "total_revenue": 497000.0,
-      "services_deployment_revenue": 230000.0,
+      "total_revenue": 591413.3333333334,
+      "services_deployment_revenue": 324413.3333333334,
       "platform_subscription_revenue": 267000.0,
       "quarter_end_month": "2028-02-01",
       "ending_arr": 1602000.0,
@@ -1041,8 +1005,8 @@ window.DASHBOARD_DATA = {
       "year": 2028,
       "quarter": 2,
       "period": "Q2 28",
-      "total_revenue": 905500.0,
-      "services_deployment_revenue": 465000.0,
+      "total_revenue": 1111853.3333333335,
+      "services_deployment_revenue": 671353.3333333334,
       "platform_subscription_revenue": 440500.0,
       "quarter_end_month": "2028-05-01",
       "ending_arr": 1794000.0,
@@ -1053,8 +1017,8 @@ window.DASHBOARD_DATA = {
       "year": 2028,
       "quarter": 3,
       "period": "Q3 28",
-      "total_revenue": 996250.0,
-      "services_deployment_revenue": 445000.0,
+      "total_revenue": 1273440.0,
+      "services_deployment_revenue": 722190.0,
       "platform_subscription_revenue": 551250.0,
       "quarter_end_month": "2028-08-01",
       "ending_arr": 2253000.0,
@@ -1065,8 +1029,8 @@ window.DASHBOARD_DATA = {
       "year": 2028,
       "quarter": 4,
       "period": "Q4 28",
-      "total_revenue": 1362000.0,
-      "services_deployment_revenue": 525000.0,
+      "total_revenue": 1727499.9999999998,
+      "services_deployment_revenue": 890500.0,
       "platform_subscription_revenue": 837000.0,
       "quarter_end_month": "2028-11-01",
       "ending_arr": 3738000.0,
@@ -1077,8 +1041,8 @@ window.DASHBOARD_DATA = {
       "year": 2028,
       "quarter": 5,
       "period": "Q5 28",
-      "total_revenue": 520500.0,
-      "services_deployment_revenue": 195000.0,
+      "total_revenue": 660963.3333333333,
+      "services_deployment_revenue": 335463.3333333333,
       "platform_subscription_revenue": 325500.0,
       "quarter_end_month": "2028-12-01",
       "ending_arr": 3906000.0,
@@ -1439,332 +1403,332 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-07-01",
       "year": 2026,
-      "total_revenue": 39000.0,
+      "total_revenue": 19000.0,
       "total_cogs": 31500.0,
-      "total_payroll_cost": 16000.0,
+      "total_payroll_cost": 14700.0,
       "total_opex": 16000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -24500.0,
-      "ending_cash": 122198.29000000001
+      "operating_cashflow": -43200.0,
+      "ending_cash": 103498.29000000001
     },
     {
       "month": "2026-08-01",
       "year": 2026,
-      "total_revenue": 39000.0,
+      "total_revenue": 19000.0,
       "total_cogs": 22000.0,
-      "total_payroll_cost": 16000.0,
+      "total_payroll_cost": 14700.0,
       "total_opex": 16000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -15000.0,
-      "ending_cash": 107198.29000000001
+      "operating_cashflow": -33700.0,
+      "ending_cash": 69798.29000000001
     },
     {
       "month": "2026-09-01",
       "year": 2026,
-      "total_revenue": 79000.0,
+      "total_revenue": 65666.66666666667,
       "total_cogs": 33000.0,
-      "total_payroll_cost": 28000.0,
+      "total_payroll_cost": 26700.0,
       "total_opex": 58000.0,
       "seed_proceeds": 2500000.0,
-      "operating_cashflow": -40000.0,
-      "ending_cash": 2567198.29
+      "operating_cashflow": -52033.33333333333,
+      "ending_cash": 2517764.9566666665
     },
     {
       "month": "2026-10-01",
       "year": 2026,
-      "total_revenue": 64000.0,
+      "total_revenue": 45666.66666666667,
       "total_cogs": 44000.0,
-      "total_payroll_cost": 28000.0,
+      "total_payroll_cost": 26700.0,
       "total_opex": 19000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -27000.0,
-      "ending_cash": 2540198.29
+      "operating_cashflow": -44033.33333333333,
+      "ending_cash": 2473731.623333333
     },
     {
       "month": "2026-11-01",
       "year": 2026,
-      "total_revenue": 64000.0,
+      "total_revenue": 45666.66666666667,
       "total_cogs": 44000.0,
-      "total_payroll_cost": 39000.0,
+      "total_payroll_cost": 37700.0,
       "total_opex": 20000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -39000.0,
-      "ending_cash": 2501198.29
+      "operating_cashflow": -56033.33333333333,
+      "ending_cash": 2417698.2899999996
     },
     {
       "month": "2026-12-01",
       "year": 2026,
-      "total_revenue": 59500.0,
+      "total_revenue": 36745.0,
       "total_cogs": 44400.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 159700.0,
       "total_opex": 20000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -174900.0,
-      "ending_cash": 2326298.29
+      "operating_cashflow": -187355.0,
+      "ending_cash": 2230343.2899999996
     },
     {
       "month": "2027-01-01",
       "year": 2027,
-      "total_revenue": 65500.0,
+      "total_revenue": 17227.5,
       "total_cogs": 45400.0,
-      "total_payroll_cost": 98000.0,
+      "total_payroll_cost": 82000.0,
       "total_opex": 61300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -139200.0,
-      "ending_cash": 2187098.29
+      "operating_cashflow": -171472.5,
+      "ending_cash": 2058870.7899999996
     },
     {
       "month": "2027-02-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 63894.16666666667,
       "total_cogs": 45400.0,
-      "total_payroll_cost": 109000.0,
+      "total_payroll_cost": 93000.0,
       "total_opex": 32300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -81200.0,
-      "ending_cash": 2105898.29
+      "operating_cashflow": -106805.83333333333,
+      "ending_cash": 1952064.9566666663
     },
     {
       "month": "2027-03-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 70560.83333333334,
       "total_cogs": 45400.0,
-      "total_payroll_cost": 109000.0,
+      "total_payroll_cost": 93000.0,
       "total_opex": 32300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -81200.0,
-      "ending_cash": 2024698.29
+      "operating_cashflow": -100139.16666666666,
+      "ending_cash": 1851925.7899999996
     },
     {
       "month": "2027-04-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 70560.83333333334,
       "total_cogs": 56400.0,
-      "total_payroll_cost": 109000.0,
+      "total_payroll_cost": 93000.0,
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -93200.0,
-      "ending_cash": 1931498.29
+      "operating_cashflow": -112139.16666666666,
+      "ending_cash": 1739786.6233333328
     },
     {
       "month": "2027-05-01",
       "year": 2027,
-      "total_revenue": 139500.0,
+      "total_revenue": 114621.66666666667,
       "total_cogs": 56800.0,
-      "total_payroll_cost": 109000.0,
+      "total_payroll_cost": 93000.0,
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -59600.0,
-      "ending_cash": 1871898.29
+      "operating_cashflow": -68478.33333333333,
+      "ending_cash": 1671308.2899999996
     },
     {
       "month": "2027-06-01",
       "year": 2027,
-      "total_revenue": 150000.0,
+      "total_revenue": 131849.1666666667,
       "total_cogs": 57200.0,
-      "total_payroll_cost": 117000.0,
+      "total_payroll_cost": 93000.0,
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -57500.0,
-      "ending_cash": 1814398.29
+      "operating_cashflow": -51650.833333333314,
+      "ending_cash": 1619657.4566666663
     },
     {
       "month": "2027-07-01",
       "year": 2027,
-      "total_revenue": 170000.0,
+      "total_revenue": 168744.1666666667,
       "total_cogs": 73200.0,
-      "total_payroll_cost": 128000.0,
+      "total_payroll_cost": 112000.0,
       "total_opex": 64300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -95500.0,
-      "ending_cash": 1718898.29
+      "operating_cashflow": -80755.83333333331,
+      "ending_cash": 1538901.623333333
     },
     {
       "month": "2027-08-01",
       "year": 2027,
-      "total_revenue": 126000.0,
+      "total_revenue": 123282.91666666667,
       "total_cogs": 73800.0,
-      "total_payroll_cost": 128000.0,
+      "total_payroll_cost": 112000.0,
       "total_opex": 34300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -110100.0,
-      "ending_cash": 1608798.29
+      "operating_cashflow": -96817.08333333333,
+      "ending_cash": 1442084.5399999998
     },
     {
       "month": "2027-09-01",
       "year": 2027,
-      "total_revenue": 176500.0,
+      "total_revenue": 186142.08333333334,
       "total_cogs": 74200.0,
-      "total_payroll_cost": 128000.0,
+      "total_payroll_cost": 112000.0,
       "total_opex": 34300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -60000.0,
-      "ending_cash": 1548798.29
+      "operating_cashflow": -34357.91666666666,
+      "ending_cash": 1407726.623333333
     },
     {
       "month": "2027-10-01",
       "year": 2027,
-      "total_revenue": 192500.0,
+      "total_revenue": 214014.1666666667,
       "total_cogs": 74800.0,
-      "total_payroll_cost": 140000.0,
+      "total_payroll_cost": 124000.0,
       "total_opex": 35300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -57600.0,
-      "ending_cash": 1491198.29
+      "operating_cashflow": -20085.833333333314,
+      "ending_cash": 1387640.7899999998
     },
     {
       "month": "2027-11-01",
       "year": 2027,
-      "total_revenue": 172500.0,
+      "total_revenue": 194014.1666666667,
       "total_cogs": 74800.0,
-      "total_payroll_cost": 140000.0,
+      "total_payroll_cost": 124000.0,
       "total_opex": 35300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -77600.0,
-      "ending_cash": 1413598.29
+      "operating_cashflow": -40085.833333333314,
+      "ending_cash": 1347554.9566666665
     },
     {
       "month": "2027-12-01",
       "year": 2027,
-      "total_revenue": 257500.0,
+      "total_revenue": 290399.1666666667,
       "total_cogs": 87100.0,
-      "total_payroll_cost": 140000.0,
+      "total_payroll_cost": 124000.0,
       "total_opex": 36300.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -5900.0,
-      "ending_cash": 1407698.29
+      "operating_cashflow": 42999.166666666686,
+      "ending_cash": 1390554.1233333333
     },
     {
       "month": "2028-01-01",
       "year": 2028,
-      "total_revenue": 258500.0,
+      "total_revenue": 305706.6666666667,
       "total_cogs": 95900.0,
-      "total_payroll_cost": 146000.0,
+      "total_payroll_cost": 130000.0,
       "total_opex": 87500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -70900.0,
-      "ending_cash": 1336798.29
+      "operating_cashflow": -7693.333333333314,
+      "ending_cash": 1382860.79
     },
     {
       "month": "2028-02-01",
       "year": 2028,
-      "total_revenue": 238500.0,
+      "total_revenue": 285706.6666666667,
       "total_cogs": 95900.0,
-      "total_payroll_cost": 158000.0,
+      "total_payroll_cost": 142000.0,
       "total_opex": 48500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -63900.0,
-      "ending_cash": 1272898.29
+      "operating_cashflow": -693.3333333333139,
+      "ending_cash": 1382167.4566666668
     },
     {
       "month": "2028-03-01",
       "year": 2028,
-      "total_revenue": 296500.0,
+      "total_revenue": 355320.0,
       "total_cogs": 96700.0,
-      "total_payroll_cost": 158000.0,
+      "total_payroll_cost": 142000.0,
       "total_opex": 48500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -6700.0,
-      "ending_cash": 1266198.29
+      "operating_cashflow": 68120.0,
+      "ending_cash": 1450287.4566666668
     },
     {
       "month": "2028-04-01",
       "year": 2028,
-      "total_revenue": 324500.0,
+      "total_revenue": 398266.6666666667,
       "total_cogs": 109000.0,
-      "total_payroll_cost": 158000.0,
+      "total_payroll_cost": 142000.0,
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 8000.0,
-      "ending_cash": 1274198.29
+      "operating_cashflow": 97766.66666666669,
+      "ending_cash": 1548054.1233333335
     },
     {
       "month": "2028-05-01",
       "year": 2028,
-      "total_revenue": 284500.0,
+      "total_revenue": 358266.6666666667,
       "total_cogs": 109000.0,
-      "total_payroll_cost": 158000.0,
+      "total_payroll_cost": 142000.0,
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -32000.0,
-      "ending_cash": 1242198.29
+      "operating_cashflow": 57766.666666666686,
+      "ending_cash": 1605820.7900000003
     },
     {
       "month": "2028-06-01",
       "year": 2028,
-      "total_revenue": 330750.0,
+      "total_revenue": 414866.6666666667,
       "total_cogs": 110000.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 1250.0,
-      "ending_cash": 1243448.29
+      "operating_cashflow": 101366.66666666669,
+      "ending_cash": 1707187.456666667
     },
     {
       "month": "2028-07-01",
       "year": 2028,
-      "total_revenue": 342750.0,
+      "total_revenue": 439286.6666666667,
       "total_cogs": 111200.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 12050.0,
-      "ending_cash": 1255498.29
+      "operating_cashflow": 124586.66666666669,
+      "ending_cash": 1831774.1233333338
     },
     {
       "month": "2028-08-01",
       "year": 2028,
-      "total_revenue": 322750.0,
+      "total_revenue": 419286.6666666667,
       "total_cogs": 111200.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -7950.0,
-      "ending_cash": 1247548.29
+      "operating_cashflow": 104586.66666666669,
+      "ending_cash": 1936360.7900000005
     },
     {
       "month": "2028-09-01",
       "year": 2028,
-      "total_revenue": 409000.0,
+      "total_revenue": 522553.3333333333,
       "total_cogs": 124200.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 64300.0,
-      "ending_cash": 1311848.29
+      "operating_cashflow": 193853.3333333333,
+      "ending_cash": 2130214.1233333335
     },
     {
       "month": "2028-10-01",
       "year": 2028,
-      "total_revenue": 486500.0,
+      "total_revenue": 612473.3333333333,
       "total_cogs": 125400.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 140600.0,
-      "ending_cash": 1452448.29
+      "operating_cashflow": 282573.33333333326,
+      "ending_cash": 2412787.456666667
     },
     {
       "month": "2028-11-01",
       "year": 2028,
-      "total_revenue": 466500.0,
+      "total_revenue": 592473.3333333333,
       "total_cogs": 125400.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 120600.0,
-      "ending_cash": 1573048.29
+      "operating_cashflow": 262573.33333333326,
+      "ending_cash": 2675360.79
     },
     {
       "month": "2028-12-01",
       "year": 2028,
-      "total_revenue": 520500.0,
+      "total_revenue": 660963.3333333333,
       "total_cogs": 126800.0,
-      "total_payroll_cost": 170000.0,
+      "total_payroll_cost": 154000.0,
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": 173200.0,
-      "ending_cash": 1746248.29
+      "operating_cashflow": 329663.33333333326,
+      "ending_cash": 3005024.123333333
     }
   ],
   "cogs_monthly": [
@@ -2173,468 +2137,468 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-06-01",
       "year": 2026,
-      "total_revenue": 95006.36666666667,
+      "total_revenue": 92339.7,
       "total_cogs": 16625.0,
-      "gross_profit": 78381.36666666667,
-      "gross_margin": 0.8250117272842417
+      "gross_profit": 75714.7,
+      "gross_margin": 0.8199582628057055
     },
     {
       "month": "2026-07-01",
       "year": 2026,
-      "total_revenue": 39000.0,
+      "total_revenue": 19000.0,
       "total_cogs": 31500.0,
-      "gross_profit": 7500.0,
-      "gross_margin": 0.19230769230769232
+      "gross_profit": -12500.0,
+      "gross_margin": -0.6578947368421053
     },
     {
       "month": "2026-08-01",
       "year": 2026,
-      "total_revenue": 39000.0,
+      "total_revenue": 19000.0,
       "total_cogs": 22000.0,
-      "gross_profit": 17000.0,
-      "gross_margin": 0.4358974358974359
+      "gross_profit": -3000.0,
+      "gross_margin": -0.15789473684210525
     },
     {
       "month": "2026-09-01",
       "year": 2026,
-      "total_revenue": 79000.0,
+      "total_revenue": 65666.66666666667,
       "total_cogs": 33000.0,
-      "gross_profit": 46000.0,
-      "gross_margin": 0.5822784810126582
+      "gross_profit": 32666.66666666667,
+      "gross_margin": 0.4974619289340102
     },
     {
       "month": "2026-10-01",
       "year": 2026,
-      "total_revenue": 64000.0,
+      "total_revenue": 45666.66666666667,
       "total_cogs": 44000.0,
-      "gross_profit": 20000.0,
-      "gross_margin": 0.3125
+      "gross_profit": 1666.6666666666715,
+      "gross_margin": 0.036496350364963605
     },
     {
       "month": "2026-11-01",
       "year": 2026,
-      "total_revenue": 64000.0,
+      "total_revenue": 45666.66666666667,
       "total_cogs": 44000.0,
-      "gross_profit": 20000.0,
-      "gross_margin": 0.3125
+      "gross_profit": 1666.6666666666715,
+      "gross_margin": 0.036496350364963605
     },
     {
       "month": "2026-12-01",
       "year": 2026,
-      "total_revenue": 59500.0,
+      "total_revenue": 36745.0,
       "total_cogs": 44400.0,
-      "gross_profit": 15100.0,
-      "gross_margin": 0.253781512605042
+      "gross_profit": -7655.0,
+      "gross_margin": -0.20832766362770444
     },
     {
       "month": "2027-01-01",
       "year": 2027,
-      "total_revenue": 65500.0,
+      "total_revenue": 17227.5,
       "total_cogs": 45400.0,
-      "gross_profit": 20100.0,
-      "gross_margin": 0.3068702290076336
+      "gross_profit": -28172.5,
+      "gross_margin": -1.6353214337541722
     },
     {
       "month": "2027-02-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 63894.16666666667,
       "total_cogs": 45400.0,
-      "gross_profit": 60100.0,
-      "gross_margin": 0.5696682464454976
+      "gross_profit": 18494.16666666667,
+      "gross_margin": 0.28945000195636017
     },
     {
       "month": "2027-03-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 70560.83333333334,
       "total_cogs": 45400.0,
-      "gross_profit": 60100.0,
-      "gross_margin": 0.5696682464454976
+      "gross_profit": 25160.833333333343,
+      "gross_margin": 0.35658356264688873
     },
     {
       "month": "2027-04-01",
       "year": 2027,
-      "total_revenue": 105500.0,
+      "total_revenue": 70560.83333333334,
       "total_cogs": 56400.0,
-      "gross_profit": 49100.0,
-      "gross_margin": 0.4654028436018957
+      "gross_profit": 14160.833333333343,
+      "gross_margin": 0.20068971218688378
     },
     {
       "month": "2027-05-01",
       "year": 2027,
-      "total_revenue": 139500.0,
+      "total_revenue": 114621.66666666667,
       "total_cogs": 56800.0,
-      "gross_profit": 82700.0,
-      "gross_margin": 0.592831541218638
+      "gross_profit": 57821.66666666667,
+      "gross_margin": 0.5044566908525148
     },
     {
       "month": "2027-06-01",
       "year": 2027,
-      "total_revenue": 150000.0,
+      "total_revenue": 131849.1666666667,
       "total_cogs": 57200.0,
-      "gross_profit": 92800.0,
-      "gross_margin": 0.6186666666666667
+      "gross_profit": 74649.16666666669,
+      "gross_margin": 0.5661709402789805
     },
     {
       "month": "2027-07-01",
       "year": 2027,
-      "total_revenue": 170000.0,
+      "total_revenue": 168744.1666666667,
       "total_cogs": 73200.0,
-      "gross_profit": 96800.0,
-      "gross_margin": 0.5694117647058824
+      "gross_profit": 95544.16666666669,
+      "gross_margin": 0.5662072269164861
     },
     {
       "month": "2027-08-01",
       "year": 2027,
-      "total_revenue": 126000.0,
+      "total_revenue": 123282.91666666667,
       "total_cogs": 73800.0,
-      "gross_profit": 52200.0,
-      "gross_margin": 0.4142857142857143
+      "gross_profit": 49482.91666666667,
+      "gross_margin": 0.4013769142115527
     },
     {
       "month": "2027-09-01",
       "year": 2027,
-      "total_revenue": 176500.0,
+      "total_revenue": 186142.08333333334,
       "total_cogs": 74200.0,
-      "gross_profit": 102300.0,
-      "gross_margin": 0.5796033994334278
+      "gross_profit": 111942.08333333334,
+      "gross_margin": 0.6013797703814963
     },
     {
       "month": "2027-10-01",
       "year": 2027,
-      "total_revenue": 192500.0,
+      "total_revenue": 214014.1666666667,
       "total_cogs": 74800.0,
-      "gross_profit": 117700.0,
-      "gross_margin": 0.6114285714285714
+      "gross_profit": 139214.1666666667,
+      "gross_margin": 0.6504904270355935
     },
     {
       "month": "2027-11-01",
       "year": 2027,
-      "total_revenue": 172500.0,
+      "total_revenue": 194014.1666666667,
       "total_cogs": 74800.0,
-      "gross_profit": 97700.0,
-      "gross_margin": 0.566376811594203
+      "gross_profit": 119214.16666666669,
+      "gross_margin": 0.6144611433013912
     },
     {
       "month": "2027-12-01",
       "year": 2027,
-      "total_revenue": 257500.0,
+      "total_revenue": 290399.1666666667,
       "total_cogs": 87100.0,
-      "gross_profit": 170400.0,
-      "gross_margin": 0.661747572815534
+      "gross_profit": 203299.1666666667,
+      "gross_margin": 0.7000680098370347
     },
     {
       "month": "2028-01-01",
       "year": 2028,
-      "total_revenue": 258500.0,
+      "total_revenue": 305706.6666666667,
       "total_cogs": 95900.0,
-      "gross_profit": 162600.0,
-      "gross_margin": 0.6290135396518375
+      "gross_profit": 209806.6666666667,
+      "gross_margin": 0.6863005931612003
     },
     {
       "month": "2028-02-01",
       "year": 2028,
-      "total_revenue": 238500.0,
+      "total_revenue": 285706.6666666667,
       "total_cogs": 95900.0,
-      "gross_profit": 142600.0,
-      "gross_margin": 0.5979035639412998
+      "gross_profit": 189806.6666666667,
+      "gross_margin": 0.6643410490946425
     },
     {
       "month": "2028-03-01",
       "year": 2028,
-      "total_revenue": 296500.0,
+      "total_revenue": 355320.0,
       "total_cogs": 96700.0,
-      "gross_profit": 199800.0,
-      "gross_margin": 0.6738617200674536
+      "gross_profit": 258620.0,
+      "gross_margin": 0.7278509512552066
     },
     {
       "month": "2028-04-01",
       "year": 2028,
-      "total_revenue": 324500.0,
+      "total_revenue": 398266.6666666667,
       "total_cogs": 109000.0,
-      "gross_profit": 215500.0,
-      "gross_margin": 0.6640986132511556
+      "gross_profit": 289266.6666666667,
+      "gross_margin": 0.7263140274522932
     },
     {
       "month": "2028-05-01",
       "year": 2028,
-      "total_revenue": 284500.0,
+      "total_revenue": 358266.6666666667,
       "total_cogs": 109000.0,
-      "gross_profit": 175500.0,
-      "gross_margin": 0.616871704745167
+      "gross_profit": 249266.6666666667,
+      "gross_margin": 0.6957573502046892
     },
     {
       "month": "2028-06-01",
       "year": 2028,
-      "total_revenue": 330750.0,
+      "total_revenue": 414866.6666666667,
       "total_cogs": 110000.0,
-      "gross_profit": 220750.0,
-      "gross_margin": 0.6674225245653818
+      "gross_profit": 304866.6666666667,
+      "gross_margin": 0.7348545717499598
     },
     {
       "month": "2028-07-01",
       "year": 2028,
-      "total_revenue": 342750.0,
+      "total_revenue": 439286.6666666667,
       "total_cogs": 111200.0,
-      "gross_profit": 231550.0,
-      "gross_margin": 0.6755652808169219
+      "gross_profit": 328086.6666666667,
+      "gross_margin": 0.7468623374258267
     },
     {
       "month": "2028-08-01",
       "year": 2028,
-      "total_revenue": 322750.0,
+      "total_revenue": 419286.6666666667,
       "total_cogs": 111200.0,
-      "gross_profit": 211550.0,
-      "gross_margin": 0.6554608830364059
+      "gross_profit": 308086.6666666667,
+      "gross_margin": 0.7347876552239518
     },
     {
       "month": "2028-09-01",
       "year": 2028,
-      "total_revenue": 409000.0,
+      "total_revenue": 522553.3333333333,
       "total_cogs": 124200.0,
-      "gross_profit": 284800.0,
-      "gross_margin": 0.6963325183374083
+      "gross_profit": 398353.3333333333,
+      "gross_margin": 0.7623209114221196
     },
     {
       "month": "2028-10-01",
       "year": 2028,
-      "total_revenue": 486500.0,
+      "total_revenue": 612473.3333333333,
       "total_cogs": 125400.0,
-      "gross_profit": 361100.0,
-      "gross_margin": 0.74224049331963
+      "gross_profit": 487073.33333333326,
+      "gross_margin": 0.7952563921150309
     },
     {
       "month": "2028-11-01",
       "year": 2028,
-      "total_revenue": 466500.0,
+      "total_revenue": 592473.3333333333,
       "total_cogs": 125400.0,
-      "gross_profit": 341100.0,
-      "gross_margin": 0.7311897106109325
+      "gross_profit": 467073.33333333326,
+      "gross_margin": 0.7883449044120129
     },
     {
       "month": "2028-12-01",
       "year": 2028,
-      "total_revenue": 520500.0,
+      "total_revenue": 660963.3333333333,
       "total_cogs": 126800.0,
-      "gross_profit": 393700.0,
-      "gross_margin": 0.756388088376561
+      "gross_profit": 534163.3333333333,
+      "gross_margin": 0.8081587985213501
     }
   ],
   "headcount_monthly": [
     {
       "month": "2026-01-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 0.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 5700.0
     },
     {
       "month": "2026-02-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 0.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 5700.0
     },
     {
       "month": "2026-03-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 0.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 5700.0
     },
     {
       "month": "2026-04-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 0.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 5700.0
     },
     {
       "month": "2026-05-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 0.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 5700.0
     },
     {
       "month": "2026-06-01",
       "year": 2026,
-      "total_headcount_equivalent": 3,
-      "total_payroll_cost": 110000.0
+      "total_headcount_equivalent": 5,
+      "total_payroll_cost": 115700.0
     },
     {
       "month": "2026-07-01",
       "year": 2026,
       "total_headcount_equivalent": 6,
-      "total_payroll_cost": 16000.0
+      "total_payroll_cost": 14700.0
     },
     {
       "month": "2026-08-01",
       "year": 2026,
       "total_headcount_equivalent": 6,
-      "total_payroll_cost": 16000.0
+      "total_payroll_cost": 14700.0
     },
     {
       "month": "2026-09-01",
       "year": 2026,
       "total_headcount_equivalent": 7,
-      "total_payroll_cost": 28000.0
+      "total_payroll_cost": 26700.0
     },
     {
       "month": "2026-10-01",
       "year": 2026,
       "total_headcount_equivalent": 7,
-      "total_payroll_cost": 28000.0
+      "total_payroll_cost": 26700.0
     },
     {
       "month": "2026-11-01",
       "year": 2026,
       "total_headcount_equivalent": 8,
-      "total_payroll_cost": 39000.0
+      "total_payroll_cost": 37700.0
     },
     {
       "month": "2026-12-01",
       "year": 2026,
-      "total_headcount_equivalent": 10,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 159700.0
     },
     {
       "month": "2027-01-01",
       "year": 2027,
-      "total_headcount_equivalent": 11,
-      "total_payroll_cost": 98000.0
+      "total_headcount_equivalent": 8,
+      "total_payroll_cost": 82000.0
     },
     {
       "month": "2027-02-01",
       "year": 2027,
-      "total_headcount_equivalent": 12,
-      "total_payroll_cost": 109000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 93000.0
     },
     {
       "month": "2027-03-01",
       "year": 2027,
-      "total_headcount_equivalent": 12,
-      "total_payroll_cost": 109000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 93000.0
     },
     {
       "month": "2027-04-01",
       "year": 2027,
-      "total_headcount_equivalent": 12,
-      "total_payroll_cost": 109000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 93000.0
     },
     {
       "month": "2027-05-01",
       "year": 2027,
-      "total_headcount_equivalent": 12,
-      "total_payroll_cost": 109000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 93000.0
     },
     {
       "month": "2027-06-01",
       "year": 2027,
-      "total_headcount_equivalent": 13,
-      "total_payroll_cost": 117000.0
+      "total_headcount_equivalent": 9,
+      "total_payroll_cost": 93000.0
     },
     {
       "month": "2027-07-01",
       "year": 2027,
-      "total_headcount_equivalent": 14,
-      "total_payroll_cost": 128000.0
+      "total_headcount_equivalent": 11,
+      "total_payroll_cost": 112000.0
     },
     {
       "month": "2027-08-01",
       "year": 2027,
-      "total_headcount_equivalent": 14,
-      "total_payroll_cost": 128000.0
+      "total_headcount_equivalent": 11,
+      "total_payroll_cost": 112000.0
     },
     {
       "month": "2027-09-01",
       "year": 2027,
-      "total_headcount_equivalent": 14,
-      "total_payroll_cost": 128000.0
+      "total_headcount_equivalent": 11,
+      "total_payroll_cost": 112000.0
     },
     {
       "month": "2027-10-01",
       "year": 2027,
-      "total_headcount_equivalent": 15,
-      "total_payroll_cost": 140000.0
+      "total_headcount_equivalent": 12,
+      "total_payroll_cost": 124000.0
     },
     {
       "month": "2027-11-01",
       "year": 2027,
-      "total_headcount_equivalent": 15,
-      "total_payroll_cost": 140000.0
+      "total_headcount_equivalent": 12,
+      "total_payroll_cost": 124000.0
     },
     {
       "month": "2027-12-01",
       "year": 2027,
-      "total_headcount_equivalent": 15,
-      "total_payroll_cost": 140000.0
+      "total_headcount_equivalent": 12,
+      "total_payroll_cost": 124000.0
     },
     {
       "month": "2028-01-01",
       "year": 2028,
-      "total_headcount_equivalent": 15,
-      "total_payroll_cost": 146000.0
+      "total_headcount_equivalent": 12,
+      "total_payroll_cost": 130000.0
     },
     {
       "month": "2028-02-01",
       "year": 2028,
-      "total_headcount_equivalent": 16,
-      "total_payroll_cost": 158000.0
+      "total_headcount_equivalent": 13,
+      "total_payroll_cost": 142000.0
     },
     {
       "month": "2028-03-01",
       "year": 2028,
-      "total_headcount_equivalent": 16,
-      "total_payroll_cost": 158000.0
+      "total_headcount_equivalent": 13,
+      "total_payroll_cost": 142000.0
     },
     {
       "month": "2028-04-01",
       "year": 2028,
-      "total_headcount_equivalent": 16,
-      "total_payroll_cost": 158000.0
+      "total_headcount_equivalent": 13,
+      "total_payroll_cost": 142000.0
     },
     {
       "month": "2028-05-01",
       "year": 2028,
-      "total_headcount_equivalent": 16,
-      "total_payroll_cost": 158000.0
+      "total_headcount_equivalent": 13,
+      "total_payroll_cost": 142000.0
     },
     {
       "month": "2028-06-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-07-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-08-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-09-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-10-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-11-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     },
     {
       "month": "2028-12-01",
       "year": 2028,
-      "total_headcount_equivalent": 17,
-      "total_payroll_cost": 170000.0
+      "total_headcount_equivalent": 14,
+      "total_payroll_cost": 154000.0
     }
   ],
   "use_of_funds": [
@@ -2705,7 +2669,7 @@ window.DASHBOARD_DATA = {
   ],
   "key_assumptions": {
     "workshop_fee": 20000,
-    "deployment_fee_per_uc": 30000,
+    "deployment_fee_per_uc": 40000,
     "deployment_duration_months": 3,
     "fde_billable_day_rate": 1150,
     "avg_token_cost_per_uc": 200,
@@ -2723,8 +2687,8 @@ window.DASHBOARD_DATA = {
       "period": "H1 2026",
       "status": "active",
       "revenue_model": "Service pur — workshops, déploiement custom, FDE facturé",
-      "pricing": "Workshop 20k€ + deploy 40k€/UC + FDE 1 150€/j",
-      "margin_profile": "~40% (service-heavy)",
+      "pricing": "Workshop 20k€ + deploy 40k€/UC + FDE 1150€/j",
+      "margin_profile": "~51% (service-heavy)",
       "key_metric": "Revenue de service générée"
     },
     {
@@ -2734,17 +2698,17 @@ window.DASHBOARD_DATA = {
       "status": "next",
       "revenue_model": "Abonnement per-UC + service FDE séparé",
       "pricing": "ETI 2000€ / GC 5250€ / TGC 16250€ par UC/mois",
-      "margin_profile": "60-75% (mix platform + service)",
+      "margin_profile": "~53% (mix platform + service)",
       "key_metric": "ARR plateforme + accounts actifs"
     },
     {
       "id": "target",
       "name": "Modèle cible",
-      "period": "Q3 2027+",
+      "period": "2028+",
       "status": "planned",
-      "revenue_model": "Abonnement léger + crédits prépayés (usage-based)",
-      "pricing": "1 crédit = X tokens, marge ~80%+ sur la couche plateforme",
-      "margin_profile": "80%+ (SaaS pure)",
+      "revenue_model": "Plateforme dominante + service FDE allégé (utilization réduite)",
+      "pricing": "Plateforme 2000–16250€/UC/mois + FDE on-demand",
+      "margin_profile": "~75% (SaaS-grade)",
       "key_metric": "Net Revenue Retention > 130%"
     }
   ],
@@ -2778,17 +2742,17 @@ window.DASHBOARD_DATA = {
     {
       "year": 2026,
       "theme": "Deployment proof",
-      "text": "Traction existante 184k€ H1, premier client GC signé, 2 UC en déploiement, levée seed 2.5M€."
+      "text": "Traction 334k€ facturés H1, premier client GC signé, 2 UC en déploiement, levée seed 2.5M€."
     },
     {
       "year": 2027,
       "theme": "Platform transition",
-      "text": "12 comptes activés, 26 UC live, bascule vers l'abonnement récurrent. ARR 1.6M€."
+      "text": "8 comptes activés, 18 UC live, bascule vers l'abonnement récurrent. ARR 1.4M€."
     },
     {
       "year": 2028,
       "theme": "Use case expansion",
-      "text": "30 comptes, 84 UC live, ARR 4.8M€. Levier FDE + self-serve progressif."
+      "text": "20 comptes, 59 UC live, ARR 3.9M€. Levier FDE + self-serve progressif."
     }
   ]
 };
