@@ -3,3 +3,4 @@ frontend/dist/
 frontend/public/dashboard/
 backend/.venv/
 backend/uv.lock
+backend/.env

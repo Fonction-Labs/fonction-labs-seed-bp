@@ -35,15 +35,9 @@ ALLOWED_FILES = {
     "T4_strategie (enterprise strategy)."
 ))
 async def read_context(ctx: RunContextWrapper[BPAgentContext], file_key: str) -> str:
-    """Read a context markdown file by key."""
     if file_key not in ALLOWED_FILES:
-        return json.dumps({
-            "error": f"Unknown file_key '{file_key}'. Available: {list(ALLOWED_FILES.keys())}"
-        })
-
+        return json.dumps({"error": f"Unknown file_key '{file_key}'. Available: {list(ALLOWED_FILES.keys())}"})
     path = ALLOWED_FILES[file_key]
     if not path.exists():
         return json.dumps({"error": f"File not found: {path}"})
-
-    content = path.read_text(encoding="utf-8")
-    return json.dumps({"file": file_key, "content": content}, ensure_ascii=False)
+    return json.dumps({"file": file_key, "content": path.read_text(encoding="utf-8")}, ensure_ascii=False)

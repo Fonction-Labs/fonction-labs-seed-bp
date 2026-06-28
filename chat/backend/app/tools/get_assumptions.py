@@ -15,14 +15,11 @@ ASSUMPTIONS_PATH = Path(__file__).resolve().parents[4] / "data" / "assumptions" 
 
 @function_tool(description_override=(
     "Return the master assumptions from vc_case.yaml — pricing, cohort plan, "
-    "headcount, FDE parameters, use of funds, and all model parameters. "
-    "Use this to understand and explain the model's inputs."
+    "headcount, FDE parameters, use of funds, and all model parameters."
 ))
 async def get_assumptions(ctx: RunContextWrapper[BPAgentContext]) -> str:
-    """Return the full assumptions YAML as structured JSON."""
     if not ASSUMPTIONS_PATH.exists():
         return json.dumps({"error": f"Assumptions file not found: {ASSUMPTIONS_PATH}"})
-
     try:
         with open(ASSUMPTIONS_PATH, encoding="utf-8") as f:
             data = yaml.safe_load(f)

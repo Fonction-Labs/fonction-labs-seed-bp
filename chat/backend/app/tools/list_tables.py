@@ -18,21 +18,19 @@ DB_PATH = Path(__file__).resolve().parents[4] / "data" / "processed" / "model.du
     "Use this to discover what data is available before writing SQL queries."
 ))
 async def list_tables(ctx: RunContextWrapper[BPAgentContext]) -> str:
-    """Return schema information for all tables."""
     try:
         con = duckdb.connect(str(DB_PATH), read_only=True)
         tables = con.execute(
-            "SELECT table_name FROM information_schema.tables WHERE table_schema = 'main' ORDER BY table_name"
+            "SELECT table_name FROM information_schema.tables "
+            "WHERE table_schema = 'main' ORDER BY table_name"
         ).fetchall()
-
         schema = {}
         for (table_name,) in tables:
-            columns = con.execute(
-                f"SELECT column_name, data_type FROM information_schema.columns "
+            cols = con.execute(
+                "SELECT column_name, data_type FROM information_schema.columns "
                 f"WHERE table_name = '{table_name}' ORDER BY ordinal_position"
             ).fetchall()
-            schema[table_name] = [{"name": col, "type": dtype} for col, dtype in columns]
-
+            schema[table_name] = [{"name": c, "type": t} for c, t in cols]
         con.close()
         return json.dumps(schema, ensure_ascii=False)
     except Exception as e:

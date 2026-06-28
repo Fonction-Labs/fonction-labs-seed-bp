@@ -10,6 +10,7 @@ from agents import RunContextWrapper, function_tool
 
 from app.agents.bp_agent import BPAgentContext
 
+# Relative to this file: backend/app/tools/ → up 4 levels → repo root → data/processed/
 DB_PATH = Path(__file__).resolve().parents[4] / "data" / "processed" / "model.duckdb"
 
 
@@ -18,30 +19,22 @@ DB_PATH = Path(__file__).resolve().parents[4] / "data" / "processed" / "model.du
     "Returns results as a JSON array of objects. Use list_tables first to discover the schema."
 ))
 async def query_duckdb(ctx: RunContextWrapper[BPAgentContext], sql: str) -> str:
-    """Execute a SELECT query on model.duckdb."""
     sql_stripped = sql.strip().rstrip(";")
-
-    forbidden = ["INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "ALTER", "TRUNCATE"]
     first_word = sql_stripped.split()[0].upper() if sql_stripped else ""
-    if first_word in forbidden:
+    if first_word in {"INSERT", "UPDATE", "DELETE", "DROP", "CREATE", "ALTER", "TRUNCATE"}:
         return json.dumps({"error": "Only SELECT queries are allowed."})
-
     try:
         con = duckdb.connect(str(DB_PATH), read_only=True)
-        result = con.execute(sql_stripped).fetchdf()
+        cursor = con.execute(sql_stripped)
+        columns = [d[0] for d in cursor.description]
+        rows = cursor.fetchmany(200)
+        has_more = len(rows) == 200 and cursor.fetchone() is not None
         con.close()
-
-        if len(result) > 200:
-            result = result.head(200)
-            truncated = True
-        else:
-            truncated = False
-
-        records = json.loads(result.to_json(orient="records", date_format="iso"))
-        response = {"rows": records, "count": len(records)}
-        if truncated:
+        records = [dict(zip(columns, row)) for row in rows]
+        response: dict = {"rows": records, "count": len(records)}
+        if has_more:
             response["truncated"] = True
-            response["note"] = "Results truncated to 200 rows. Add LIMIT or WHERE to narrow."
+            response["note"] = "Results truncated to 200 rows."
         return json.dumps(response, ensure_ascii=False)
     except Exception as e:
         return json.dumps({"error": str(e)})

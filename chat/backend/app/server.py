@@ -26,16 +26,15 @@ class BPChatServer(ChatKitServer):
         input_user_message: UserMessageItem | None,
         context: Any,
     ) -> AsyncIterator[ThreadStreamEvent]:
-        agent_context_data = BPAgentContext(thread_id=thread.id)
+        # Build input for the agent from the new message only
+        input_items: list[dict] = []
+        if input_user_message is not None:
+            text = _extract_text(input_user_message)
+            if text:
+                input_items = [{"role": "user", "content": text}]
 
-        items = await self.store.load_thread_items(thread.id)
-        input_items = self._to_agent_input(items)
-
-        result = Runner.run_streamed(
-            bp_agent,
-            input=input_items,
-            context=agent_context_data,
-        )
+        if not input_items:
+            return
 
         agent_ctx = AgentContext(
             thread=thread,
@@ -43,24 +42,24 @@ class BPChatServer(ChatKitServer):
             request_context=context,
         )
 
+        bp_context = BPAgentContext(thread_id=thread.id)
+
+        result = Runner.run_streamed(
+            bp_agent,
+            input=input_items,
+            context=bp_context,
+        )
+
         async for event in stream_agent_response(agent_ctx, result):
             yield event
 
-    def _to_agent_input(self, items: list) -> list:
-        """Convert stored ChatKit items to OpenAI Responses API input format."""
-        input_items = []
-        for item in items:
-            if hasattr(item, "role"):
-                if item.role == "user":
-                    content = getattr(item, "content", None) or ""
-                    if isinstance(content, list):
-                        text_parts = [p.get("text", "") for p in content if isinstance(p, dict) and p.get("type") == "text"]
-                        content = " ".join(text_parts)
-                    input_items.append({"role": "user", "content": content})
-                elif item.role == "assistant":
-                    content = getattr(item, "content", None) or ""
-                    if isinstance(content, list):
-                        text_parts = [p.get("text", "") for p in content if isinstance(p, dict) and p.get("type") == "text"]
-                        content = " ".join(text_parts)
-                    input_items.append({"role": "assistant", "content": content})
-        return input_items
+
+def _extract_text(item: UserMessageItem) -> str:
+    """Extract plain text from a UserMessageItem's content."""
+    parts = []
+    for block in (item.content or []):
+        if hasattr(block, "text"):
+            parts.append(block.text)
+        elif isinstance(block, dict) and "text" in block:
+            parts.append(block["text"])
+    return " ".join(parts)

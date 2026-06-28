@@ -5,7 +5,7 @@ function ChatPanelInner() {
   const chatkit = useChatKit({
     api: {
       url: "/chatkit",
-      domainKey: "localhost",
+      domainKey: "domain_pk_localhost_dev",
     },
     startScreen: {
       greeting: "Pose-moi des questions sur le BP : revenus, ARR, hypothèses, cash, headcount...",
