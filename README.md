@@ -56,6 +56,25 @@ Pipeline order:
 7. `export_dashboard`: generate the static HTML dashboard.
 8. `validate`: run consistency checks.
 
+## Chat assistant
+
+A conversational interface to the BP model, running alongside the dashboard.
+
+```bash
+cd chat
+./setup.sh          # install deps, symlink data/processed and docs/
+npm run dev         # backend :8002 + frontend :3000
+```
+
+Open `http://localhost:3000` — dashboard on the left, chat on the right.
+
+The agent has access to:
+- **DuckDB** (`data/processed/model.duckdb`) — mandatory for all numerical questions
+- **Markdown context** (`docs/`, `CONTEXT_FOR_LLM.md`, `AGENT.md`) — for strategy/narrative questions
+- **Assumptions** (`data/assumptions/vc_case.yaml`)
+
+Requires `OPENAI_API_KEY` in `chat/backend/.env`.
+
 ## Important rule
 
 Do not edit generated Excel outputs manually. Update raw files or assumptions, then rerun the pipeline.
