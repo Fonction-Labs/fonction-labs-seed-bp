@@ -1,0 +1,20 @@
+[project]
+name = "bp-chat-backend"
+version = "0.1.0"
+description = "ChatKit backend for Fonction Labs BP assistant"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.114.1,<0.116",
+    "uvicorn[standard]>=0.36,<0.37",
+    "openai-chatkit>=1.5.3,<2.0",
+    "openai>=1.40",
+    "duckdb>=1.0",
+    "pyyaml>=6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
