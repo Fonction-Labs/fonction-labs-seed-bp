@@ -2607,7 +2607,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2615,7 +2615,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2623,7 +2623,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2631,7 +2631,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2639,7 +2639,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2647,7 +2647,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 2,
       "ops": 0
     },
     {
@@ -2655,7 +2655,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 3,
       "ops": 0
     },
     {
@@ -2663,7 +2663,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 0,
       "fde": 0,
-      "sales_gtm": 0,
+      "sales_gtm": 3,
       "ops": 0
     },
     {
@@ -2671,7 +2671,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 1,
       "fde": 1,
-      "sales_gtm": 0,
+      "sales_gtm": 3,
       "ops": 0
     },
     {
@@ -2679,7 +2679,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 1,
       "fde": 2,
-      "sales_gtm": 0,
+      "sales_gtm": 3,
       "ops": 0
     },
     {
@@ -2687,7 +2687,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 2,
       "fde": 2,
-      "sales_gtm": 0,
+      "sales_gtm": 3,
       "ops": 0
     },
     {
@@ -2695,7 +2695,7 @@ window.DASHBOARD_DATA = {
       "founders": 3,
       "product_engineering": 2,
       "fde": 2,
-      "sales_gtm": 2,
+      "sales_gtm": 4,
       "ops": 0
     },
     {
