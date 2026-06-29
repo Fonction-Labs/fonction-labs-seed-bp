@@ -2601,6 +2601,296 @@ window.DASHBOARD_DATA = {
       "total_payroll_cost": 154000.0
     }
   ],
+  "headcount_by_function_monthly": [
+    {
+      "month": "2026-01-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-02-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-03-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-04-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-05-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-06-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 2,
+      "ops": 0
+    },
+    {
+      "month": "2026-07-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2026-08-01",
+      "founders": 3,
+      "product_engineering": 0,
+      "fde": 0,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2026-09-01",
+      "founders": 3,
+      "product_engineering": 1,
+      "fde": 1,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2026-10-01",
+      "founders": 3,
+      "product_engineering": 1,
+      "fde": 2,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2026-11-01",
+      "founders": 3,
+      "product_engineering": 2,
+      "fde": 2,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2026-12-01",
+      "founders": 3,
+      "product_engineering": 2,
+      "fde": 2,
+      "sales_gtm": 4,
+      "ops": 0
+    },
+    {
+      "month": "2027-01-01",
+      "founders": 3,
+      "product_engineering": 2,
+      "fde": 3,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-02-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 3,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-03-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 3,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-04-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 4,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-05-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 4,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-06-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 4,
+      "sales_gtm": 3,
+      "ops": 0
+    },
+    {
+      "month": "2027-07-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 5,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2027-08-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 5,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2027-09-01",
+      "founders": 3,
+      "product_engineering": 3,
+      "fde": 5,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2027-10-01",
+      "founders": 3,
+      "product_engineering": 4,
+      "fde": 5,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2027-11-01",
+      "founders": 3,
+      "product_engineering": 4,
+      "fde": 5,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2027-12-01",
+      "founders": 3,
+      "product_engineering": 4,
+      "fde": 6,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-01-01",
+      "founders": 3,
+      "product_engineering": 4,
+      "fde": 6,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-02-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 6,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-03-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 6,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-04-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 7,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-05-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 7,
+      "sales_gtm": 4,
+      "ops": 1
+    },
+    {
+      "month": "2028-06-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 7,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-07-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 7,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-08-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 7,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-09-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 8,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-10-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 8,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-11-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 8,
+      "sales_gtm": 5,
+      "ops": 1
+    },
+    {
+      "month": "2028-12-01",
+      "founders": 3,
+      "product_engineering": 5,
+      "fde": 8,
+      "sales_gtm": 5,
+      "ops": 1
+    }
+  ],
   "use_of_funds": [
     {
       "category": "Product & Engineering",

@@ -56,19 +56,19 @@ Pipeline order:
 7. `export_dashboard`: generate the static HTML dashboard.
 8. `validate`: run consistency checks.
 
-## Chat assistant
+## Dashboard + chat
 
-A conversational interface to the BP model, running alongside the dashboard.
+The main interface is `http://localhost:3000` — dashboard on the left, chat on the right.
 
 ```bash
 cd chat
-./setup.sh          # install deps, symlink data/processed and docs/
+./setup.sh          # first time: install deps, create symlinks
 npm run dev         # backend :8002 + frontend :3000
 ```
 
-Open `http://localhost:3000` — dashboard on the left, chat on the right.
+`setup.sh` symlinks `dashboard/` live into Vite's public dir — the iframe always reflects the latest pipeline output with no manual copy step.
 
-The agent has access to:
+The chat agent has access to:
 - **DuckDB** (`data/processed/model.duckdb`) — mandatory for all numerical questions
 - **Markdown context** (`docs/`, `CONTEXT_FOR_LLM.md`, `AGENT.md`) — for strategy/narrative questions
 - **Assumptions** (`data/assumptions/vc_case.yaml`)

@@ -9,6 +9,58 @@ from fonction_bp.config import Paths
 from fonction_bp.utils import _json_default, fmt_eur, fmt_pct, save_json
 
 
+def _build_headcount_by_function(raw: dict, months: list[str]) -> list[dict]:
+    from datetime import date
+    hc = raw.get("headcount", {})
+    founders = hc.get("founder_count", 3)
+    hires = hc.get("hires", [])
+
+    # Map function labels to short keys.
+    fn_map = {
+        "Product & Engineering": "product_engineering",
+        "Forward-Deployed Engineering": "fde",
+        "Sales & GTM": "sales_gtm",
+        "Ops": "ops",
+    }
+
+    # current_roles: cold callers (Sales & GTM) + sales freelance (Sales & GTM)
+    current_roles = hc.get("current_roles", {})
+    cold_callers_start = date.fromisoformat(str(current_roles.get("cold_callers", {}).get("start_month", "2099-01-01"))[:10])
+    cold_callers_end   = date.fromisoformat(str(current_roles.get("cold_callers", {}).get("end_month",   "2099-01-01"))[:10])
+    cold_callers_count = int(current_roles.get("cold_callers", {}).get("count", 0))
+    sales_fl_start = date.fromisoformat(str(current_roles.get("sales_freelance", {}).get("start_month", "2099-01-01"))[:10])
+    sales_fl_end   = date.fromisoformat(str(current_roles.get("sales_freelance", {}).get("end_month",   "2099-01-01"))[:10])
+
+    rows = []
+    for month_val in months:
+        if isinstance(month_val, date):
+            m = month_val
+            month_str = month_val.isoformat()
+        else:
+            month_str = str(month_val)[:10]
+            m = date.fromisoformat(month_str)
+        counts = {k: 0 for k in fn_map.values()}
+        # CDI/freelance hires
+        for hire in hires:
+            start = date.fromisoformat(str(hire["start_month"])[:10])
+            if m >= start:
+                fn = fn_map.get(hire.get("function", ""), None)
+                if fn:
+                    counts[fn] += 1
+        # current_roles: cold callers
+        if cold_callers_start <= m <= cold_callers_end:
+            counts["sales_gtm"] += cold_callers_count
+        # current_roles: sales freelance
+        if sales_fl_start <= m <= sales_fl_end:
+            counts["sales_gtm"] += 1
+        rows.append({
+            "month": month_str,
+            "founders": founders,
+            **counts,
+        })
+    return rows
+
+
 def _rows(con: duckdb.DuckDBPyConnection, query: str) -> list[dict]:
     return [dict(zip([c[0] for c in cur.description], row)) for cur in [con.execute(query)] for row in cur.fetchall()]
 
@@ -84,6 +136,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         "cogs_monthly": cogs_monthly,
         "gross_margin_monthly": gm_monthly,
         "headcount_monthly": headcount_monthly,
+        "headcount_by_function_monthly": _build_headcount_by_function(raw, [r["month"] for r in headcount_monthly]),
         "use_of_funds": use_of_funds,
         "attio_funnel": funnel,
         "key_assumptions": {
