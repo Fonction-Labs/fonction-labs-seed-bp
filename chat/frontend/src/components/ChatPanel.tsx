@@ -15,7 +15,7 @@ function ChatPanelInner() {
   const chatkit = useChatKit({
     api: {
       url: CHATKIT_URL,
-      domainKey: "domain_pk_localhost_dev",
+      domainKey: "domain_pk_6a4256913a9481978fd4b484f74ee7b905da5723a0889760",
       fetch: authFetch,
     },
     startScreen: {
