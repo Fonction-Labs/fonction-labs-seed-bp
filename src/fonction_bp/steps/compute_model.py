@@ -157,12 +157,12 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
             COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} AS workshop_revenue,
             COALESCE(dr.deployment_revenue, 0) AS deployment_revenue,
             COALESCE(sc.service_continuity_revenue, 0) AS service_continuity_revenue,
-            -- actual_services: invoiced for past/current months; 0 for future
+            -- actual_services: Qonto invoiced only (facturé = encaissé ou émis)
             CASE
               WHEN m.month <= DATE '{current_month_iso}' THEN COALESCE(inv.invoiced_revenue, 0)
               ELSE 0
             END AS actual_services_revenue,
-            -- forecast_services: 0 for past; residual fraction for current; full for future
+            -- forecast_services: modèle + backlog contracté (signé non facturé = forecast certain)
             CASE
               WHEN m.month < DATE '{current_month_iso}' THEN 0
               WHEN m.month = DATE '{current_month_iso}'
@@ -174,7 +174,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
               ELSE COALESCE(fsr.fde_service_revenue, 0) +
                    COALESCE(ec.new_enterprise_accounts, 0) * {float(p['workshop_fee_per_new_enterprise_client'])} +
                    COALESCE(dr.deployment_revenue, 0) + COALESCE(sc.service_continuity_revenue, 0)
-            END AS forecast_services_revenue,
+            END + COALESCE(bl.backlog_revenue, 0) AS forecast_services_revenue,
             COALESCE(pr.platform_subscription_revenue, 0) AS platform_subscription_revenue,
             0.0 AS usage_success_revenue,
             COALESCE(pr.ending_arr, 0) AS ending_arr,
@@ -190,6 +190,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         LEFT JOIN service_continuity sc USING(month)
         LEFT JOIN platform_revenue_monthly pr USING(month)
         LEFT JOIN live_use_cases luc USING(month)
+        LEFT JOIN backlog_contracted bl USING(month)
         ORDER BY m.month
     """)
 

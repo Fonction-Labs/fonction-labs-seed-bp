@@ -57,6 +57,14 @@ pricing:
   avg_token_cost_per_uc_month: 200
   usage_success_based_revenue: 0
 
+backlog_contracted:
+  # Projets signés (devis accepté), en cours de réalisation — non encore facturés.
+  # Traitement : ajoutés au forecast (gris), pas aux actuals Qonto (noir).
+  # Source : 139k€ total. Répartition : 90% juillet, 10% août, 19k septembre (projet distinct).
+  2026-07-01: 108000   # 90% × (139k - 19k) = 108k
+  2026-08-01: 12000    # 10% × (139k - 19k) = 12k
+  2026-09-01: 19000    # projet distinct, livraison fin septembre
+
 service_continuity:
   # Freelance BPCE — mission en cours, se termine fin 2026
   freelance_bpce_days_per_month: 20

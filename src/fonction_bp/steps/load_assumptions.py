@@ -94,4 +94,11 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         uof_rows.append({"category": row["category"], "amount": float(row["amount"]), "purpose": row["purpose"]})
     create_table_from_dicts(con, "use_of_funds", uof_rows, [("category", "VARCHAR"), ("amount", "DOUBLE"), ("purpose", "VARCHAR")])
 
+    # Backlog contracted — projets contractualisés, recognition par mois de livraison.
+    backlog = assumptions.get("backlog_contracted", {})
+    backlog_rows = [{"month": str(m), "backlog_revenue": float(v)} for m, v in backlog.items()]
+    if not backlog_rows:
+        backlog_rows = [{"month": "2099-01-01", "backlog_revenue": 0.0}]
+    create_table_from_dicts(con, "backlog_contracted", backlog_rows, [("month", "DATE"), ("backlog_revenue", "DOUBLE")])
+
     con.close()
