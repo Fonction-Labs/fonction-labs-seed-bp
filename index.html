@@ -98,7 +98,14 @@
     <section id="model-phases">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Évolution du modèle économique</h2>
       <p class="text-zinc-500 dark:text-zinc-400 mb-6">Fonction Labs opère en trois phases successives. Le modèle transitoire per-UC n'est pas un compromis : il permet de signer pragmatiquement les premiers grands comptes, d'assurer la transition avec les certifications enterprise requises, et de construire la base d'expansion vers la plateforme. Cliquer sur une phase pour voir les hypothèses associées.</p>
-      <div id="modelPhases" class="space-y-4"></div>
+      <div id="modelPhases" class="space-y-4 mb-6"></div>
+
+      <!-- LTV / CAC / Payback -->
+      <div class="stat-card">
+        <h3 class="font-semibold text-base mb-1">Unit economics par segment</h3>
+        <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4">LTV, CAC et payback calculés depuis les hypothèses BP. Ces métriques se consolident à partir du moment où le portefeuille récurrent devient significatif (2027+).</p>
+        <div id="ltvcacTable" class="overflow-x-auto"></div>
+      </div>
     </section>
 
     <!-- Revenue — unified section -->
@@ -124,10 +131,22 @@
         <div class="chart-wrap h-72"><canvas id="revenueChart"></canvas></div>
       </div>
 
+      <!-- Backlog visibility -->
+      <div class="stat-card mb-4">
+        <div class="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h3 class="font-semibold text-base">Visibilité backlog contracté</h3>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">Projets signés (devis accepté, non encore facturés) — intégrés au forecast. Source : 139k€ contractualisés fin juin.</p>
+          </div>
+        </div>
+        <div id="backlogTable"></div>
+      </div>
+
       <!-- Revenue annual table + ARR + mix -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">ARR et comptes</h3>
+          <h3 class="font-semibold text-base mb-1">ARR et comptes actifs</h3>
+          <p class="text-xs text-zinc-400 dark:text-zinc-500 mb-4">Barres = comptes (axe gauche) · Ligne = ARR (axe droit)</p>
           <div class="chart-wrap h-56"><canvas id="arrChart"></canvas></div>
         </div>
         <div class="stat-card">
@@ -166,6 +185,11 @@
           <h3 class="font-semibold text-base mb-4">Décomposition COGS annuelle</h3>
           <div class="chart-wrap h-56"><canvas id="cogsChart"></canvas></div>
         </div>
+      </div>
+      <div class="stat-card mb-4">
+        <h3 class="font-semibold text-base mb-1">Levier ARR / FDE</h3>
+        <p class="text-xs text-zinc-400 dark:text-zinc-500 mb-4">ARR récurrent généré par FDE actif — mesure l'efficience de la plateforme dans le temps. Hypothèse BP.</p>
+        <div class="chart-wrap h-48"><canvas id="arrFdeChart"></canvas></div>
       </div>
       <div class="overflow-x-auto stat-card !p-0">
         <table class="w-full text-sm">

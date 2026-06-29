@@ -109,7 +109,17 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     # Query-driven sheets
     sheet_specs = [
         ("02_Assumptions", "SELECT * FROM assumptions_scalar ORDER BY section, key", "AssumptionsTable"),
-        ("03_Qonto_Raw", "SELECT * FROM raw_qonto_transactions ORDER BY operation_date DESC", "QontoRawTable"),
+        ("03_Actuals_Summary", """
+            SELECT
+                month AS mois,
+                counterparty AS client,
+                COUNT(*) AS nb_transactions,
+                SUM(amount_ht) AS total_ht_eur
+            FROM raw_qonto_transactions
+            WHERE is_commercial_revenue = 1
+            GROUP BY 1, 2
+            ORDER BY 1, 2
+        """, "ActualsSummaryTable"),
         ("04_Actuals_Monthly", "SELECT * FROM actual_revenue_monthly ORDER BY month", "ActualsTable"),
         ("05_Funnel_Attio", "SELECT * FROM attio_funnel", "AttioFunnelTable"),
         ("06_Cohort_Model", "SELECT * FROM enterprise_cohorts ORDER BY month", "CohortModelTable"),

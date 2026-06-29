@@ -296,6 +296,56 @@ function renderModelPhases() {
       <div class="mt-3 text-xs text-zinc-500">KPI principal : ${p.key_metric}</div>
       ${renderAssumptionDrawer(p.id)}
     </div>`).join(''));
+
+  // LTV / CAC / Payback — hypothèses BP par segment
+  const ltvcacEl = el('ltvcacTable');
+  if (ltvcacEl && a.segment_pricing) {
+    const seg = a.segment_pricing;
+    const workshopFee = a.workshop_fee || 20000;
+    const deployFee   = a.deployment_fee_per_uc || 40000;
+    const deployDur   = a.deployment_duration_months || 3;
+    // CAC hypothesis: fully-loaded sales cost spread across expected new logos per year
+    // Simplified: CAC = 30k ETI / 60k GC / 120k TGC (hypothèse BP — coût commercial + sales eng / logos)
+    const cacMap = { ETI: 30000, GC: 60000, TGC: 120000 };
+    // LTV = (MRR × GM_platform) / churn — GrossMargin plateforme ~85%, churn 0%→5% hypothèse conservatrice
+    // LTV = ARR × 0.85 / 0.10 (10% annual churn → simplification VC-facing)
+    const ltv = (mrr) => (mrr * 12 * 0.85) / 0.10;
+    const segments = [
+      { seg: 'ETI', mrr: seg.ETI || 2000, label: 'ETI (~100M€ CA)' },
+      { seg: 'GC',  mrr: seg.GC  || 5250, label: 'Grand Compte (~1Md€ CA)' },
+      { seg: 'TGC', mrr: seg.TGC || 16250, label: 'TGC (~40Md€ CA)' },
+    ];
+    setHTML('ltvcacTable', `
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-zinc-100 dark:border-zinc-800">
+            <th class="text-left py-2 pr-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">Segment</th>
+            <th class="text-right py-2 px-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">MRR / UC</th>
+            <th class="text-right py-2 px-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">LTV <span class="normal-case font-normal">(hypothèse)</span></th>
+            <th class="text-right py-2 px-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">CAC <span class="normal-case font-normal">(hypothèse)</span></th>
+            <th class="text-right py-2 pl-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">LTV/CAC</th>
+            <th class="text-right py-2 pl-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">Payback</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
+          ${segments.map(s => {
+            const l = ltv(s.mrr);
+            const c = cacMap[s.seg];
+            const ratio = (l / c).toFixed(1);
+            const payback = Math.round(c / (s.mrr * 0.85));
+            return `<tr>
+              <td class="py-2.5 pr-4 font-medium">${s.label}</td>
+              <td class="py-2.5 px-4 text-right">${fmt.eur(s.mrr)}</td>
+              <td class="py-2.5 px-4 text-right">${fmt.eur(l)}</td>
+              <td class="py-2.5 px-4 text-right">${fmt.eur(c)}</td>
+              <td class="py-2.5 px-4 text-right font-semibold">${ratio}×</td>
+              <td class="py-2.5 pl-4 text-right">${payback} mois</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+      <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-3">Hypothèses BP : LTV = ARR × 85% GM plateforme / 10% churn annuel. CAC = coût commercial fully-loaded / logos signés. Ces métriques se consolident dès 2027 avec le portefeuille récurrent.</p>`);
+  }
 }
 
 function togglePhaseDrawer(id, card) {
@@ -381,25 +431,111 @@ function renderRevenue() {
     }
   });
 
-  // ARR line chart
+  // ARR + comptes — bar (accounts, left) + line (ARR, right)
   const ARR_MONTHS = ['2026-12-01','2027-06-01','2027-12-01','2028-06-01','2028-12-01'];
   const ARR_LABELS = ["Dec '26", "Jun '27", "Dec '27", "Jun '28", "Dec '28"];
   const arrRows = ARR_MONTHS.map(m => months.find(r => r.month === m)).filter(Boolean);
 
   new Chart(el('arrChart'), {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: ARR_LABELS,
-      datasets: [{
-        label: 'Ending ARR',
-        data: arrRows.map(r => r.ending_arr),
-        borderColor: INDIGO(),
-        backgroundColor: isDark() ? 'rgba(129,140,248,.12)' : 'rgba(79,70,229,.08)',
-        borderWidth: 2.5, pointBackgroundColor: INDIGO(), pointRadius: 5, tension: 0.35, fill: true,
-      }]
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Comptes actifs',
+          data: arrRows.map(r => r.enterprise_accounts_end || 0),
+          backgroundColor: isDark() ? 'rgba(228,228,231,.25)' : 'rgba(24,24,27,.15)',
+          borderRadius: 4,
+          yAxisID: 'yAccounts',
+        },
+        {
+          type: 'line',
+          label: 'ARR',
+          data: arrRows.map(r => r.ending_arr || 0),
+          borderColor: INDIGO(),
+          backgroundColor: 'transparent',
+          borderWidth: 2.5, pointBackgroundColor: INDIGO(), pointRadius: 5, tension: 0.35,
+          yAxisID: 'yArr',
+        },
+      ]
     },
-    options: baseChartOpts(fmt.eur)
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, font: { size: 11 } } },
+        tooltip: {
+          backgroundColor: isDark() ? '#18181b' : '#fff',
+          titleColor: isDark() ? '#f4f4f5' : '#18181b',
+          bodyColor: isDark() ? '#d4d4d8' : '#3f3f46',
+          borderColor: isDark() ? '#3f3f46' : '#e4e4e7',
+          borderWidth: 1, padding: 10,
+          callbacks: {
+            label: ctx => ctx.dataset.yAxisID === 'yArr'
+              ? ` ARR : ${fmt.eur(ctx.parsed.y)}`
+              : ` Comptes : ${ctx.parsed.y}`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: GRID_COLOR() }, ticks: { color: TICK_COLOR(), font: { size: 11 } } },
+        yAccounts: {
+          type: 'linear', position: 'left',
+          grid: { color: GRID_COLOR() },
+          ticks: { color: TICK_COLOR(), font: { size: 11 }, stepSize: 1, callback: v => v % 1 === 0 ? v : '' },
+          border: { display: false },
+        },
+        yArr: {
+          type: 'linear', position: 'right',
+          grid: { drawOnChartArea: false },
+          ticks: { color: TICK_COLOR(), font: { size: 11 }, callback: fmt.eur },
+          border: { display: false },
+        },
+      }
+    }
   });
+
+  // Backlog visibility table (contracté + qualified pipeline)
+  const backlogSection = el('backlogTable');
+  if (backlogSection) {
+    const bRows = data.revenue_monthly || [];
+    const backlogRows = data.backlog_contracted || [];
+    const backlogAmounts = Object.fromEntries(backlogRows.map(r => [r.month, r.backlog_revenue]));
+    const backlogMonths = backlogRows.map(r => r.month).filter(m => m < '2099');
+    const bData = backlogMonths.map(m => {
+      const r = bRows.find(x => x.month === m) || {};
+      const [y, mo] = m.split('-').map(Number);
+      const label = new Date(y, mo - 1, 1).toLocaleDateString('fr-FR', { month: 'short', year: '2-digit' });
+      return { label, backlog: backlogAmounts[m] || 0, forecast: r.forecast_services_revenue || 0 };
+    });
+    const totalBacklog = bData.reduce((s, r) => s + r.backlog, 0);
+    setHTML('backlogTable', `
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-zinc-100 dark:border-zinc-800">
+            <th class="text-left py-2 pr-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">Mois</th>
+            <th class="text-right py-2 px-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">Backlog signé</th>
+            <th class="text-right py-2 pl-4 text-xs font-medium text-zinc-400 uppercase tracking-wide">Forecast total</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-100 dark:divide-zinc-800">
+          ${bData.map(r => `
+            <tr>
+              <td class="py-2.5 pr-4 font-medium capitalize">${r.label}</td>
+              <td class="py-2.5 px-4 text-right font-semibold">${fmt.eur(r.backlog)}</td>
+              <td class="py-2.5 pl-4 text-right text-zinc-500">${r.forecast > 0 ? fmt.eur(r.forecast) : '—'}</td>
+            </tr>`).join('')}
+        </tbody>
+        <tfoot>
+          <tr class="border-t border-zinc-200 dark:border-zinc-700">
+            <td class="py-2.5 pr-4 text-xs font-semibold uppercase tracking-wide text-zinc-500">Total backlog</td>
+            <td class="py-2.5 px-4 text-right font-bold">${fmt.eur(totalBacklog)}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>`);
+  }
 
   // Revenue mix stacked
   new Chart(el('revenueMixChart'), {
@@ -506,6 +642,35 @@ function renderMargins() {
     }
   });
 
+  // ARR / FDE headcount ratio — levier plateforme
+  const arrFdeEl = el('arrFdeChart');
+  if (arrFdeEl) {
+    const ARR_FDE_MONTHS = ['2026-12-01','2027-06-01','2027-12-01','2028-06-01','2028-12-01'];
+    const ARR_FDE_LABELS = ["Dec '26", "Jun '27", "Dec '27", "Jun '28", "Dec '28"];
+    const rev = data.revenue_monthly || [];
+    const hcFn = data.headcount_by_function_monthly || [];
+    const arrFdeData = ARR_FDE_MONTHS.map(m => {
+      const r = rev.find(x => x.month === m) || {};
+      const h = hcFn.find(x => x.month === m) || {};
+      const fdeCount = h.fde || 0;
+      return fdeCount > 0 ? ((r.ending_arr || 0) / fdeCount) : 0;
+    });
+    new Chart(arrFdeEl, {
+      type: 'line',
+      data: {
+        labels: ARR_FDE_LABELS,
+        datasets: [{
+          label: 'ARR / FDE',
+          data: arrFdeData,
+          borderColor: TEAL(),
+          backgroundColor: isDark() ? 'rgba(94,234,212,.1)' : 'rgba(13,148,136,.07)',
+          borderWidth: 2.5, pointBackgroundColor: TEAL(), pointRadius: 5, tension: 0.35, fill: true,
+        }]
+      },
+      options: { ...baseChartOpts(fmt.eur), scales: { ...baseChartOpts(fmt.eur).scales, y: { ...baseChartOpts(fmt.eur).scales.y, min: 0 } } }
+    });
+  }
+
   // Margins table
   const annual = data.annual_summary;
   const marginRows = [
@@ -532,23 +697,58 @@ function renderRunway() {
       : d.toLocaleDateString('fr-FR', { month: 'short' });
   });
 
+  // Cash waterfall — revenue, coûts, solde mensuel
   new Chart(el('cashChart'), {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: cashLabels,
-      datasets: [{
-        label: 'Cash disponible',
-        data: cash.map(r => r.ending_cash),
-        borderColor: DARK_BAR(),
-        backgroundColor: isDark() ? 'rgba(228,228,231,.08)' : 'rgba(63,63,70,.06)',
-        borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: 0.3, fill: true,
-      }]
+      datasets: [
+        {
+          label: 'Revenue',
+          data: cash.map(r => r.total_revenue || 0),
+          backgroundColor: isDark() ? 'rgba(74,222,128,.45)' : 'rgba(22,163,74,.4)',
+          borderRadius: 2,
+        },
+        {
+          label: 'Coûts & charges',
+          data: cash.map(r => -((r.total_cogs || 0) + (r.total_payroll_cost || 0) + (r.total_opex || 0))),
+          backgroundColor: isDark() ? 'rgba(251,113,133,.45)' : 'rgba(225,29,72,.3)',
+          borderRadius: 2,
+        },
+        {
+          type: 'line',
+          label: 'Cash disponible',
+          data: cash.map(r => r.ending_cash || 0),
+          borderColor: DARK_BAR(),
+          backgroundColor: 'transparent',
+          borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: 0.3,
+          yAxisID: 'yCash',
+        },
+      ]
     },
     options: {
-      ...baseChartOpts(fmt.eur),
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { color: TICK_COLOR(), boxWidth: 12, boxHeight: 12, useBorderRadius: true, borderRadius: 3, font: { size: 11 } } },
+        tooltip: {
+          backgroundColor: isDark() ? '#18181b' : '#fff',
+          titleColor: isDark() ? '#f4f4f5' : '#18181b',
+          bodyColor: isDark() ? '#d4d4d8' : '#3f3f46',
+          borderColor: isDark() ? '#3f3f46' : '#e4e4e7',
+          borderWidth: 1, padding: 10,
+          callbacks: { label: ctx => ` ${ctx.dataset.label} : ${fmt.eur(Math.abs(ctx.parsed.y))}` }
+        }
+      },
       scales: {
-        ...baseChartOpts(fmt.eur).scales,
-        x: { ...baseChartOpts(fmt.eur).scales.x, ticks: { ...baseChartOpts(fmt.eur).scales.x.ticks, maxRotation: 0, maxTicksLimit: 12 } },
+        x: { grid: { color: GRID_COLOR() }, ticks: { color: TICK_COLOR(), font: { size: 11 }, maxRotation: 0, maxTicksLimit: 12 }, stacked: true },
+        y: { grid: { color: GRID_COLOR() }, ticks: { color: TICK_COLOR(), font: { size: 11 }, callback: fmt.eur }, border: { display: false }, stacked: true },
+        yCash: {
+          type: 'linear', position: 'right',
+          grid: { drawOnChartArea: false },
+          ticks: { color: TICK_COLOR(), font: { size: 11 }, callback: fmt.eur },
+          border: { display: false },
+        },
       }
     }
   });

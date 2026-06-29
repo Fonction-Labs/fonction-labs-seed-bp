@@ -14,7 +14,7 @@ window.DASHBOARD_DATA = {
     },
     {
       "metric": "2026E revenue",
-      "value": 566727.2000000001,
+      "value": 705727.2,
       "unit": "EUR"
     },
     {
@@ -49,7 +49,7 @@ window.DASHBOARD_DATA = {
     },
     {
       "metric": "Ending cash Dec-2027",
-      "value": 1390554.1233333333,
+      "value": 1529554.1233333333,
       "unit": "EUR"
     },
     {
@@ -61,17 +61,17 @@ window.DASHBOARD_DATA = {
   "annual_summary": [
     {
       "year": 2026,
-      "services_deployment_revenue": 556227.2000000001,
+      "services_deployment_revenue": 695227.2,
       "platform_subscription_revenue": 10500.0,
       "usage_success_revenue": 0.0,
-      "total_revenue": 566727.2000000001,
+      "total_revenue": 705727.2,
       "total_cogs": 276400.0,
-      "gross_profit": 290327.20000000007,
-      "gross_margin": 0.5122873932996335,
+      "gross_profit": 429327.20000000007,
+      "gross_margin": 0.6083472480584567,
       "ending_arr": 126000.0,
       "enterprise_accounts_end": 1,
       "live_use_cases": 2,
-      "recurring_revenue_share": 0.01852743259896472
+      "recurring_revenue_share": 0.014878270243799589
     },
     {
       "year": 2027,
@@ -233,15 +233,15 @@ window.DASHBOARD_DATA = {
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 19000.0,
+      "forecast_services_revenue": 127000.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "services_deployment_revenue": 19000.0,
-      "total_revenue": 19000.0
+      "services_deployment_revenue": 127000.0,
+      "total_revenue": 127000.0
     },
     {
       "month": "2026-08-01",
@@ -253,15 +253,15 @@ window.DASHBOARD_DATA = {
       "deployment_revenue": 0.0,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 19000.0,
+      "forecast_services_revenue": 31000.0,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 0,
       "use_case_starts": 0,
-      "services_deployment_revenue": 19000.0,
-      "total_revenue": 19000.0
+      "services_deployment_revenue": 31000.0,
+      "total_revenue": 31000.0
     },
     {
       "month": "2026-09-01",
@@ -273,15 +273,15 @@ window.DASHBOARD_DATA = {
       "deployment_revenue": 26666.666666666668,
       "service_continuity_revenue": 19000.0,
       "actual_services_revenue": 0.0,
-      "forecast_services_revenue": 65666.66666666667,
+      "forecast_services_revenue": 84666.66666666667,
       "platform_subscription_revenue": 0.0,
       "usage_success_revenue": 0.0,
       "ending_arr": 0.0,
       "live_use_cases": 0,
       "enterprise_accounts_end": 1,
       "use_case_starts": 2,
-      "services_deployment_revenue": 65666.66666666667,
-      "total_revenue": 65666.66666666667
+      "services_deployment_revenue": 84666.66666666667,
+      "total_revenue": 84666.66666666667
     },
     {
       "month": "2026-10-01",
@@ -897,8 +897,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 3,
       "period": "Q3 26",
-      "total_revenue": 130339.7,
-      "services_deployment_revenue": 130339.7,
+      "total_revenue": 250339.7,
+      "services_deployment_revenue": 250339.7,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-08-01",
       "ending_arr": 0.0,
@@ -909,8 +909,8 @@ window.DASHBOARD_DATA = {
       "year": 2026,
       "quarter": 4,
       "period": "Q4 26",
-      "total_revenue": 157000.0,
-      "services_deployment_revenue": 157000.0,
+      "total_revenue": 176000.0,
+      "services_deployment_revenue": 176000.0,
       "platform_subscription_revenue": 0.0,
       "quarter_end_month": "2026-11-01",
       "ending_arr": 0.0,
@@ -1403,35 +1403,35 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-07-01",
       "year": 2026,
-      "total_revenue": 19000.0,
+      "total_revenue": 127000.0,
       "total_cogs": 31500.0,
       "total_payroll_cost": 14700.0,
       "total_opex": 16000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -43200.0,
-      "ending_cash": 103498.29000000001
+      "operating_cashflow": 64800.0,
+      "ending_cash": 211498.29
     },
     {
       "month": "2026-08-01",
       "year": 2026,
-      "total_revenue": 19000.0,
+      "total_revenue": 31000.0,
       "total_cogs": 22000.0,
       "total_payroll_cost": 14700.0,
       "total_opex": 16000.0,
       "seed_proceeds": 0.0,
-      "operating_cashflow": -33700.0,
-      "ending_cash": 69798.29000000001
+      "operating_cashflow": -21700.0,
+      "ending_cash": 189798.29
     },
     {
       "month": "2026-09-01",
       "year": 2026,
-      "total_revenue": 65666.66666666667,
+      "total_revenue": 84666.66666666667,
       "total_cogs": 33000.0,
       "total_payroll_cost": 26700.0,
       "total_opex": 58000.0,
       "seed_proceeds": 2500000.0,
-      "operating_cashflow": -52033.33333333333,
-      "ending_cash": 2517764.9566666665
+      "operating_cashflow": -33033.33333333333,
+      "ending_cash": 2656764.9566666665
     },
     {
       "month": "2026-10-01",
@@ -1442,7 +1442,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 19000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -44033.33333333333,
-      "ending_cash": 2473731.623333333
+      "ending_cash": 2612731.623333333
     },
     {
       "month": "2026-11-01",
@@ -1453,7 +1453,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 20000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -56033.33333333333,
-      "ending_cash": 2417698.2899999996
+      "ending_cash": 2556698.2899999996
     },
     {
       "month": "2026-12-01",
@@ -1464,7 +1464,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 20000.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -187355.0,
-      "ending_cash": 2230343.2899999996
+      "ending_cash": 2369343.2899999996
     },
     {
       "month": "2027-01-01",
@@ -1475,7 +1475,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 61300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -171472.5,
-      "ending_cash": 2058870.7899999996
+      "ending_cash": 2197870.7899999996
     },
     {
       "month": "2027-02-01",
@@ -1486,7 +1486,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 32300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -106805.83333333333,
-      "ending_cash": 1952064.9566666663
+      "ending_cash": 2091064.9566666663
     },
     {
       "month": "2027-03-01",
@@ -1497,7 +1497,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 32300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -100139.16666666666,
-      "ending_cash": 1851925.7899999996
+      "ending_cash": 1990925.7899999996
     },
     {
       "month": "2027-04-01",
@@ -1508,7 +1508,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -112139.16666666666,
-      "ending_cash": 1739786.6233333328
+      "ending_cash": 1878786.6233333328
     },
     {
       "month": "2027-05-01",
@@ -1519,7 +1519,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -68478.33333333333,
-      "ending_cash": 1671308.2899999996
+      "ending_cash": 1810308.2899999996
     },
     {
       "month": "2027-06-01",
@@ -1530,7 +1530,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 33300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -51650.833333333314,
-      "ending_cash": 1619657.4566666663
+      "ending_cash": 1758657.4566666663
     },
     {
       "month": "2027-07-01",
@@ -1541,7 +1541,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 64300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -80755.83333333331,
-      "ending_cash": 1538901.623333333
+      "ending_cash": 1677901.623333333
     },
     {
       "month": "2027-08-01",
@@ -1552,7 +1552,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 34300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -96817.08333333333,
-      "ending_cash": 1442084.5399999998
+      "ending_cash": 1581084.5399999998
     },
     {
       "month": "2027-09-01",
@@ -1563,7 +1563,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 34300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -34357.91666666666,
-      "ending_cash": 1407726.623333333
+      "ending_cash": 1546726.623333333
     },
     {
       "month": "2027-10-01",
@@ -1574,7 +1574,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 35300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -20085.833333333314,
-      "ending_cash": 1387640.7899999998
+      "ending_cash": 1526640.7899999998
     },
     {
       "month": "2027-11-01",
@@ -1585,7 +1585,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 35300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -40085.833333333314,
-      "ending_cash": 1347554.9566666665
+      "ending_cash": 1486554.9566666665
     },
     {
       "month": "2027-12-01",
@@ -1596,7 +1596,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 36300.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 42999.166666666686,
-      "ending_cash": 1390554.1233333333
+      "ending_cash": 1529554.1233333333
     },
     {
       "month": "2028-01-01",
@@ -1607,7 +1607,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 87500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -7693.333333333314,
-      "ending_cash": 1382860.79
+      "ending_cash": 1521860.79
     },
     {
       "month": "2028-02-01",
@@ -1618,7 +1618,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 48500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": -693.3333333333139,
-      "ending_cash": 1382167.4566666668
+      "ending_cash": 1521167.4566666668
     },
     {
       "month": "2028-03-01",
@@ -1629,7 +1629,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 48500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 68120.0,
-      "ending_cash": 1450287.4566666668
+      "ending_cash": 1589287.4566666668
     },
     {
       "month": "2028-04-01",
@@ -1640,7 +1640,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 97766.66666666669,
-      "ending_cash": 1548054.1233333335
+      "ending_cash": 1687054.1233333335
     },
     {
       "month": "2028-05-01",
@@ -1651,7 +1651,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 57766.666666666686,
-      "ending_cash": 1605820.7900000003
+      "ending_cash": 1744820.7900000003
     },
     {
       "month": "2028-06-01",
@@ -1662,7 +1662,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 101366.66666666669,
-      "ending_cash": 1707187.456666667
+      "ending_cash": 1846187.456666667
     },
     {
       "month": "2028-07-01",
@@ -1673,7 +1673,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 124586.66666666669,
-      "ending_cash": 1831774.1233333338
+      "ending_cash": 1970774.1233333338
     },
     {
       "month": "2028-08-01",
@@ -1684,7 +1684,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 49500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 104586.66666666669,
-      "ending_cash": 1936360.7900000005
+      "ending_cash": 2075360.7900000005
     },
     {
       "month": "2028-09-01",
@@ -1695,7 +1695,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 193853.3333333333,
-      "ending_cash": 2130214.1233333335
+      "ending_cash": 2269214.123333334
     },
     {
       "month": "2028-10-01",
@@ -1706,7 +1706,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 282573.33333333326,
-      "ending_cash": 2412787.456666667
+      "ending_cash": 2551787.456666667
     },
     {
       "month": "2028-11-01",
@@ -1717,7 +1717,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 262573.33333333326,
-      "ending_cash": 2675360.79
+      "ending_cash": 2814360.79
     },
     {
       "month": "2028-12-01",
@@ -1728,7 +1728,7 @@ window.DASHBOARD_DATA = {
       "total_opex": 50500.0,
       "seed_proceeds": 0.0,
       "operating_cashflow": 329663.33333333326,
-      "ending_cash": 3005024.123333333
+      "ending_cash": 3144024.123333333
     }
   ],
   "cogs_monthly": [
@@ -2145,26 +2145,26 @@ window.DASHBOARD_DATA = {
     {
       "month": "2026-07-01",
       "year": 2026,
-      "total_revenue": 19000.0,
+      "total_revenue": 127000.0,
       "total_cogs": 31500.0,
-      "gross_profit": -12500.0,
-      "gross_margin": -0.6578947368421053
+      "gross_profit": 95500.0,
+      "gross_margin": 0.7519685039370079
     },
     {
       "month": "2026-08-01",
       "year": 2026,
-      "total_revenue": 19000.0,
+      "total_revenue": 31000.0,
       "total_cogs": 22000.0,
-      "gross_profit": -3000.0,
-      "gross_margin": -0.15789473684210525
+      "gross_profit": 9000.0,
+      "gross_margin": 0.2903225806451613
     },
     {
       "month": "2026-09-01",
       "year": 2026,
-      "total_revenue": 65666.66666666667,
+      "total_revenue": 84666.66666666667,
       "total_cogs": 33000.0,
-      "gross_profit": 32666.66666666667,
-      "gross_margin": 0.4974619289340102
+      "gross_profit": 51666.66666666667,
+      "gross_margin": 0.610236220472441
     },
     {
       "month": "2026-10-01",
@@ -2957,6 +2957,20 @@ window.DASHBOARD_DATA = {
       "notes": "Current telecom motion: approx. 25 meetings per month"
     }
   ],
+  "backlog_contracted": [
+    {
+      "month": "2026-07-01",
+      "backlog_revenue": 108000.0
+    },
+    {
+      "month": "2026-08-01",
+      "backlog_revenue": 12000.0
+    },
+    {
+      "month": "2026-09-01",
+      "backlog_revenue": 19000.0
+    }
+  ],
   "key_assumptions": {
     "workshop_fee": 20000,
     "deployment_fee_per_uc": 40000,
@@ -2978,7 +2992,7 @@ window.DASHBOARD_DATA = {
       "status": "active",
       "revenue_model": "Service pur — workshops, déploiement custom, FDE facturé",
       "pricing": "Workshop 20k€ + deploy 40k€/UC + FDE 1150€/j",
-      "margin_profile": "~51% (service-heavy)",
+      "margin_profile": "~60% (service-heavy)",
       "key_metric": "Revenue de service générée"
     },
     {
