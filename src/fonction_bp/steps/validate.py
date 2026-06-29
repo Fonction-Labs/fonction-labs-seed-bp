@@ -71,7 +71,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> Path:
     if not full_path.exists() or not simple_path.exists():
         raise FileNotFoundError("Excel outputs missing")
     wb = load_workbook(full_path, read_only=True, data_only=False)
-    expected_sheets = ['00_ReadMe','01_Dashboard','02_Assumptions','03_Qonto_Raw','04_Actuals_Monthly','05_Funnel_Attio','06_Cohort_Model','07_Revenue_Model','08_Delivery_Capacity','09_Headcount','10_Opex','11_Cash_Runway','12_Scenarios','13_Use_of_Funds','14_Data_Checks']
+    expected_sheets = ['00_ReadMe','01_Dashboard','02_Assumptions','03_Actuals_Summary','04_Actuals_Monthly','05_Funnel_Attio','06_Cohort_Model','07_Revenue_Model','08_Delivery_Capacity','09_Headcount','10_Opex','11_Cash_Runway','12_Scenarios','13_Use_of_Funds','14_Data_Checks']
     missing = [s for s in expected_sheets if s not in wb.sheetnames]
     checks.append({"check": "Full workbook sheets", "actual": len(missing), "expected": 0, "status": "PASS" if not missing else "FAIL"})
     if missing:
