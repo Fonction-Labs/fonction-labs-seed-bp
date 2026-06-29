@@ -29,7 +29,7 @@ function ChatPanelInner() {
 
 export function ChatPanel() {
   return (
-    <div className="w-[420px] h-full flex flex-col bg-white border-l border-gray-100 flex-shrink-0">
+    <div className="w-[420px] h-full relative overflow-hidden flex-shrink-0 border-l border-gray-100">
       <ChatPanelInner />
     </div>
   );
