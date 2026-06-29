@@ -67,7 +67,6 @@
     <a href="#kpis">KPIs clés</a>
     <a href="#model-phases">Modèle économique</a>
     <a href="#revenue">Revenue</a>
-    <a href="#assumptions">Hypothèses</a>
     <a href="#margins">Marges & COGS</a>
     <a href="#runway">Runway & équipe</a>
     <a href="#downloads">Téléchargements</a>
@@ -81,28 +80,31 @@
       <p class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Annexe BP · VC Case · 2026–2028</p>
       <h1 class="text-4xl font-bold tracking-tight mb-5">Fonction Labs BP Dashboard</h1>
       <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed">
-        Fonction Labs développe l'Agent OS pour les opérations enterprise — la couche qui permet aux grands comptes de déployer, superviser et scaler des agents IA sur leurs workflows métier.
-        Ce dashboard présente le modèle financier seed 2026–2028 : du service pur vers un modèle SaaS récurrent, avec une transition explicite par étape.
+        Fonction Labs développe l'OS agentique pour les opérations enterprise — une couche qui permet de déployer, superviser et scaler des agents IA sur l'ensemble de leurs workflows.
+      </p>
+      <p class="text-base text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed mt-3">
+        Ce rapport présente le modèle financier seed 2026–2028 : du service pur vers un modèle SaaS récurrent, avec une transition explicite par étape.
       </p>
     </header>
 
     <!-- KPIs -->
     <section id="kpis">
-      <h2 class="text-sm font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-6">Chiffres clés</h2>
+      <h2 class="text-sm font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Chiffres clés</h2>
+      <p id="kpisIntro" class="text-sm text-zinc-500 dark:text-zinc-400 mb-6 max-w-2xl"></p>
       <div id="kpiGrid"></div>
     </section>
 
-    <!-- Business Model Phases -->
+    <!-- Business Model Phases + Hypothèses -->
     <section id="model-phases">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Évolution du modèle économique</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Trois étapes de maturité — du service pur à la plateforme usage-based. Chaque phase s'additionne à la précédente.</p>
+      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Trois étapes de maturité — du service pur à la plateforme usage-based. Cliquer sur une phase pour voir les hypothèses associées.</p>
       <div id="modelPhases" class="space-y-4"></div>
     </section>
 
     <!-- Revenue — unified section -->
     <section id="revenue">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Revenue et trajectoire</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Revenue facturé H1 2026 (actuals) + forecast H2 2026 → 2028. L'ARR est construit par nouveaux comptes enterprise et expansion des use cases live.</p>
+      <p id="revenueIntro" class="text-zinc-500 dark:text-zinc-400 mb-6 max-w-2xl"></p>
 
       <!-- Trajectory table -->
       <div id="trajectoryTable" class="overflow-x-auto mb-6"></div>
@@ -151,17 +153,10 @@
       </div>
     </section>
 
-    <!-- Key assumptions -->
-    <section id="assumptions">
-      <h2 class="text-2xl font-semibold tracking-tight mb-2">Hypothèses structurantes</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Toute valeur du modèle provient d'une hypothèse nommée (YAML) ou d'une formule dérivée.</p>
-      <div id="assumptionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-    </section>
-
     <!-- Margins & COGS -->
     <section id="margins">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Marges et structure de coûts</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">COGS bottom-up : FDE salaires + freelances delivery + tokens clients + infra cloud + Wassym. Gross margin progresse avec le mix plateforme.</p>
+      <p id="marginsIntro" class="text-zinc-500 dark:text-zinc-400 mb-6 max-w-2xl"></p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div class="stat-card">
           <h3 class="font-semibold text-base mb-4">Gross margin trimestrielle</h3>
@@ -190,20 +185,18 @@
     <!-- Runway & team -->
     <section id="runway">
       <h2 class="text-2xl font-semibold tracking-tight mb-2">Runway, équipe et usage des fonds</h2>
-      <p class="text-zinc-500 dark:text-zinc-400 mb-6">Seed de 2.5M€ finance 30+ mois de runway. Cash toujours positif sur l'horizon du plan.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Cash runway</h3>
-          <div class="chart-wrap h-56"><canvas id="cashChart"></canvas></div>
-        </div>
-        <div class="stat-card">
-          <h3 class="font-semibold text-base mb-4">Croissance équipe</h3>
-          <div class="chart-wrap h-56"><canvas id="headcountChart"></canvas></div>
-        </div>
+      <p id="runwayIntro" class="text-zinc-500 dark:text-zinc-400 mb-6 max-w-2xl"></p>
+      <div class="stat-card mb-4">
+        <h3 class="font-semibold text-base mb-4">Cash runway mensuel</h3>
+        <div class="chart-wrap h-56"><canvas id="cashChart"></canvas></div>
+      </div>
+      <div class="stat-card mb-4">
+        <h3 class="font-semibold text-base mb-4">Croissance équipe par fonction</h3>
+        <div class="chart-wrap h-64"><canvas id="headcountChart"></canvas></div>
       </div>
       <div class="stat-card">
         <h3 class="font-semibold text-base mb-4">Allocation seed — 2,5M€</h3>
-        <div id="fundsGrid" class="space-y-4"></div>
+        <div id="fundsGrid" class="space-y-3"></div>
       </div>
     </section>
 

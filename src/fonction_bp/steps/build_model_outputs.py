@@ -9,6 +9,43 @@ from fonction_bp.config import Paths
 from fonction_bp.utils import _json_default, fmt_eur, fmt_pct, save_json
 
 
+def _build_headcount_by_function(raw: dict, months: list[str]) -> list[dict]:
+    from datetime import date
+    hc = raw.get("headcount", {})
+    founders = hc.get("founder_count", 3)
+    hires = hc.get("hires", [])
+
+    # Map function labels to short keys.
+    fn_map = {
+        "Product & Engineering": "product_engineering",
+        "Forward-Deployed Engineering": "fde",
+        "Sales & GTM": "sales_gtm",
+        "Ops": "ops",
+    }
+
+    rows = []
+    for month_val in months:
+        if isinstance(month_val, date):
+            m = month_val
+            month_str = month_val.isoformat()
+        else:
+            month_str = str(month_val)[:10]
+            m = date.fromisoformat(month_str)
+        counts = {k: 0 for k in fn_map.values()}
+        for hire in hires:
+            start = date.fromisoformat(str(hire["start_month"])[:10])
+            if m >= start:
+                fn = fn_map.get(hire.get("function", ""), None)
+                if fn:
+                    counts[fn] += 1
+        rows.append({
+            "month": month_str,
+            "founders": founders,
+            **counts,
+        })
+    return rows
+
+
 def _rows(con: duckdb.DuckDBPyConnection, query: str) -> list[dict]:
     return [dict(zip([c[0] for c in cur.description], row)) for cur in [con.execute(query)] for row in cur.fetchall()]
 
@@ -84,6 +121,7 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         "cogs_monthly": cogs_monthly,
         "gross_margin_monthly": gm_monthly,
         "headcount_monthly": headcount_monthly,
+        "headcount_by_function_monthly": _build_headcount_by_function(raw, [r["month"] for r in headcount_monthly]),
         "use_of_funds": use_of_funds,
         "attio_funnel": funnel,
         "key_assumptions": {

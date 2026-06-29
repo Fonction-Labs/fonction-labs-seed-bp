@@ -6,6 +6,9 @@ __pycache__/
 dist/
 .python-version
 
+# Generated symlinks
+dashboard/assets/logo.png
+
 # Generated outputs — not source of truth
 data/processed/model.duckdb
 data/processed/model_outputs.json
