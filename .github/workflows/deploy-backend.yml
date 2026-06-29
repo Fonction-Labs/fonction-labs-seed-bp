@@ -1,0 +1,62 @@
+name: Build & Deploy Backend to App Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Docker image tag"
+        required: false
+        default: "latest"
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  ECR_REPO: ${{ vars.ECR_REPO }}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Run pipeline (regenerate data + dashboard)
+        run: uv run fonction-bp build --scenario vc_case
+
+      - name: Prepare Docker build context
+        run: |
+          mkdir -p chat/backend/data/processed chat/backend/data/assumptions
+          cp data/processed/model.duckdb chat/backend/data/processed/
+          cp data/processed/model_outputs.json chat/backend/data/processed/
+          cp data/processed/validation_report.json chat/backend/data/processed/
+          cp data/assumptions/vc_case.yaml chat/backend/data/assumptions/
+          mkdir -p chat/backend/context/docs
+          cp CONTEXT_FOR_LLM.md chat/backend/context/
+          cp AGENT.md chat/backend/context/
+          cp docs/T*.md chat/backend/context/docs/ 2>/dev/null || true
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        working-directory: chat/backend
+        run: |
+          IMAGE_TAG="${{ github.event.inputs.image_tag || 'latest' }}"
+          docker build -t "$ECR_REPO:$IMAGE_TAG" .
+          docker push "$ECR_REPO:$IMAGE_TAG"
+
+      - name: Deploy to App Runner
+        run: |
+          aws apprunner start-deployment \
+            --service-arn "${{ vars.APP_RUNNER_SERVICE_ARN }}"

@@ -1,0 +1,7 @@
+.venv
+__pycache__
+*.pyc
+.env
+# Temporary Docker build context (created by build_and_push.sh, cleaned up after push)
+data/
+context/

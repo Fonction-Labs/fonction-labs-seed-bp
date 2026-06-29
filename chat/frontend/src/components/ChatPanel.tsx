@@ -1,11 +1,19 @@
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { STARTER_PROMPTS } from "../lib/config";
+import { getToken } from "../lib/auth";
 
 function ChatPanelInner() {
+  const token = getToken();
+  const authFetch: typeof fetch = (input, init) => {
+    const headers = new Headers(init?.headers);
+    if (token) headers.set("Authorization", `Bearer ${token}`);
+    return fetch(input, { ...init, headers });
+  };
   const chatkit = useChatKit({
     api: {
       url: "/chatkit",
       domainKey: "domain_pk_localhost_dev",
+      fetch: authFetch,
     },
     startScreen: {
       greeting: "Pose-moi des questions sur le BP : revenus, ARR, hypothèses, cash, headcount...",

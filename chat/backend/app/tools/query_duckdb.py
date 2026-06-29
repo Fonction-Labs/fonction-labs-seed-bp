@@ -10,8 +10,19 @@ from agents import RunContextWrapper, function_tool
 
 from app.agents.bp_agent import BPAgentContext
 
-# Relative to this file: backend/app/tools/ → up 4 levels → repo root → data/processed/
-DB_PATH = Path(__file__).resolve().parents[4] / "data" / "processed" / "model.duckdb"
+import os
+
+def _resolve_db_path() -> Path:
+    env = os.getenv("DATA_PATH")
+    if env:
+        return Path(env) / "model.duckdb"
+    # Local dev: this file is at chat/backend/app/tools/query_duckdb.py
+    # repo root is 4 levels up → data/processed/model.duckdb
+    parts = Path(__file__).resolve().parts
+    repo_root = Path(*parts[: len(parts) - 4])
+    return repo_root / "data" / "processed" / "model.duckdb"
+
+DB_PATH = _resolve_db_path()
 
 
 @function_tool(description_override=(

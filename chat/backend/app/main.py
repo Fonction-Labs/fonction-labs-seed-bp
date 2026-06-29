@@ -3,14 +3,16 @@
 from __future__ import annotations
 
 import logging
+import os
 import traceback
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, JSONResponse, Response
 
 from chatkit.server import StreamingResult, NonStreamingResult
 
+from app.auth import require_auth
 from app.memory_store import MemoryStore
 from app.server import BPChatServer
 
@@ -19,9 +21,11 @@ logger = logging.getLogger("bp_chat")
 
 app = FastAPI(title="BP Chat Backend")
 
+_raw_origins = os.getenv("ALLOWED_ORIGINS", "*")
+_origins = [o.strip() for o in _raw_origins.split(",")]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,7 +35,7 @@ store = MemoryStore()
 server = BPChatServer(store=store)
 
 
-@app.post("/chatkit")
+@app.post("/chatkit", dependencies=[Depends(require_auth)])
 async def chatkit_endpoint(request: Request):
     body = await request.body()
     logger.info("→ /chatkit request: %s", body[:500])
