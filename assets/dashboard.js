@@ -70,10 +70,10 @@ function renderIntros() {
   );
 
   p('revenueIntro',
-    `H1 2026 est intégralement basé sur des factures réelles (${inv ? fmt.eur(inv.value) : '—'}). ` +
-    `À partir de juillet, le forecast modélise la signature de nouveaux comptes enterprise et l'expansion des use cases live. ` +
-    `L'ARR passe de ${fmt.eur(y26.ending_arr)} fin 2026 à ${fmt.eur(mil27.ending_arr)} fin 2027, ` +
-    `avec ${fmt.count(mil27.enterprise_accounts)} comptes et ${fmt.count(mil27.live_use_cases)} use cases live.`
+    `Septembre 2026 est le vrai point de départ grands comptes : premier déploiement Bouygues en production, ` +
+    `shift stratégique préparé depuis janvier. ` +
+    `Le forecast construit sur cette base : ${fmt.eur(mil27.ending_arr)} d'ARR fin 2027, ` +
+    `${fmt.count(mil27.enterprise_accounts)} comptes actifs et ${fmt.count(mil27.live_use_cases)} use cases live.`
   );
 
   p('marginsIntro',

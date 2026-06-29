@@ -8,6 +8,7 @@ dist/
 
 # Generated symlinks
 dashboard/assets/logo.png
+dashboard/downloads
 
 # Generated outputs — not source of truth
 data/processed/model.duckdb

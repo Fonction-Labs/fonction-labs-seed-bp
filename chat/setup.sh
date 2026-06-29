@@ -39,12 +39,15 @@ fi
 echo "→ Linking logo.png into dashboard/assets/..."
 ln -sf "../../assets/logo.png" "$PROJECT_ROOT/dashboard/assets/logo.png" 2>/dev/null || true
 
-# 7. Symlink dashboard into frontend/public/dashboard (live, no stale copies)
-echo "→ Linking dashboard into frontend/public/dashboard..."
+# 7. Symlink dashboard and downloads into frontend/public/ (live, no stale copies)
+echo "→ Linking dashboard and downloads into frontend/public/..."
 mkdir -p "$SCRIPT_DIR/frontend/public"
 rm -rf "$SCRIPT_DIR/frontend/public/dashboard"
 ln -sf "$PROJECT_ROOT/dashboard" "$SCRIPT_DIR/frontend/public/dashboard"
 echo "  → dashboard/ symlinked (always live)"
+rm -rf "$SCRIPT_DIR/frontend/public/downloads"
+ln -sf "$PROJECT_ROOT/downloads" "$SCRIPT_DIR/frontend/public/downloads"
+echo "  → downloads/ symlinked (always live)"
 
 # 7. Check for OPENAI_API_KEY
 if [ -z "${OPENAI_API_KEY:-}" ]; then
