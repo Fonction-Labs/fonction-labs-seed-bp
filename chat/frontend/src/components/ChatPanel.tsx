@@ -2,6 +2,9 @@ import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { STARTER_PROMPTS } from "../lib/config";
 import { getToken } from "../lib/auth";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "";
+const CHATKIT_URL = BACKEND_URL ? `${BACKEND_URL}/chatkit` : "/chatkit";
+
 function ChatPanelInner() {
   const token = getToken();
   const authFetch: typeof fetch = (input, init) => {
@@ -11,7 +14,7 @@ function ChatPanelInner() {
   };
   const chatkit = useChatKit({
     api: {
-      url: "/chatkit",
+      url: CHATKIT_URL,
       domainKey: "domain_pk_localhost_dev",
       fetch: authFetch,
     },
