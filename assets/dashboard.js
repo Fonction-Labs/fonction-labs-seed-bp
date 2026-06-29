@@ -500,16 +500,14 @@ function renderRevenue() {
   const backlogSection = el('backlogTable');
   if (backlogSection) {
     const bRows = data.revenue_monthly || [];
-    const backlogMonths = ['2026-07-01','2026-08-01','2026-09-01'];
-    // backlog amounts from YAML — hardcoded from assumptions (139k total)
-    const backlogAmounts = { '2026-07-01': 108000, '2026-08-01': 12000, '2026-09-01': 19000 };
+    const backlogRows = data.backlog_contracted || [];
+    const backlogAmounts = Object.fromEntries(backlogRows.map(r => [r.month, r.backlog_revenue]));
+    const backlogMonths = backlogRows.map(r => r.month).filter(m => m < '2099');
     const bData = backlogMonths.map(m => {
       const r = bRows.find(x => x.month === m) || {};
-      return {
-        label: new Date(m).toLocaleDateString('fr-FR', { month: 'short', year: '2-digit' }),
-        backlog: backlogAmounts[m] || 0,
-        forecast: r.forecast_services_revenue || 0,
-      };
+      const [y, mo] = m.split('-').map(Number);
+      const label = new Date(y, mo - 1, 1).toLocaleDateString('fr-FR', { month: 'short', year: '2-digit' });
+      return { label, backlog: backlogAmounts[m] || 0, forecast: r.forecast_services_revenue || 0 };
     });
     const totalBacklog = bData.reduce((s, r) => s + r.backlog, 0);
     setHTML('backlogTable', `

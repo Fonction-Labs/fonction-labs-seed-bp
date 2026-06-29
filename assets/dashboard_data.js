@@ -2957,6 +2957,20 @@ window.DASHBOARD_DATA = {
       "notes": "Current telecom motion: approx. 25 meetings per month"
     }
   ],
+  "backlog_contracted": [
+    {
+      "month": "2026-07-01",
+      "backlog_revenue": 108000.0
+    },
+    {
+      "month": "2026-08-01",
+      "backlog_revenue": 12000.0
+    },
+    {
+      "month": "2026-09-01",
+      "backlog_revenue": 19000.0
+    }
+  ],
   "key_assumptions": {
     "workshop_fee": 20000,
     "deployment_fee_per_uc": 40000,

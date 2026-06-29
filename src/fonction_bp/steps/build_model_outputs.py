@@ -139,6 +139,10 @@ def run(paths: Paths, scenario: str = "vc_case") -> None:
         "headcount_by_function_monthly": _build_headcount_by_function(raw, [r["month"] for r in headcount_monthly]),
         "use_of_funds": use_of_funds,
         "attio_funnel": funnel,
+        "backlog_contracted": [
+            {"month": str(m), "backlog_revenue": float(v)}
+            for m, v in raw.get("backlog_contracted", {}).items()
+        ],
         "key_assumptions": {
             "workshop_fee": pricing.get("workshop_fee_per_new_enterprise_client", 20000),
             "deployment_fee_per_uc": pricing.get("deployment_fee_per_use_case", 40000),
