@@ -1,6 +1,8 @@
 name: Build & Deploy Backend to App Runner
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       image_tag:
