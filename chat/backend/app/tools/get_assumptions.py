@@ -5,12 +5,23 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import os
+
 import yaml
 from agents import RunContextWrapper, function_tool
 
 from app.agents.bp_agent import BPAgentContext
 
-ASSUMPTIONS_PATH = Path(__file__).resolve().parents[4] / "data" / "assumptions" / "vc_case.yaml"
+
+def _resolve_assumptions_path() -> Path:
+    env = os.getenv("ASSUMPTIONS_PATH")
+    if env:
+        return Path(env)
+    parts = Path(__file__).resolve().parts
+    repo_root = Path(*parts[: len(parts) - 4])
+    return repo_root / "data" / "assumptions" / "vc_case.yaml"
+
+ASSUMPTIONS_PATH = _resolve_assumptions_path()
 
 
 @function_tool(description_override=(

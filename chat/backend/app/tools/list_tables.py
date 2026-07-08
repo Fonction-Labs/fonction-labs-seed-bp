@@ -5,12 +5,23 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import os
+
 import duckdb
 from agents import RunContextWrapper, function_tool
 
 from app.agents.bp_agent import BPAgentContext
 
-DB_PATH = Path(__file__).resolve().parents[4] / "data" / "processed" / "model.duckdb"
+
+def _resolve_db_path() -> Path:
+    env = os.getenv("DATA_PATH")
+    if env:
+        return Path(env) / "model.duckdb"
+    parts = Path(__file__).resolve().parts
+    repo_root = Path(*parts[: len(parts) - 4])
+    return repo_root / "data" / "processed" / "model.duckdb"
+
+DB_PATH = _resolve_db_path()
 
 
 @function_tool(description_override=(
