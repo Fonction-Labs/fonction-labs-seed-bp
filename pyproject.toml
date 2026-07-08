@@ -9,6 +9,9 @@ dependencies = [
   "pyyaml>=6.0.2,<7.0",
 ]
 
+[project.scripts]
+fonction-bp = "fonction_bp.pipeline:main"
+
 [tool.uv]
 package = true
 
