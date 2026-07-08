@@ -30,6 +30,9 @@ jobs:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Download raw data from S3
+        run: aws s3 sync s3://fonctionlabs-bp-pipeline-data-654654547209/raw/ data/raw/
+
       - name: Install uv
         uses: astral-sh/setup-uv@v4
 
